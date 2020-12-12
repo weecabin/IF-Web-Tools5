@@ -3,6 +3,8 @@
 /**
   This is a modified Node.js script
   utilizing my Node and FlightPlan classes to generate an XML flightplan and save it to a file.
+  I was just trying to figure things out, so there was a lot of back and forth.
+  I need to go back and look at error handling. 
 */
 
 var ask = require ('./qryGoogle')
