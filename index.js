@@ -39,6 +39,8 @@ var response="KSFO";
 var latlon ="";
 var legs="5";
 var length="50";
+var radius="50";
+var loops="10";
 var icao="KSAN";
 rl.on('line', (line) => 
 {
@@ -53,7 +55,31 @@ rl.on('line', (line) =>
     icao = rsp.toUpperCase().replace(")","(").split("(")[1];
     askhttps.AskWeb(search[use][0],search[use][1]+icao,callback);
   }
-  else if (rsp.toUpperCase().indexOf("HOLD2")>=0)
+    else if (rsp.toUpperCase().indexOf("HOLD1")>=0)
+  {
+    // HOLD(ICAO,legs,length)
+    var str = rsp.replace("(",",").replace(")",",").split(",")
+    icao = str[1]
+    //print(icao+","+legs+","+length+","+loops)
+    legs = str[2]
+    length = str[3]
+    loops = str[4]
+    print(icao+","+legs+","+length)
+    askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
+  } 
+    else if (rsp.toUpperCase().indexOf("HOLD2")>=0)
+  {
+    // HOLD(ICAO,legs,radius)
+    var str = rsp.replace("(",",").replace(")",",").split(",")
+    icao = str[1]
+    //print(icao+","+legs+","+length +","+loops)
+    legs = str[2]
+    radius = str[3]
+    loops = str[4]
+    print(icao+","+legs+","+length)
+    askhttps.AskWeb(search[use][0],search[use][1]+icao,holdradiuscallback);
+  } 
+    else if (rsp.toUpperCase().indexOf("HOLD3")>=0)
   {
     // HOLD(lat,lon,legs,length)
     var str = rsp.replace("(",",").replace(")",",").split(",")
@@ -61,8 +87,9 @@ rl.on('line', (line) =>
     var lon = str[2]
     legs = str[3]
     length = str[4]
+    loops = str[5]
     //print("Executing Hold with "+lat+","+lon+","+legs+","+length)
-    var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon))
+    var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
     var filename = './flightplans/test.fpl';
     fs.writeFile(filename, xmlfp , function (err) {
@@ -70,17 +97,7 @@ rl.on('line', (line) =>
       console.log(filename+ ' Replaced!');
     });
   }
-    else if (rsp.toUpperCase().indexOf("HOLD1")>=0)
-  {
-    // HOLD(ICAO,legs,length)
-    var str = rsp.replace("(",",").replace(")",",").split(",")
-    icao = str[1]
-    print(icao+","+legs+","+length)
-    legs = str[2]
-    length = str[3]
-    print(icao+","+legs+","+length)
-    askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
-  }
+
   else if (rsp.toUpperCase().indexOf("XML")>=0)
   {
     print("executing XML Test")
@@ -169,8 +186,8 @@ holdcallback = function(str)
   print("latlon="+latlon)
   let lat = splitlatlon[0]
   let lon = splitlatlon[1]
-  print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+")")
-  let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon))
+  print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
+  let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold-"+legs+" "+length+".fpl"
   let filename = './flightplans/'+fn;
@@ -180,6 +197,33 @@ holdcallback = function(str)
     console.log(filename+ ' Replaced!');
   });
 }
+
+holdradiuscallback = function(str)
+{
+  let latlon = GetLatLong(str);
+  if (latlon.length==0)
+  {
+    print("Lat/Long not found");
+    return
+  }
+  var splitlatlon = latlon.split(",")
+  print("latlon="+latlon)
+  let lat = splitlatlon[0]
+  let lon = splitlatlon[1]
+  let legangle = Math.PI*2/Number(legs);
+  let len = 2*Math.sin(legangle/2)*radius;
+  print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
+  let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
+  //print(xmlfp)
+  let fn = icao+" HoldRadius-"+legs+" "+radius+".fpl"
+  let filename = './flightplans/'+fn;
+  fs.writeFile(filename, xmlfp , function (err) 
+  {
+    if (err) throw err;
+    console.log(filename+ ' Replaced!');
+  });
+}
+
 print(strings.help)
 print('')
 process.stdout.write(strings.optionprompt)

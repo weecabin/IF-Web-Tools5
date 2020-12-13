@@ -202,7 +202,7 @@ function DistHeading(latfrom,lonfrom,latto,lonto)
    return[dist,heading];
 }
 
-function HoldPattern(legs,leglen,lat,lon)
+function HoldPattern(legs,leglen,lat,lon,loops=10)
 {
   // turn angle at the end of each leg
   var deltaHeading = 360 / legs;
@@ -214,12 +214,13 @@ function HoldPattern(legs,leglen,lat,lon)
   var initialdistance = (leglen/2)/Math.sin((2*Math.PI*(180-initialheading))/360);
 
   var fp = new mx.FlightPlan(legs+"leg hold pattern");
-  for (loop=0;loop<legs;loop++)
+  for (loop=0;loop<loops;loop++)
   {
+    console.log(loop)
     // print out the first point
     var fixlen=(legs-1+"").toString().length;
-    var fix = NewPoint(lat,lon,initialheading,initialdistance);
-    fp.AddUserFix("fix"+pad(0,"0",fixlen),fix[0],fix[1]);
+    var firstfix = NewPoint(lat,lon,initialheading,initialdistance);
+    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
 
     // print out the remaining points
     var deltaAngle = 360/legs;
@@ -227,11 +228,13 @@ function HoldPattern(legs,leglen,lat,lon)
     for (leg=0;leg<legs-1;leg++)
     {
       //console.log(angle)
-      fix = NewPoint(lat,lon,angle,initialdistance);
+      let fix = NewPoint(lat,lon,angle,initialdistance);
       //console.log(fix[0]+","+fix[1])
       fp.AddUserFix("fix"+pad((leg+1),"0",fixlen),fix[0],fix[1]);
       angle = FixHeading(angle + deltaAngle);
     }
+    // back to the first fix to close it off
+    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
   }
   return fp.ToXml();
 }

@@ -3,7 +3,14 @@ const prompt = 'Host: '
 const result = 'IP address:'
 const error = 'Received error with code:'
 const latlonprompt = "enter fix1lat,fix1lon,fix2lat,fix2lon,heading: "
-const optionprompt = "Enter one ofthe following...\nFP\nXML\nHOLD1(ICAO,legs,length)\nHOLD2(lat,lon,legs,length)\nLATLON(AirportICAO)\n: "
+const optionprompt = "Enter one ofthe following... \n\
+FP\n\
+XML\n\
+HOLD1(ICAO,legs,length,loops)\n\
+HOLD2(ICAO,legs,radius,loops)\n\
+HOLD3(lat,lon,legs,length,loops)\n\
+LATLON(AirportICAO)\n\
+: "
 
 module.exports = {
   help: help,
