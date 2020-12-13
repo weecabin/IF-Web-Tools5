@@ -104,7 +104,7 @@ rl.on('line', (line) =>
   else if (rsp.toUpperCase().indexOf("XML")>=0)
   {
     print("Executing XML Test")
-    var xml = new mx.Node("Root","","this=is an attribute")
+    var xml = new mx.Node("Root","","this=\"is an attribute\"")
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
     print(xml.ToXML())
@@ -120,7 +120,10 @@ rl.on('line', (line) =>
     var xmlfp = fp.ToXml();
     print(xmlfp)
   }
+  else
+    print("Err: cmd not found")
   print("Exiting response handler")
+  process.stdout.write("> ");
 })
 
 function Occurence(count,mainstr,substr)
@@ -227,6 +230,6 @@ holdradiuscallback = function(str)
   });
 }
 
-print(strings.help)
-print('')
+//print(strings.help)
+//print('')
 process.stdout.write(strings.optionprompt)

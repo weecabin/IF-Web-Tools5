@@ -10,7 +10,7 @@ HOLD1(ICAO,legs,length,loops)\n\
 HOLD2(ICAO,legs,radius,loops)\n\
 HOLD3(lat,lon,legs,length,loops)\n\
 LATLON(AirportICAO)\n\
-: "
+> "
 
 module.exports = {
   help: help,
