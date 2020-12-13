@@ -216,7 +216,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
   var fp = new mx.FlightPlan(legs+"leg hold pattern");
   for (loop=0;loop<loops;loop++)
   {
-    console.log(loop)
+    //console.log(loop)
     // print out the first point
     var fixlen=(legs-1+"").toString().length;
     var firstfix = NewPoint(lat,lon,initialheading,initialdistance);

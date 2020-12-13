@@ -51,12 +51,13 @@ rl.on('line', (line) =>
   //print("response = "+response);
   if (rsp.toUpperCase().indexOf("LATLON")>=0)
   {
-    print("executing LATLON")
+    print("Executing LATLON")
     icao = rsp.toUpperCase().replace(")","(").split("(")[1];
     askhttps.AskWeb(search[use][0],search[use][1]+icao,callback);
   }
     else if (rsp.toUpperCase().indexOf("HOLD1")>=0)
   {
+    print("Executing HOLD1")
     // HOLD(ICAO,legs,length)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
@@ -69,6 +70,7 @@ rl.on('line', (line) =>
   } 
     else if (rsp.toUpperCase().indexOf("HOLD2")>=0)
   {
+    print("Executing HOLD2")
     // HOLD(ICAO,legs,radius)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
@@ -81,6 +83,7 @@ rl.on('line', (line) =>
   } 
     else if (rsp.toUpperCase().indexOf("HOLD3")>=0)
   {
+    print("Executing HOLD3")
     // HOLD(lat,lon,legs,length)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     var lat = str[1]
@@ -100,7 +103,7 @@ rl.on('line', (line) =>
 
   else if (rsp.toUpperCase().indexOf("XML")>=0)
   {
-    print("executing XML Test")
+    print("Executing XML Test")
     var xml = new mx.Node("Root","","this=is an attribute")
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
@@ -108,7 +111,7 @@ rl.on('line', (line) =>
   }
   else if (rsp.toUpperCase().indexOf("FP")>=0)
   {
-    print("executing FLIGHTPLAN")
+    print("Executing FLIGHTPLAN")
     var fp = new mx.FlightPlan("KSAN")
     fp.AddUserFix("fix1",23.1234,-116.1234)
     fp.AddUserFix("fix2",24.1234,-117.1234)
@@ -189,7 +192,7 @@ holdcallback = function(str)
   print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
-  let fn = icao+" Hold-"+legs+" "+length+".fpl"
+  let fn = icao+" Hold "+legs+" "+length+".fpl"
   let filename = './flightplans/'+fn;
   fs.writeFile(filename, xmlfp , function (err) 
   {
@@ -215,7 +218,7 @@ holdradiuscallback = function(str)
   print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
-  let fn = icao+" HoldRadius-"+legs+" "+radius+".fpl"
+  let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
   let filename = './flightplans/'+fn;
   fs.writeFile(filename, xmlfp , function (err) 
   {
