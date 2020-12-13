@@ -57,41 +57,36 @@ rl.on('line', (line) =>
   }
     else if (rsp.toUpperCase().indexOf("HOLD1")>=0)
   {
-    print("Executing HOLD1")
-    // HOLD(ICAO,legs,length)
+    print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
     //print(icao+","+legs+","+length+","+loops)
     legs = str[2]
     length = str[3]
     loops = str[4]
-    print(icao+","+legs+","+length)
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
   } 
     else if (rsp.toUpperCase().indexOf("HOLD2")>=0)
   {
-    print("Executing HOLD2")
-    // HOLD(ICAO,legs,radius)
+    print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
     //print(icao+","+legs+","+length +","+loops)
     legs = str[2]
     radius = str[3]
     loops = str[4]
-    print(icao+","+legs+","+length)
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdradiuscallback);
   } 
     else if (rsp.toUpperCase().indexOf("HOLD3")>=0)
   {
-    print("Executing HOLD3")
-    // HOLD(lat,lon,legs,length)
+    print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     var lat = str[1]
     var lon = str[2]
     legs = str[3]
     length = str[4]
     loops = str[5]
-    //print("Executing Hold with "+lat+","+lon+","+legs+","+length)
+  print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
     var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
     var filename = './flightplans/test.fpl';
@@ -108,6 +103,7 @@ rl.on('line', (line) =>
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
     print(xml.ToXML())
+    process.stdout.write("> ");
   }
   else if (rsp.toUpperCase().indexOf("FP")>=0)
   {
@@ -119,11 +115,11 @@ rl.on('line', (line) =>
     fp.AddUserFix("fix2",24.1234,-117.1234)
     var xmlfp = fp.ToXml();
     print(xmlfp)
+    process.stdout.write("> ");
   }
   else
     print("Err: cmd not found")
   print("Exiting response handler")
-  process.stdout.write("> ");
 })
 
 function Occurence(count,mainstr,substr)
@@ -192,7 +188,7 @@ holdcallback = function(str)
   print("latlon="+latlon)
   let lat = splitlatlon[0]
   let lon = splitlatlon[1]
-  print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
+  print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold "+legs+" "+length+".fpl"
@@ -201,7 +197,9 @@ holdcallback = function(str)
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
+    process.stdout.write("> ");
   });
+ 
 }
 
 holdradiuscallback = function(str)
@@ -218,7 +216,7 @@ holdradiuscallback = function(str)
   let lon = splitlatlon[1]
   let legangle = Math.PI*2/Number(legs);
   let len = 2*Math.sin(legangle/2)*radius;
-  print("Executing HoldPattern("+lat+","+lon+","+legs+","+length+","+loops+")")
+  print("Executing HoldPattern("+legs+","+len+","+lat+","+lon+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
   let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
@@ -227,6 +225,7 @@ holdradiuscallback = function(str)
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
+    process.stdout.write("> ");
   });
 }
 
