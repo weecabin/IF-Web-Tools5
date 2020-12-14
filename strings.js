@@ -3,7 +3,7 @@ const prompt = 'Host: '
 const result = 'IP address:'
 const error = 'Received error with code:'
 const latlonprompt = "enter fix1lat,fix1lon,fix2lat,fix2lon,heading: "
-const optionprompt = "Enter one ofthe following... \n\
+const optionprompt = "Enter one of the following... \n\
 FP\n\
 XML\n\
 HOLD1(ICAO,legs,length,loops)\n\
