@@ -99,6 +99,13 @@ rl.on('line', (line) =>
       process.stdout.write("> ");
     });
     break;
+    
+    case "CIRCLING":
+    let cmd = cmdParts(rsp,",");
+    print(cmd);
+    print ("not implemented");
+    cmdErr = true;
+    break;
 
     case "XML":
     print("Executing XML Test")
@@ -176,6 +183,22 @@ function GetLatLong(xmlString)
     }
   }
   return ""
+}
+
+function cmdParts(cmdstr,delim)
+{
+  let str = cmdstr.replace("(",delim).replace(")",delim).split(delim)
+  /*
+  let parts="";
+  for(i=0;i<str.length;i++)
+  {
+    parts+=str[i];
+    if (i!=(str.length-1))
+      parts+=",";
+  }
+  print (parts)
+  */
+  return str;
 }
 
 callback = function(str)

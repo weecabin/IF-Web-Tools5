@@ -239,6 +239,10 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
   return fp.ToXml();
 }
 
+/*
+computes an arc between two fixes given an entry heading.
+latlon is enterred as a two dim array for latlon1 and another for latlon2
+*/
 function Circling(latlon1,latlon2,heading)
 {
   var lat0=latlon1[0];
