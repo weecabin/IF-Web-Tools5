@@ -100,7 +100,7 @@ rl.on('line', (line) =>
     });
     break;
     
-    case "CIRCLING":
+    case "CIRCLE":
     //rsp="CIRCLING(23,116,24,116.1,90)"
     //CIRCLE(lat1,lon1,lat2,lon2,entryHeading)
     let cmd = cmdParts(rsp,",");
@@ -109,7 +109,7 @@ rl.on('line', (line) =>
     let fix2 = [cmd[3],cmd[4]]
     let circxml = ff.Circling(fix1,fix2,Number(cmd[5]))
     //print(circxml)
-    var filename = './flightplans/Circling.fpl';
+    var filename = strings.Flightplans+'/Circling.fpl';
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
       console.log(filename+ ' Replaced!');
