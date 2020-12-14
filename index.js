@@ -92,7 +92,7 @@ rl.on('line', (line) =>
     print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
     var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
-    var filename = './flightplans/test.fpl';
+    var filename = FpPath('test.fpl');
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
       console.log(filename+ ' Replaced!');
@@ -109,7 +109,7 @@ rl.on('line', (line) =>
     let fix2 = [cmd[3],cmd[4]]
     let circxml = ff.Circling(fix1,fix2,Number(cmd[5]))
     //print(circxml)
-    var filename = strings.Flightplans+'/Circling.fpl';
+    var filename = FpPath('Circling.fpl');
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
       console.log(filename+ ' Replaced!');
@@ -197,6 +197,11 @@ function GetLatLong(xmlString)
   return ""
 }
 
+function FpPath(str)
+{
+  return strings.Flightplans+"/"+str;
+}
+
 function cmdParts(cmdstr,delim)
 {
   let str = cmdstr.replace("(",delim).replace(")",delim).split(delim)
@@ -239,7 +244,7 @@ holdcallback = function(str)
   let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold "+legs+" "+length+".fpl"
-  let filename = './flightplans/'+fn;
+  let filename = FpPath(fn);
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
@@ -267,7 +272,7 @@ holdradiuscallback = function(str)
   let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
   let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
-  let filename = './flightplans/'+fn;
+  let filename = FpPath(fn);
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
