@@ -89,7 +89,7 @@ rl.on('line', (line) =>
     legs = str[3]
     length = str[4]
     loops = str[5]
-  print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
+    print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
     var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
     var filename = './flightplans/test.fpl';
