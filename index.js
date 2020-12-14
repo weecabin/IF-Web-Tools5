@@ -101,10 +101,22 @@ rl.on('line', (line) =>
     break;
     
     case "CIRCLING":
+    //rsp="CIRCLING(23,116,24,116.1,90)"
+    //CIRCLE(lat1,lon1,lat2,lon2,entryHeading)
     let cmd = cmdParts(rsp,",");
-    print(cmd);
-    print ("not implemented");
-    cmdErr = true;
+    //print(cmd);
+    let fix1 = [cmd[1],cmd[2]]
+    let fix2 = [cmd[3],cmd[4]]
+    let circxml = ff.Circling(fix1,fix2,Number(cmd[5]))
+    //print(circxml)
+    var filename = './flightplans/Circling.fpl';
+    fs.writeFile(filename, circxml , function (err) {
+      if (err) throw err;
+      console.log(filename+ ' Replaced!');
+      process.stdout.write("> ");
+    });
+    //print ("not implemented");
+    //cmdErr = true;
     break;
 
     case "XML":
