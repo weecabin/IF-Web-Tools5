@@ -91,24 +91,20 @@ function ToIF(latitude,longitude)
 {
   if (latitude<0)
   {
-    print(ToDegMin(latitude*-1));
-    print('S/');
+    print(ToDegMin(latitude*-1).toString()+"S/");
   }
   else
   {
-    print(ToDegMin(latitude));
-    print('N/');
+    print(ToDegMin(latitude).toString()+"N/");
   }
  
   if (longitude <0)
   {
-    print(ToDegMin(longitude*-1));
-    print('W');
+    print(ToDegMin(longitude*-1).toString()+"W");
   }
   else
   {
-    print(ToDegMin(longitude));
-    print('E');
+    print(ToDegMin(longitude).toString()+"E");
   }
 }
 
@@ -175,6 +171,7 @@ function NewPoint(latitude,longitude,heading,leglength)
   console.log("newLat="+newLat+" newLon="+newLon)
   console.log("end debug")
   */
+  
   return [newLat,newLon];
 }
 
@@ -239,6 +236,138 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
   return fp.ToXml();
 }
 
+function println(str)
+{
+  console.log(str+"\n")
+}
+function print(str)
+{
+  console.log(str)
+}
+/*
+computes an arc between two fixes given an entry heading.
+latlon is enterred as a two dim array for latlon1 and another for latlon2
+*/
+function Circling(latlon1,latlon2,heading)
+{
+  console.log("in Circling")
+  var lat0=Number(latlon1[0]);
+  var lon0=Number(latlon1[1]);
+  var lat1=Number(latlon2[0]);
+  var lon1=Number(latlon2[1]);
+
+  var points=10;
+  
+  /*
+  print("heading "+heading);
+  print("Initial ");
+  ToIF(lat0,lon0);
+  print(" ");
+
+  print("Final ");
+  ToIF(lat1,lon1);
+  print(" ");
+  */
+  
+  var lonscale = LonMultiplier((lat0+lat1)/2);
+  //println("LonMultiplier="+lonscale);
+  var dx = (lon1-lon0)*lonscale;
+  var dy = lat1-lat0;
+  //println(dx + "," + dy);
+
+  // find the distance and heading to the final fix
+  dh = DistHeading(lat0,lon0,lat1,lon1);
+  //print("dist="+dh[0] + " heading=" + dh[1]);
+  var headingToFinal=dh[1];
+  var distToFinal=dh[0];
+  //print("headingToFinal="+ headingToFinal);
+
+  // verify final fix with distance and heading from initial fix
+  check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
+  //print("final from initial given heading and distance..");
+  //ToIF(check[0],check[1]);
+  //print();
+
+  // find the arc radius
+  alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;
+  //println("alpha="+alpha)
+  var arcR = Math.abs(dh[0]/(2*Math.cos(alpha*Math.PI/180)));
+  //println("Arc Radius="+arcR)
+
+  // find lat lon of arc center
+  // first determine the direction
+  var dir1=heading-90;
+  var dir2=heading+90;
+  var headingToCenter=dir2;
+  var turnLeft=false;
+  if (AngleBetween(headingToFinal,dir1)<AngleBetween(headingToFinal,dir2))
+  {
+    headingToCenter=dir1;
+    turnLeft=true;
+    //println("turning left");
+  }
+  var arcCenterDec = NewPoint(lat0,lon0,headingToCenter,arcR);
+  var initialArcHeading = FixHeading(headingToCenter-180);
+  //print("headingToCenter="+headingToCenter+" initialArcHeading="+ initialArcHeading);
+
+  // find swept angle and setup increment
+  var headingfixangle=AngleBetween(heading,headingToFinal);
+  //print("headingfixangle="+ headingfixangle);
+  var arcAngle=2*(90-AngleBetween(initialArcHeading,headingToFinal+180));
+  if (headingfixangle>90)
+  {
+    //println("obtuse angle between heading & fix path")
+    arcAngle=2*(90+AngleBetween(initialArcHeading,headingToFinal+180));
+  }
+  //else
+    //print("acute angle between heading & fix path")
+
+  //print("arcAngle="+arcAngle);
+  var deltaAngle = arcAngle/points;
+  var initialArcangle = FixHeading(headingToCenter+180);
+
+  var decPoints = [];
+  if (turnLeft)
+  {
+    var lastAngle = initialArcangle-arcAngle-deltaAngle+1;
+  //print("initialArcangle ="+ initialArcangle +" deltaAngle="+deltaAngle+" lastAngle="+lastAngle)
+    for (h= initialArcangle;h>lastAngle;h-=deltaAngle)
+    {
+      //print("arc center "+arcCenterDec)
+      var arcPoint = NewPoint(arcCenterDec[0],arcCenterDec[1],h,arcR);
+      decPoints.push(arcPoint);
+      //ToIF(arcPoint[0],arcPoint[1]);
+      //print(" ")
+    }
+  }
+  else
+  {
+    var lastAngle = initialArcangle +arcAngle+deltaAngle-1;
+    //print("initialArcangle ="+ initialArcangle +" deltaAngle="+ deltaAngle+" lastAngle="+lastAngle)
+    for (h= initialArcangle;h<lastAngle;h+=deltaAngle)
+    {
+      var arcPoint = NewPoint(arcCenterDec[0],arcCenterDec[1],h,arcR);
+      decPoints.push(arcPoint);
+      //ToIF(arcPoint[0],arcPoint[1]);
+      //print(" ")
+    }
+  }
+  //println();
+
+  var fp = new mx.FlightPlan("KSAN Circle");
+  //print("Decimal fixes...");
+  for (index=0;index<decPoints.length;index++)
+  {
+    var lat = Number(decPoints[index][0]).toFixed(4);
+    var lon = Number(decPoints[index][1]).toFixed(4);
+    //print(lat+"/"+lon+" ");
+    var id = (lat*1000).toFixed(0) +"/"+ (lon*1000).toFixed(0);
+    fp.AddUserFix(id,lat,lon);
+  }
+  return fp.ToXml();
+}
+
+
 module.exports =
 {
   DistHeading: DistHeading,
@@ -249,5 +378,6 @@ module.exports =
   AngleBetween: AngleBetween,
   TurnAngle: TurnAngle,
   pad: pad,
-  HoldPattern: HoldPattern
+  HoldPattern: HoldPattern,
+  Circling: Circling
 }
