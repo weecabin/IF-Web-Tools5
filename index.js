@@ -49,14 +49,17 @@ rl.on('line', (line) =>
   if (rsp.length>0)
     response=rsp; 
   //print("response = "+response);
-  if (rsp.toUpperCase().indexOf("LATLON")>=0)
+  var cmd = rsp.toUpperCase().split("(")[0];
+  var cmdErr=false;
+  switch (cmd)
   {
+    case "LATLON":
     print("Executing LATLON")
     icao = rsp.toUpperCase().replace(")","(").split("(")[1];
     askhttps.AskWeb(search[use][0],search[use][1]+icao,callback);
-  }
-    else if (rsp.toUpperCase().indexOf("HOLD1")>=0)
-  {
+    break;
+    
+    case "HOLD1":
     print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
@@ -65,9 +68,9 @@ rl.on('line', (line) =>
     length = str[3]
     loops = str[4]
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
-  } 
-    else if (rsp.toUpperCase().indexOf("HOLD2")>=0)
-  {
+    break;
+    
+    case "HOLD2":
     print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
@@ -76,9 +79,9 @@ rl.on('line', (line) =>
     radius = str[3]
     loops = str[4]
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdradiuscallback);
-  } 
-    else if (rsp.toUpperCase().indexOf("HOLD3")>=0)
-  {
+    break;
+    
+    case "HOLD3":
     print("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     var lat = str[1]
@@ -93,20 +96,20 @@ rl.on('line', (line) =>
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
       console.log(filename+ ' Replaced!');
+      process.stdout.write("> ");
     });
-  }
+    break;
 
-  else if (rsp.toUpperCase().indexOf("XML")>=0)
-  {
+    case "XML":
     print("Executing XML Test")
     var xml = new mx.Node("Root","","this=\"is an attribute\"")
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
     print(xml.ToXML())
     process.stdout.write("> ");
-  }
-  else if (rsp.toUpperCase().indexOf("FP")>=0)
-  {
+    break;
+    
+    case "FP":
     print("Executing FLIGHTPLAN")
     var fp = new mx.FlightPlan("KSAN")
     fp.AddUserFix("fix1",23.1234,-116.1234)
@@ -116,10 +119,18 @@ rl.on('line', (line) =>
     var xmlfp = fp.ToXml();
     print(xmlfp)
     process.stdout.write("> ");
-  }
-  else
-    print("Err: cmd not found")
+    break;
+
+    default:
+    {
+      print("Err: cmd not found")
+      cmdErr = true;
+    }
+   
+    }
   print("Exiting response handler")
+  if (cmdErr)
+    process.stdout.write("> ");
 })
 
 function Occurence(count,mainstr,substr)
@@ -173,7 +184,8 @@ callback = function(str)
   if (latlon.length>0)
     print (response + " Lat/Long = "+latlon);
   else
-    print("Not Found")
+    print("Not Found") 
+    process.stdout.write("> ");
 }
 
 holdcallback = function(str)
