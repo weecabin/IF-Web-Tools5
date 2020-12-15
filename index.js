@@ -18,11 +18,13 @@ const ff = require("./FlightFunctions")
 
 colors.enable()
 
+var printHold = ""
 const print = (msg) => {
-  process.stdout.write(msg)
+  printHold+=msg;
 }
 const println = (msg) => {
-  console.log(msg)
+  console.log(printHold+msg);
+  printHold="";
 }
 
 var rl = readline.createInterface({

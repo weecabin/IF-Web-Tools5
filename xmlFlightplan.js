@@ -6,11 +6,13 @@ the structure of the node is as follows...
 where attribure and value may be null, or not specified
 */
 
+var printHold = ""
 const print = (msg) => {
-  process.stdout.write(msg)
+  printHold+=msg;
 }
 const println = (msg) => {
-  console.log(msg)
+  console.log(printHold+msg);
+  printHold="";
 }
 
 class Node

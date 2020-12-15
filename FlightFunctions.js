@@ -1,10 +1,12 @@
 var mx = require('./xmlFlightplan')
 
+var printHold = ""
 const print = (msg) => {
-  process.stdout.write(msg)
+  printHold+=msg;
 }
 const println = (msg) => {
-  console.log(msg)
+  console.log(printHold+msg);
+  printHold="";
 }
 
 // pads a number out to count characters with padChar
