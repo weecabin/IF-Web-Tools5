@@ -55,7 +55,7 @@ rl.on('line', (line) =>
     response=rsp; 
   //print("response = "+response);
   var cmd = rsp.toUpperCase().split("(")[0];
-  var cmdErr=false;
+  var waitingForResponse=false;
   switch (cmd)
   {
     case "LATLON":
@@ -73,6 +73,7 @@ rl.on('line', (line) =>
     length = str[3]
     loops = str[4]
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
+    waitingForResponse=true;
     break;
     
     case "HOLD2":
@@ -84,6 +85,7 @@ rl.on('line', (line) =>
     radius = str[3]
     loops = str[4]
     askhttps.AskWeb(search[use][0],search[use][1]+icao,holdradiuscallback);
+    waitingForResponse=true;
     break;
     
     case "HOLD3":
@@ -100,9 +102,9 @@ rl.on('line', (line) =>
     var filename = FpPath('test.fpl');
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
-      console.log(filename+ ' Replaced!');
-      process.stdout.write("> ");
+      println(filename+ ' Replaced!');
     });
+    waitingForResponse=true;
     break;
     
     case "CIRCLE":
@@ -117,10 +119,9 @@ rl.on('line', (line) =>
     var filename = FpPath('Circling.fpl');
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
-      console.log(filename+ ' Replaced!');
-      process.stdout.write("> ");
+      println(filename+ ' Replaced!');
     });
-    //cmdErr = true;
+    waitingForResponse=true;
     break;
 
     case "XML":
@@ -129,7 +130,6 @@ rl.on('line', (line) =>
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
     println(xml.ToXML())
-    process.stdout.write("> ");
     break;
     
     case "FP":
@@ -141,19 +141,20 @@ rl.on('line', (line) =>
     fp.AddUserFix("fix2",24.1234,-117.1234)
     var xmlfp = fp.ToXml();
     println(xmlfp)
-    process.stdout.write("> ");
     break;
 
     default:
     {
       println("Err: cmd not found")
-      cmdErr = true;
+      process.stdout.write("> ");
     }
    
-    }
-  println("Exiting response handler")
-  if (cmdErr)
-    process.stdout.write("> ");
+  }
+  if (!waitingForResponse)
+  {
+    //println("Exiting response handler");
+    process.stdout.write(strings.optionprompt);
+  }
 })
 
 function Occurence(count,mainstr,substr)
@@ -229,7 +230,7 @@ callback = function(str)
     print (response + " Lat/Long = "+latlon);
   else
     print("Not Found") 
-    process.stdout.write("> ");
+    process.stdout.write(strings.optionprompt);
 }
 
 holdcallback = function(str)
@@ -253,7 +254,7 @@ holdcallback = function(str)
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
-    process.stdout.write("> ");
+    process.stdout.write(strings.optionprompt);
   });
  
 }
@@ -281,7 +282,7 @@ holdradiuscallback = function(str)
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
-    process.stdout.write("> ");
+    process.stdout.write(strings.optionprompt);
   });
 }
 
