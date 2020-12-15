@@ -1,6 +1,3 @@
-
-
-
 /*
 This class is used to generate all Nodes of an XML structure.
 Each Node may contain any number of child Nodes.
@@ -8,6 +5,14 @@ the structure of the node is as follows...
 <name attribute>value</name>
 where attribure and value may be null, or not specified
 */
+
+const print = (msg) => {
+  process.stdout.write(msg)
+}
+const println = (msg) => {
+  console.log(msg)
+}
+
 class Node
 {
   constructor(name,value,attribute)

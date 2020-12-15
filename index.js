@@ -19,6 +19,9 @@ const ff = require("./FlightFunctions")
 colors.enable()
 
 const print = (msg) => {
+  process.stdout.write(msg)
+}
+const println = (msg) => {
   console.log(msg)
 }
 
@@ -60,7 +63,7 @@ rl.on('line', (line) =>
     break;
     
     case "HOLD1":
-    print("Executing "+rsp)
+    println("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
     //print(icao+","+legs+","+length+","+loops)
@@ -71,7 +74,7 @@ rl.on('line', (line) =>
     break;
     
     case "HOLD2":
-    print("Executing "+rsp)
+    println("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     icao = str[1]
     //print(icao+","+legs+","+length +","+loops)
@@ -82,14 +85,14 @@ rl.on('line', (line) =>
     break;
     
     case "HOLD3":
-    print("Executing "+rsp)
+    println("Executing "+rsp)
     var str = rsp.replace("(",",").replace(")",",").split(",")
     var lat = str[1]
     var lon = str[2]
     legs = str[3]
     length = str[4]
     loops = str[5]
-    print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
+    //println("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
     var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
     var filename = FpPath('test.fpl');
@@ -104,50 +107,49 @@ rl.on('line', (line) =>
     //rsp="CIRCLING(23,116,24,116.1,90)"
     //CIRCLE(lat1,lon1,lat2,lon2,entryHeading)
     let cmd = cmdParts(rsp,",");
-    //print(cmd);
+    //println(cmd);
     let fix1 = [cmd[1],cmd[2]]
     let fix2 = [cmd[3],cmd[4]]
     let circxml = ff.Circling(fix1,fix2,Number(cmd[5]))
-    //print(circxml)
+    //println(circxml)
     var filename = FpPath('Circling.fpl');
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
       console.log(filename+ ' Replaced!');
       process.stdout.write("> ");
     });
-    //print ("not implemented");
     //cmdErr = true;
     break;
 
     case "XML":
-    print("Executing XML Test")
+    println("Executing XML Test")
     var xml = new mx.Node("Root","","this=\"is an attribute\"")
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
-    print(xml.ToXML())
+    println(xml.ToXML())
     process.stdout.write("> ");
     break;
     
     case "FP":
-    print("Executing FLIGHTPLAN")
+    println("Executing FLIGHTPLAN")
     var fp = new mx.FlightPlan("KSAN")
     fp.AddUserFix("fix1",23.1234,-116.1234)
     fp.AddUserFix("fix2",24.1234,-117.1234)
     fp.AddUserFix("fix1",23.1234,-116.1234)
     fp.AddUserFix("fix2",24.1234,-117.1234)
     var xmlfp = fp.ToXml();
-    print(xmlfp)
+    println(xmlfp)
     process.stdout.write("> ");
     break;
 
     default:
     {
-      print("Err: cmd not found")
+      println("Err: cmd not found")
       cmdErr = true;
     }
    
     }
-  print("Exiting response handler")
+  println("Exiting response handler")
   if (cmdErr)
     process.stdout.write("> ");
 })
@@ -164,7 +166,7 @@ function Occurence(count,mainstr,substr)
     }
     else
     {
-      print ("error");
+      println ("error");
       return -1
     }
     //print (offset);
@@ -233,14 +235,14 @@ holdcallback = function(str)
   let latlon = GetLatLong(str);
   if (latlon.length==0)
   {
-    print("Lat/Long not found");
+    println("Lat/Long not found");
     return
   }
   var splitlatlon = latlon.split(",")
-  print("latlon="+latlon)
+  println("latlon="+latlon)
   let lat = splitlatlon[0]
   let lon = splitlatlon[1]
-  print("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
+  println("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold "+legs+" "+length+".fpl"
@@ -259,16 +261,16 @@ holdradiuscallback = function(str)
   let latlon = GetLatLong(str);
   if (latlon.length==0)
   {
-    print("Lat/Long not found");
+    println("Lat/Long not found");
     return
   }
   var splitlatlon = latlon.split(",")
-  print("latlon="+latlon)
+  println("latlon="+latlon)
   let lat = splitlatlon[0]
   let lon = splitlatlon[1]
   let legangle = Math.PI*2/Number(legs);
   let len = 2*Math.sin(legangle/2)*radius;
-  print("Executing HoldPattern("+legs+","+len+","+lat+","+lon+","+loops+")")
+  println("Executing HoldPattern("+legs+","+len+","+lat+","+lon+","+loops+")")
   let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
   let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
