@@ -1,5 +1,14 @@
 var mx = require('./xmlFlightplan')
 
+const print = (msg) => 
+{
+  console.log(msg)
+}
+const println = (msg) =>
+{
+  console.log(msg+"\n")
+}
+
 // pads a number out to count characters with padChar
 function pad(numToPad,padChar,count)
 { 
@@ -236,14 +245,6 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
   return fp.ToXml();
 }
 
-function println(str)
-{
-  console.log(str+"\n")
-}
-function print(str)
-{
-  console.log(str)
-}
 /*
 computes an arc between two fixes given an entry heading.
 latlon is enterred as a two dim array for latlon1 and another for latlon2
