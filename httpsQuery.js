@@ -26,7 +26,7 @@ callback = function(response) {
 var askCB = function(str){};
 function AskWeb(host,askString,askCallback)
 {
-  console.log("In https.AskWeb")
+  //console.log("In https.AskWeb")
   options.host = host;
   options.path = askString;
   https.request(options, callback).end();

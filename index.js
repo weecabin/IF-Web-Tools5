@@ -59,7 +59,7 @@ rl.on('line', (line) =>
   switch (cmd)
   {
     case "LATLON":
-    print("Executing LATLON")
+    println("Executing LATLON")
     icao = rsp.toUpperCase().replace(")","(").split("(")[1];
     askhttps.AskWeb(search[use][0],search[use][1]+icao,callback);
     break;
@@ -153,7 +153,7 @@ rl.on('line', (line) =>
   if (!waitingForResponse)
   {
     //println("Exiting response handler");
-    process.stdout.write(strings.optionprompt);
+    process.stdout.write("> ");
   }
 })
 
@@ -227,10 +227,10 @@ callback = function(str)
 {
   let latlon = GetLatLong(str);
   if (latlon.length>0)
-    print (response + " Lat/Long = "+latlon);
+    println(" Lat/Long = "+latlon);
   else
-    print("Not Found") 
-    process.stdout.write(strings.optionprompt);
+    println("Not Found") 
+    process.stdout.write("> ");
 }
 
 holdcallback = function(str)
