@@ -34,7 +34,7 @@ var rl = readline.createInterface({
 })
 
 var search = [
-  ['airportnavfinder.com','/airport/'],
+  ['https://www.airnav.com','/airport/'],
   ['skyvector.com','/airport/'],
   ['pilotnav.com','/airport/'],
   ];
@@ -61,7 +61,17 @@ rl.on('line', (line) =>
     case "LATLON":
     println("Executing LATLON")
     icao = rsp.toUpperCase().replace(")","(").split("(")[1];
-    askhttps.AskWeb(search[use][0],search[use][1]+icao,callback);
+    var url = search[use][0]+search[use][1]+icao
+    console.log(url)
+    askhttps.getContent(url)
+      .then((html)=>{
+        //console.log(html)
+        let latlon = GetLatLong(html)
+        console.log(latlon)
+        process.stdout.write(strings.optionprompt)
+        }
+      )
+      .catch((err)=>console.log(err));
     break;
     
     case "HOLD1":
@@ -72,7 +82,16 @@ rl.on('line', (line) =>
     legs = str[2]
     length = str[3]
     loops = str[4]
-    askhttps.AskWeb(search[use][0],search[use][1]+icao,holdcallback);
+    var url = search[use][0]+search[use][1]+icao
+    askhttps.getContent(url)
+      .then((html)=>{
+        //console.log(html)
+        let latlon = GetLatLong(html)
+        HoldLegLen(latlon,icao,legs,length,loops)
+        process.stdout.write(strings.optionprompt)
+        }
+      )
+      .catch((err)=>console.log(err));
     waitingForResponse=true;
     break;
     
@@ -182,15 +201,15 @@ function Occurence(count,mainstr,substr)
 function GetLatLong(xmlString)
 {
     //print(str);
-  var n = xmlString.indexOf("Lat/Lng");
+  var n = xmlString.indexOf("Lat/Long");
   //print(n)
   //icao = "";
   if (n>0)
   {
     var sub = xmlString.substring(n,n+300)
     //print(sub);
-    var n1 = Occurence(1,sub,"maps?ll=")
-    var n2 = Occurence(1,sub,"&t=h");
+    var n1 = Occurence(2,sub,"<BR>")
+    var n2 = Occurence(3,sub,"<BR>");
     if (n1>0 && n2>0)
     {
       var start =n1+4;
@@ -233,9 +252,8 @@ callback = function(str)
     process.stdout.write("> ");
 }
 
-holdcallback = function(str)
+function HoldLegLen (latlon,icao,legs,length,loops)
 {
-  let latlon = GetLatLong(str);
   if (latlon.length==0)
   {
     println("Lat/Long not found");
