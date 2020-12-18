@@ -40,6 +40,7 @@ var search = [
   ];
   
 var use =0;
+/*
 var response="KSFO";
 var latlon ="";
 var legs="5";
@@ -47,6 +48,7 @@ var length="50";
 var radius="50";
 var loops="10";
 var icao="KSAN";
+*/
 rl.on('line', (line) => 
 {
   var rsp = line.replace(/\0/g, '');
@@ -54,15 +56,18 @@ rl.on('line', (line) =>
   if (rsp.length>0)
     response=rsp; 
   //print("response = "+response);
-  var cmd = rsp.toUpperCase().split("(")[0];
+  var splitcmd= rsp.toUpperCase().replace(")",",").replace("(",",").split(",")
+  //console.log(parsedcmd)
+  var cmd = splitcmd[0]
+  var icao = splitcmd[1]
+  //console.log("cmd="+cmd+" icao="+icao)
   var waitingForResponse=false;
+  var url = search[use][0]+search[use][1]+icao
+  //console.log(url)
   switch (cmd)
   {
     case "LATLON":
     println("Executing LATLON")
-    icao = rsp.toUpperCase().replace(")","(").split("(")[1];
-    var url = search[use][0]+search[use][1]+icao
-    console.log(url)
     askhttps.getContent(url)
       .then((html)=>{
         //console.log(html)
@@ -76,13 +81,10 @@ rl.on('line', (line) =>
     
     case "HOLD1":
     println("Executing "+rsp)
-    var str = rsp.replace("(",",").replace(")",",").split(",")
-    icao = str[1]
     //print(icao+","+legs+","+length+","+loops)
-    legs = str[2]
-    length = str[3]
-    loops = str[4]
-    var url = search[use][0]+search[use][1]+icao
+    legs = splitcmd[2]
+    length = splitcmd[3]
+    loops = splitcmd[4]
     askhttps.getContent(url)
       .then((html)=>{
         //console.log(html)
@@ -97,24 +99,29 @@ rl.on('line', (line) =>
     
     case "HOLD2":
     println("Executing "+rsp)
-    var str = rsp.replace("(",",").replace(")",",").split(",")
-    icao = str[1]
     //print(icao+","+legs+","+length +","+loops)
-    legs = str[2]
-    radius = str[3]
-    loops = str[4]
-    askhttps.AskWeb(search[use][0],search[use][1]+icao,holdradiuscallback);
+    legs = splitcmd[2]
+    radius = splitcmd[3]
+    loops = splitcmd[4]
+    askhttps.getContent(url)
+      .then((html)=>{
+        //console.log(html)
+        let latlon = GetLatLong(html)
+        HoldRadius(latlon,icao,legs,radius,loops)
+        process.stdout.write(strings.optionprompt)
+        }
+      )
+      .catch((err)=>console.log(err));
     waitingForResponse=true;
     break;
     
     case "HOLD3":
     println("Executing "+rsp)
-    var str = rsp.replace("(",",").replace(")",",").split(",")
-    var lat = str[1]
-    var lon = str[2]
-    legs = str[3]
-    length = str[4]
-    loops = str[5]
+    var lat = splitcmd[1]
+    var lon = splitcmd[2]
+    legs = splitcmd[3]
+    length = splitcmd[4]
+    loops = splitcmd[5]
     //println("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
     var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
@@ -139,6 +146,7 @@ rl.on('line', (line) =>
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
       println(filename+ ' Replaced!');
+      process.stdout.write(strings.optionprompt)
     });
     waitingForResponse=true;
     break;
@@ -277,9 +285,8 @@ function HoldLegLen (latlon,icao,legs,length,loops)
  
 }
 
-holdradiuscallback = function(str)
+function HoldRadius(latlon,icao,legs,radius,loops)
 {
-  let latlon = GetLatLong(str);
   if (latlon.length==0)
   {
     println("Lat/Long not found");
