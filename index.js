@@ -94,7 +94,6 @@ rl.on('line', (line) =>
         }
       )
       .catch((err)=>console.log(err));
-    waitingForResponse=true;
     break;
     
     case "HOLD2":
@@ -112,7 +111,6 @@ rl.on('line', (line) =>
         }
       )
       .catch((err)=>console.log(err));
-    waitingForResponse=true;
     break;
     
     case "HOLD3":
@@ -129,8 +127,8 @@ rl.on('line', (line) =>
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
       println(filename+ ' Replaced!');
+      process.stdout.write(strings.optionprompt)
     });
-    waitingForResponse=true;
     break;
     
     case "CIRCLE":
@@ -148,7 +146,6 @@ rl.on('line', (line) =>
       println(filename+ ' Replaced!');
       process.stdout.write(strings.optionprompt)
     });
-    waitingForResponse=true;
     break;
 
     case "XML":
@@ -157,6 +154,7 @@ rl.on('line', (line) =>
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
     println(xml.ToXML())
+    process.stdout.write(strings.optionprompt)
     break;
     
     case "FP":
@@ -168,6 +166,7 @@ rl.on('line', (line) =>
     fp.AddUserFix("fix2",24.1234,-117.1234)
     var xmlfp = fp.ToXml();
     println(xmlfp)
+    process.stdout.write(strings.optionprompt)
     break;
 
     default:
@@ -175,12 +174,6 @@ rl.on('line', (line) =>
       println("Err: cmd not found")
       process.stdout.write("> ");
     }
-   
-  }
-  if (!waitingForResponse)
-  {
-    //println("Exiting response handler");
-    process.stdout.write("> ");
   }
 })
 
