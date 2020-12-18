@@ -35,10 +35,31 @@ var rl = readline.createInterface({
 
 var search = [
   ['https://www.airnav.com/airport/'],
+  ['https://flightplandatabase.com/airport/'],
   ['https://www.airport-data.com/world-airports/']
   ];
   
-var srchStringIndex =0;
+const searchTags = 
+[
+  [
+  [1,"Lat/Long"],
+  [2,"<BR>"],
+  [3,"<BR>"]
+  ],
+  
+  [
+  [1,"JSON.parse"],
+  [1,"\"lat\":"],
+  [1,",\"mag"]
+  ]
+]
+
+const replacestrings =
+[
+  ["",""],
+  ["\"lon\":",""]
+]
+var srchStringIndex =1;
 /*
 var response="KSFO";
 var latlon ="";
@@ -89,7 +110,7 @@ rl.on('line', (line) =>
         //console.log(html)
         let latlon = GetLatLong(html)
         HoldLegLen(latlon,icao,legs,length,loops)
-        process.stdout.write(strings.optionprompt)
+        //process.stdout.write(strings.optionprompt)
         }
       )
       .catch((err)=>console.log(err));
@@ -106,7 +127,7 @@ rl.on('line', (line) =>
         //console.log(html)
         let latlon = GetLatLong(html)
         HoldRadius(latlon,icao,legs,radius,loops)
-        process.stdout.write(strings.optionprompt)
+        //process.stdout.write(strings.optionprompt)
         }
       )
       .catch((err)=>console.log(err));
@@ -126,7 +147,7 @@ rl.on('line', (line) =>
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
       println(filename+ ' Replaced!');
-      process.stdout.write(strings.optionprompt)
+      //process.stdout.write(strings.optionprompt)
     });
     break;
     
@@ -149,6 +170,7 @@ rl.on('line', (line) =>
 
     case "XML":
     println("Executing XML Test")
+    //println(replacestrings[srchStringIndex])
     var xml = new mx.Node("Root","","this=\"is an attribute\"")
     var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
     var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
@@ -200,20 +222,23 @@ function Occurence(count,mainstr,substr)
 
 function GetLatLong(xmlString)
 {
-    //print(str);
-  var n = xmlString.indexOf("Lat/Long");
+  //println(xmlString);
+  var n = Occurence(searchTags[srchStringIndex][0][0], xmlString, searchTags[srchStringIndex][0][1]);
   //print(n)
   //icao = "";
   if (n>0)
   {
     var sub = xmlString.substring(n,n+300)
     //print(sub);
-    var n1 = Occurence(2,sub,"<BR>")
-    var n2 = Occurence(3,sub,"<BR>");
+    let tag1 = searchTags[srchStringIndex][1][1];
+    let tag2= searchTags[srchStringIndex][2][1]
+    var n1 = Occurence(searchTags[srchStringIndex][1][0],sub,tag1)
+    var n2 = Occurence(searchTags[srchStringIndex][2][0],sub,tag2)
     if (n1>0 && n2>0)
     {
-      var start =n1+4;
-      latlon = sub.substring(n1,n2-4);
+      var start =n1+tag1.length;
+      latlon = sub.substring(n1,n2-tag2.length);
+      latlon = latlon.replace(replacestrings[srchStringIndex][0], replacestrings[srchStringIndex][1])
       //print (response + " Lat/Long = "+latlon);
       return latlon;
     }
