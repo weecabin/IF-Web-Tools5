@@ -34,12 +34,11 @@ var rl = readline.createInterface({
 })
 
 var search = [
-  ['https://www.airnav.com','/airport/'],
-  ['skyvector.com','/airport/'],
-  ['pilotnav.com','/airport/'],
+  ['https://www.airnav.com/airport/'],
+  ['https://www.airport-data.com/world-airports/']
   ];
   
-var use =0;
+var srchStringIndex =0;
 /*
 var response="KSFO";
 var latlon ="";
@@ -62,8 +61,8 @@ rl.on('line', (line) =>
   var icao = splitcmd[1]
   //console.log("cmd="+cmd+" icao="+icao)
   var waitingForResponse=false;
-  var url = search[use][0]+search[use][1]+icao
-  //console.log(url)
+  var url = search[srchStringIndex]+icao
+  console.log(url)
   switch (cmd)
   {
     case "LATLON":
