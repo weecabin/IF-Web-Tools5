@@ -91,8 +91,15 @@ rl.on('line', (line) =>
   {
     case "LATLON":
     println("Executing LATLON")
-    let latlon = GetLatLong(icao)
-    console.log(latlon)
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      console.log(latlon)
+    }
+    else
+    {
+      println(icao+" not found")
+    }
     process.stdout.write(strings.optionprompt)
     break;
     
@@ -102,15 +109,16 @@ rl.on('line', (line) =>
     legs = splitcmd[2]
     length = splitcmd[3]
     loops = splitcmd[4]
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        HoldLegLen(latlon,icao,legs,length,loops)
-        //process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      HoldLegLen(latlon,icao,legs,length,loops)
+    }
+    else
+    {
+      println(icao+" not found")
+      process.stdout.write(strings.optionprompt)
+    }
     break;
     
     case "HOLD2":
@@ -119,15 +127,16 @@ rl.on('line', (line) =>
     legs = splitcmd[2]
     radius = splitcmd[3]
     loops = splitcmd[4]
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        HoldRadius(latlon,icao,legs,radius,loops)
-        //process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      HoldRadius(latlon,icao,legs,radius,loops)
+    }
+    else
+    {
+      println(icao+" not found")
+      process.stdout.write(strings.optionprompt)
+    }
     break;
     
     case "HOLD3":
@@ -219,9 +228,11 @@ function Occurence(count,mainstr,substr)
 
 function GetLatLong(icao)
 {
-  let ap = myAirports.filter(tst=>tst.icao==icao)
+  var ap = myAirports.filter(tst=>tst.icao==icao)
+  if (ap.length==0)
+    return "";
   var ll = ap[0].latitude+","+ap[0].longitude;
-return ll;
+  return ll;
 }
 
 function FpPath(str)

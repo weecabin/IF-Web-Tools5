@@ -240,7 +240,8 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
       angle = FixHeading(angle + deltaAngle);
     }
     // back to the first fix to close it off
-    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
+    if (loop==loops-1)
+      fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
   }
   return fp.ToXml();
 }
