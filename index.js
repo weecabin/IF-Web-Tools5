@@ -200,13 +200,14 @@ rl.on('line', (line) =>
     askhttps.getContent(url)
       .then((html)=>{
         //console.log(html)
-        let latlon = UpdateAirports(html)
+        let latlon = UpdateAirports(html,icao)
         console.log(latlon)
         process.stdout.write(strings.optionprompt)
         }
       )
       .catch((err)=>console.log(err));
     break;
+    
     default:
     {
       println("Err: cmd not found")
@@ -235,6 +236,34 @@ function Occurence(count,mainstr,substr)
   }
   //print ("returning "+offset)
   return offset;
+}
+
+function UpdateAirports(htmlString,airportICAO)
+{
+  //println(xmlString);
+  var n = Occurence(searchTags[srchStringIndex][0][0], htmlString, searchTags[srchStringIndex][0][1]);
+  //print(n)
+  //icao = "";
+  if (n>0)
+  {
+    var sub = htmlString.substring(n,n+300)
+    //print(sub);
+    let tag1 = searchTags[srchStringIndex][1][1];
+    let tag2= searchTags[srchStringIndex][2][1]
+    var n1 = Occurence(searchTags[srchStringIndex][1][0],sub,tag1)
+    var n2 = Occurence(searchTags[srchStringIndex][2][0],sub,tag2)
+    if (n1>0 && n2>0)
+    {
+      var start =n1+tag1.length;
+      latlon = sub.substring(n1,n2-tag2.length);
+      latlon = latlon.replace(replacestrings[srchStringIndex][0], replacestrings[srchStringIndex][1])
+      println(response + " Lat/Long = "+latlon);
+      var splitlatlon=latlon.split(",")
+      myAirports.push({id:myAirports.length,icao:airportICAO,latitude:splitlatlon[0],longitude:splitlatlon[1]})
+      return latlon;
+    }
+  }
+  return ""
 }
 
 function GetLatLong(icao)
