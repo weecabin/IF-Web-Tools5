@@ -27,51 +27,16 @@ const println = (msg) => {
   printHold="";
 }
 
+const apfilename="../../Database/MyAirports.json"
+const jsonString = fs.readFileSync(apfilename)
+var myAirports = JSON.parse(jsonString) 
+
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   terminal: false
 })
-const apfilename="../../Database/MyAirports.json"
-const jsonString = fs.readFileSync(apfilename)
-var myAirports = JSON.parse(jsonString)
 
-var search = [
-  ['https://www.airnav.com/airport/'],
-  ['https://flightplandatabase.com/airport/'],
-  ['https://www.airport-data.com/world-airports/']
-  ];
-  
-const searchTags = 
-[
-  [
-  [1,"Lat/Long"],
-  [2,"<BR>"],
-  [3,"<BR>"]
-  ],
-  
-  [
-  [1,"JSON.parse"],
-  [1,"\"lat\":"],
-  [1,",\"mag"]
-  ]
-]
-
-const replacestrings =
-[
-  ["",""],
-  ["\"lon\":",""]
-]
-var srchStringIndex =1;
-/*
-var response="KSFO";
-var latlon ="";
-var legs="5";
-var length="50";
-var radius="50";
-var loops="10";
-var icao="KSAN";
-*/
 rl.on('line', (line) => 
 {
   var rsp = line.replace(/\0/g, '');
@@ -210,7 +175,7 @@ rl.on('line', (line) =>
         .then((html)=>{
           //console.log(html)
           let latlon = UpdateAirports(html,icao)
-          console.log(latlon)
+          console.log("Database updated with: "+icao+"="+latlon)
           process.stdout.write(strings.optionprompt)
           }
         )
@@ -229,15 +194,16 @@ rl.on('line', (line) =>
   }
 })
 
-function Occurence(count,mainstr,substr)
+// returns the offset into mainstr for the n'th searchstr'
+function Occurence(count,mainstr,searchstr)
 {
   var offset=0;
   for (i=0;i<count;i++)
   {
-    var n = mainstr.substring(offset).indexOf(substr);
+    var n = mainstr.substring(offset).indexOf(searchstr);
     if (n>0)
     {
-      offset+=n+substr.length;
+      offset+=n+ searchstr.length;
     }
     else
     {
@@ -251,6 +217,36 @@ function Occurence(count,mainstr,substr)
   return offset;
 }
 
+const search = [
+  ['https://www.airnav.com/airport/'],
+  ['https://flightplandatabase.com/airport/'],
+  ['https://www.airport-data.com/world-airports/']
+  ];
+  
+const searchTags = 
+[
+  [
+  [1,"Lat/Long"],
+  [2,"<BR>"],
+  [3,"<BR>"]
+  ],
+  
+  [
+  [1,"JSON.parse"],
+  [1,"\"lat\":"],
+  [1,",\"mag"]
+  ]
+]
+
+const replacestrings =
+[
+  ["",""],
+  ["\"lon\":",""]
+]
+var srchStringIndex =1;
+
+// updates the airport database for airportICAO
+// Does nothing if it already exists
 function UpdateAirports(htmlString,airportICAO)
 {
   //println(xmlString);
@@ -287,6 +283,7 @@ function UpdateAirports(htmlString,airportICAO)
   return ""
 }
 
+// returns lat,lon for the sPecified sirport ICAO
 function GetLatLong(icao)
 {
   var ap = myAirports.filter(tst=>tst.icao==icao)
@@ -304,16 +301,6 @@ function FpPath(str)
 function cmdParts(cmdstr,delim)
 {
   let str = cmdstr.replace("(",delim).replace(")",delim).split(delim)
-  /*
-  let parts="";
-  for(i=0;i<str.length;i++)
-  {
-    parts+=str[i];
-    if (i!=(str.length-1))
-      parts+=",";
-  }
-  print (parts)
-  */
   return str;
 }
 
