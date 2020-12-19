@@ -196,6 +196,17 @@ rl.on('line', (line) =>
     process.stdout.write(strings.optionprompt)
     break;
 
+    case "UPDATE":
+    askhttps.getContent(url)
+      .then((html)=>{
+        //console.log(html)
+        let latlon = UpdateAirports(html)
+        console.log(latlon)
+        process.stdout.write(strings.optionprompt)
+        }
+      )
+      .catch((err)=>console.log(err));
+    break;
     default:
     {
       println("Err: cmd not found")
