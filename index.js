@@ -32,6 +32,9 @@ var rl = readline.createInterface({
   output: process.stdout,
   terminal: false
 })
+const apfilename="../../Database/MyAirports.json"
+const jsonString = fs.readFileSync(apfilename)
+var myAirports = JSON.parse(jsonString)
 
 var search = [
   ['https://www.airnav.com/airport/'],
@@ -83,20 +86,21 @@ rl.on('line', (line) =>
   //console.log("cmd="+cmd+" icao="+icao)
   var waitingForResponse=false;
   var url = search[srchStringIndex]+icao
-  console.log(url)
+  //console.log(url)
   switch (cmd)
   {
     case "LATLON":
     println("Executing LATLON")
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        console.log(latlon)
-        process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      console.log(latlon)
+    }
+    else
+    {
+      println(icao+" not found")
+    }
+    process.stdout.write(strings.optionprompt)
     break;
     
     case "HOLD1":
@@ -105,15 +109,16 @@ rl.on('line', (line) =>
     legs = splitcmd[2]
     length = splitcmd[3]
     loops = splitcmd[4]
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        HoldLegLen(latlon,icao,legs,length,loops)
-        //process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      HoldLegLen(latlon,icao,legs,length,loops)
+    }
+    else
+    {
+      println(icao+" not found")
+      process.stdout.write(strings.optionprompt)
+    }
     break;
     
     case "HOLD2":
@@ -122,15 +127,16 @@ rl.on('line', (line) =>
     legs = splitcmd[2]
     radius = splitcmd[3]
     loops = splitcmd[4]
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        HoldRadius(latlon,icao,legs,radius,loops)
-        //process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    var latlon = GetLatLong(icao)
+    if (latlon.length!=0)
+    {
+      HoldRadius(latlon,icao,legs,radius,loops)
+    }
+    else
+    {
+      println(icao+" not found")
+      process.stdout.write(strings.optionprompt)
+    }
     break;
     
     case "HOLD3":
@@ -190,6 +196,31 @@ rl.on('line', (line) =>
     process.stdout.write(strings.optionprompt)
     break;
 
+    case "UPDATE":
+    let exists = myAirports.filter(element=>element.icao==icao)
+    if (exists.length>0)
+    {
+      println(icao+" is already in the database")
+      process.stdout.write(strings.optionprompt)
+    }
+    else
+    {
+      println(url)
+      askhttps.getContent(url)
+        .then((html)=>{
+          //console.log(html)
+          let latlon = UpdateAirports(html,icao)
+          console.log(latlon)
+          process.stdout.write(strings.optionprompt)
+          }
+        )
+        .catch((err)=>{
+          console.log("Error-failed to load: "+url);
+          process.stdout.write(strings.optionprompt)
+        })
+      }
+    break;
+    
     default:
     {
       println("Err: cmd not found")
@@ -220,15 +251,15 @@ function Occurence(count,mainstr,substr)
   return offset;
 }
 
-function GetLatLong(xmlString)
+function UpdateAirports(htmlString,airportICAO)
 {
   //println(xmlString);
-  var n = Occurence(searchTags[srchStringIndex][0][0], xmlString, searchTags[srchStringIndex][0][1]);
+  var n = Occurence(searchTags[srchStringIndex][0][0], htmlString, searchTags[srchStringIndex][0][1]);
   //print(n)
   //icao = "";
   if (n>0)
   {
-    var sub = xmlString.substring(n,n+300)
+    var sub = htmlString.substring(n,n+300)
     //print(sub);
     let tag1 = searchTags[srchStringIndex][1][1];
     let tag2= searchTags[srchStringIndex][2][1]
@@ -239,11 +270,30 @@ function GetLatLong(xmlString)
       var start =n1+tag1.length;
       latlon = sub.substring(n1,n2-tag2.length);
       latlon = latlon.replace(replacestrings[srchStringIndex][0], replacestrings[srchStringIndex][1])
-      //print (response + " Lat/Long = "+latlon);
+      //println(response + " Lat/Long = "+latlon);
+      var splitlatlon=latlon.split(",")
+      if (Math.abs(Number(splitlatlon[0]>90)) ||  Math.abs(Number(splitlatlon[0]>180)))
+      {
+        console.log("invalid LatLong");
+        return ""
+      }
+      let nextID=Number(myAirports[myAirports.length-1].id)+1
+      myAirports.push({id:nextID,icao:airportICAO,latitude:splitlatlon[0],longitude:splitlatlon[1]})
+      var jsonAirports = JSON.stringify(myAirports,null,1)
+      fs.writeFileSync(apfilename, jsonAirports)
       return latlon;
     }
   }
   return ""
+}
+
+function GetLatLong(icao)
+{
+  var ap = myAirports.filter(tst=>tst.icao==icao)
+  if (ap.length==0)
+    return "";
+  var ll = ap[0].latitude+","+ap[0].longitude;
+  return ll;
 }
 
 function FpPath(str)
