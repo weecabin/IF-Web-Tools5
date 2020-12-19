@@ -205,7 +205,7 @@ rl.on('line', (line) =>
     }
     else
     {
-      println(url)
+      //println(url)
       askhttps.getContent(url)
         .then((html)=>{
           //console.log(html)
