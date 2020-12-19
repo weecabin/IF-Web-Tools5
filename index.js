@@ -32,6 +32,9 @@ var rl = readline.createInterface({
   output: process.stdout,
   terminal: false
 })
+const apfilename="../../Database/MyAirports.json"
+const jsonString = fs.readFileSync(apfilename)
+var myAirports = JSON.parse(jsonString)
 
 var search = [
   ['https://www.airnav.com/airport/'],
@@ -88,15 +91,9 @@ rl.on('line', (line) =>
   {
     case "LATLON":
     println("Executing LATLON")
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = GetLatLong(html)
-        console.log(latlon)
-        process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    let latlon = GetLatLong(icao)
+    console.log(latlon)
+    process.stdout.write(strings.optionprompt)
     break;
     
     case "HOLD1":
@@ -220,30 +217,11 @@ function Occurence(count,mainstr,substr)
   return offset;
 }
 
-function GetLatLong(xmlString)
+function GetLatLong(icao)
 {
-  //println(xmlString);
-  var n = Occurence(searchTags[srchStringIndex][0][0], xmlString, searchTags[srchStringIndex][0][1]);
-  //print(n)
-  //icao = "";
-  if (n>0)
-  {
-    var sub = xmlString.substring(n,n+300)
-    //print(sub);
-    let tag1 = searchTags[srchStringIndex][1][1];
-    let tag2= searchTags[srchStringIndex][2][1]
-    var n1 = Occurence(searchTags[srchStringIndex][1][0],sub,tag1)
-    var n2 = Occurence(searchTags[srchStringIndex][2][0],sub,tag2)
-    if (n1>0 && n2>0)
-    {
-      var start =n1+tag1.length;
-      latlon = sub.substring(n1,n2-tag2.length);
-      latlon = latlon.replace(replacestrings[srchStringIndex][0], replacestrings[srchStringIndex][1])
-      //print (response + " Lat/Long = "+latlon);
-      return latlon;
-    }
-  }
-  return ""
+  let ap = myAirports.filter(tst=>tst.icao==icao)
+  var ll = ap[0].latitude+","+ap[0].longitude;
+return ll;
 }
 
 function FpPath(str)
