@@ -86,7 +86,7 @@ rl.on('line', (line) =>
   //console.log("cmd="+cmd+" icao="+icao)
   var waitingForResponse=false;
   var url = search[srchStringIndex]+icao
-  console.log(url)
+  //console.log(url)
   switch (cmd)
   {
     case "LATLON":
@@ -197,15 +197,28 @@ rl.on('line', (line) =>
     break;
 
     case "UPDATE":
-    askhttps.getContent(url)
-      .then((html)=>{
-        //console.log(html)
-        let latlon = UpdateAirports(html,icao)
-        console.log(latlon)
-        process.stdout.write(strings.optionprompt)
-        }
-      )
-      .catch((err)=>console.log(err));
+    let exists = myAirports.filter(element=>element.icao==icao)
+    if (exists.length>0)
+    {
+      println(icao+" is already in the database")
+      process.stdout.write(strings.optionprompt)
+    }
+    else
+    {
+      println(url)
+      askhttps.getContent(url)
+        .then((html)=>{
+          //console.log(html)
+          let latlon = UpdateAirports(html,icao)
+          console.log(latlon)
+          process.stdout.write(strings.optionprompt)
+          }
+        )
+        .catch((err)=>{
+          console.log("Error-failed to load: "+url);
+          process.stdout.write(strings.optionprompt)
+        })
+      }
     break;
     
     default:
@@ -257,9 +270,17 @@ function UpdateAirports(htmlString,airportICAO)
       var start =n1+tag1.length;
       latlon = sub.substring(n1,n2-tag2.length);
       latlon = latlon.replace(replacestrings[srchStringIndex][0], replacestrings[srchStringIndex][1])
-      println(response + " Lat/Long = "+latlon);
+      //println(response + " Lat/Long = "+latlon);
       var splitlatlon=latlon.split(",")
-      myAirports.push({id:myAirports.length,icao:airportICAO,latitude:splitlatlon[0],longitude:splitlatlon[1]})
+      if (Math.abs(Number(splitlatlon[0]>90)) ||  Math.abs(Number(splitlatlon[0]>180)))
+      {
+        console.log("invalid LatLong");
+        return ""
+      }
+      let nextID=Number(myAirports[myAirports.length-1].id)+1
+      myAirports.push({id:nextID,icao:airportICAO,latitude:splitlatlon[0],longitude:splitlatlon[1]})
+      var jsonAirports = JSON.stringify(myAirports,null,1)
+      fs.writeFileSync(apfilename, jsonAirports)
       return latlon;
     }
   }
