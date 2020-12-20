@@ -69,6 +69,12 @@ class Node
       ret+=this.Indent+"</"+this.Name+">\n";
     return ret;
   }
+  /*
+  creates this structure if no children
+  <name attribute>value</name>
+  or this if children
+  <name attribute>value
+  */
   BuildElement()
   {
     var el = this.Indent+"<"+this.Name+this.Attribute+">"+this.Value;
