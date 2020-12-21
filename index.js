@@ -14,6 +14,7 @@ const readline = require('readline')
 const strings = require('./strings')
 const colors = require('colors/safe') 
 const fs = require("fs")
+const myfs = require("../../MyLib/myfs")
 const ff = require("./FlightFunctions")
 
 colors.enable()
@@ -329,7 +330,8 @@ function HoldLegLen (latlon,icao,legs,length,loops)
   let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold "+legs+" "+length+".fpl"
-  let filename = FpPath(fn);
+  let filename = FpPath(icao+"/"+fn);
+  myfs.mkdir(filename)
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
@@ -356,7 +358,8 @@ function HoldRadius(latlon,icao,legs,radius,loops)
   let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
   let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
-  let filename = FpPath(fn);
+  let filename = FpPath(icao+"/"+fn);
+  myfs.mkdir(filename)
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
