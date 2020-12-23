@@ -9,7 +9,7 @@
 
 var ask = require ('./qryGoogle')
 var askhttps = require('./httpsQuery')
-var mx = require('./xmlFlightplan')
+var mx = require('../../MyLib/flightplan')
 const readline = require('readline')
 const strings = require('./strings')
 const colors = require('colors/safe') 
