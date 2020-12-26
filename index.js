@@ -217,13 +217,25 @@ function Occurence(count,mainstr,searchstr)
   //print ("returning "+offset)
   return offset;
 }
+/*
+The following strings are used to find text inside a website
 
+search=the url of the website
+
+searchTags=an array of array of array of strings used to locate the text to be returned.
+first element is the occurance number of the string
+second element is the string to locate
+the last two arrays bracket the target string
+*/
 const search = [
   ['https://www.airnav.com/airport/'],
   ['https://flightplandatabase.com/airport/'],
   ['https://www.airport-data.com/world-airports/']
   ];
   
+/*
+each block in here cerresponds with the same indexed url in search above
+*/
 const searchTags = 
 [
   [
@@ -239,6 +251,9 @@ const searchTags =
   ]
 ]
 
+/*
+finally, this is used to replace a substring in the target string
+*/
 const replacestrings =
 [
   ["",""],
