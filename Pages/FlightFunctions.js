@@ -216,7 +216,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
     // print out the first point
     var fixlen=(legs-1+"").toString().length;
     var firstfix = NewPoint(lat,lon,initialheading,initialdistance);
-    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
+    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(4), firstfix[1].toFixed(4));
 
     // print out the remaining points
     var deltaAngle = 360/legs;

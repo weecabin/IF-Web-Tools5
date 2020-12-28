@@ -47,7 +47,7 @@ function copy()
   document.execCommand("copy");
 
   /* Alert the copied text */
-  alert("Copied to clipboard")
+  document.getElementById("status").value="flightplan copied to clipboard"
 }
 
 function concat(arrayofstrings,separator="")
