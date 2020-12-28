@@ -23,8 +23,9 @@ function execute()
   let txt= document.getElementById("txt");
   try 
   {
-    let fltplan = new FlightPlan("name");
-    document.getElementById("txt").value=fltplan.ToXml();
+    //let fltplan = new FlightPlan("name");
+    //txt.value=fltplan.ToXml();
+    txt.value=HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
   }
   catch(err) 
   {
