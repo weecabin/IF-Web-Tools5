@@ -5,7 +5,7 @@ function setup()
   
 }
 
-function functionselect()
+function execute()
 {
-  
+  document.getElementById("ststus").value="Working..."
 }
