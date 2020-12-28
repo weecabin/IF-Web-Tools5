@@ -10,7 +10,7 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools v031
+Infinite Flight Tools v032
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
@@ -28,6 +28,9 @@ Infinite Flight Tools v031
 <input type="button" value="Execute" onclick="execute()"><br>
 <input id="status" type="text" size="80" value="...">
 </form>
+<form
 <textarea id="txt" rows="10" cols="80"></textarea>
+<input type="button" value="Copy" onclick="copy()">
+</form>
 </body>
 </html>
