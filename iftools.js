@@ -43,7 +43,7 @@ function save()
   {
     let lat = document.getElementById("lat").value;
     let lon = document.getElementById("lon").value;
-    let filename = "Hold Radius.fpl""
+    let filename = "Hold Radius.fpl"
     download(filename,xmlData)
   }
   else
