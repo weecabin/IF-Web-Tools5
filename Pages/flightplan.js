@@ -1,5 +1,4 @@
-const myxml = require("./myxml")
-const Node = myxml.Node;
+
 
 /*
 Supports the creation of a flightplan, and the generation of an

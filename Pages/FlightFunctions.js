@@ -1,7 +1,4 @@
-var mx = require('./flightplan')
-const FlightPlan = mx.FlightPlan;
 
-var printHold = ""
 const print = (msg) => {
   printHold+=msg;
 }

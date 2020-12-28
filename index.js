@@ -1,5 +1,4 @@
 
-
 /**
   This is a modified Node.js script
   utilizing my Node and FlightPlan classes to generate an XML flightplan and save it to a file.
@@ -7,14 +6,27 @@
   I need to go back and look at error handling. 
 */
 
-var ask = require ('./qryGoogle')
 var askhttps = require('./httpsQuery')
+const getContent=askhttps.getContent;
+
 var mx = require('./flightplan')
+const FlightPlan=mx.FlightPlan;
+const Node=mx.Node;
+
 const readline = require('readline')
+
 const strings = require('./strings')
+const optionprompt = strings.optionprompt;
+const Flightplans = strings.Flightplans;
+const help=strings.help;
+
 const fs = require("fs")
 const myfs = require("./myfs")
+const mkdir=myfs.mkdir;
+
 const ff = require("./FlightFunctions")
+const HoldPattern=ff.HoldPattern;
+const Circling=ff.Circling;
 
 var printHold = ""
 const print = (msg) => {
@@ -63,7 +75,7 @@ rl.on('line', (line) =>
     {
       println(icao+" not found")
     }
-    process.stdout.write(strings.optionprompt)
+    process.stdout.write(optionprompt)
     break;
     
     case "HOLD1":
@@ -80,7 +92,7 @@ rl.on('line', (line) =>
     else
     {
       println(icao+" not found")
-      process.stdout.write(strings.optionprompt)
+      process.stdout.write(optionprompt)
     }
     break;
     
@@ -98,7 +110,7 @@ rl.on('line', (line) =>
     else
     {
       println(icao+" not found")
-      process.stdout.write(strings.optionprompt)
+      process.stdout.write(optionprompt)
     }
     break;
     
@@ -110,13 +122,13 @@ rl.on('line', (line) =>
     length = splitcmd[4]
     loops = splitcmd[5]
     //println("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
-    var  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
+    var  xmlfp = HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
     //print(xmlfp)
     var filename = FpPath('test.fpl');
     fs.writeFile(filename, xmlfp , function (err) {
       if (err) throw err;
       println(filename+ ' Replaced!');
-      //process.stdout.write(strings.optionprompt)
+      //process.stdout.write(optionprompt)
     });
     break;
     
@@ -127,36 +139,36 @@ rl.on('line', (line) =>
     //println(cmd);
     let fix1 = [cmd[1],cmd[2]]
     let fix2 = [cmd[3],cmd[4]]
-    let circxml = ff.Circling(fix1,fix2,Number(cmd[5]))
+    let circxml = Circling(fix1,fix2,Number(cmd[5]))
     //println(circxml)
     var filename = FpPath('Circling.fpl');
     fs.writeFile(filename, circxml , function (err) {
       if (err) throw err;
       println(filename+ ' Replaced!');
-      process.stdout.write(strings.optionprompt)
+      process.stdout.write(optionprompt)
     });
     break;
 
     case "XML":
     println("Executing XML Test")
     //println(replacestrings[srchStringIndex])
-    var xml = new mx.Node("Root","","this=\"is an attribute\"")
-    var l1 = xml.AddChild(new mx.Node("Level1","L1Value"))
-    var l2 = l1.AddChild(new mx.Node("Level2","L2Value"))
+    var xml = new Node("Root","","this=\"is an attribute\"")
+    var l1 = xml.AddChild(new Node("Level1","L1Value"))
+    var l2 = l1.AddChild(new Node("Level2","L2Value"))
     println(xml.ToXML())
-    process.stdout.write(strings.optionprompt)
+    process.stdout.write(optionprompt)
     break;
     
     case "FP":
     println("Executing FLIGHTPLAN")
-    var fp = new mx.FlightPlan("KSAN")
+    var fp = new FlightPlan("KSAN")
     fp.AddUserFix("fix1",23.1234,-116.1234)
     fp.AddUserFix("fix2",24.1234,-117.1234)
     fp.AddUserFix("fix1",23.1234,-116.1234)
     fp.AddUserFix("fix2",24.1234,-117.1234)
     var xmlfp = fp.ToXml();
     println(xmlfp)
-    process.stdout.write(strings.optionprompt)
+    process.stdout.write(optionprompt)
     break;
 
     case "UPDATE":
@@ -164,22 +176,22 @@ rl.on('line', (line) =>
     if (exists.length>0)
     {
       println(icao+" is already in the database")
-      process.stdout.write(strings.optionprompt)
+      process.stdout.write(optionprompt)
     }
     else
     {
       //println(url)
-      askhttps.getContent(url)
+      getContent(url)
         .then((html)=>{
           //console.log(html)
           let latlon = UpdateAirports(html,icao)
           console.log("Database updated with: "+icao+"="+latlon)
-          process.stdout.write(strings.optionprompt)
+          process.stdout.write(optionprompt)
           }
         )
         .catch((err)=>{
           console.log("Error-failed to load: "+url);
-          process.stdout.write(strings.optionprompt)
+          process.stdout.write(optionprompt)
         })
       }
     break;
@@ -308,7 +320,7 @@ function GetLatLong(icao)
 
 function FpPath(str)
 {
-  return strings.Flightplans+"/"+str;
+  return Flightplans+"/"+str;
 }
 
 function cmdParts(cmdstr,delim)
@@ -339,16 +351,16 @@ function HoldLegLen (latlon,icao,legs,length,loops)
   let lat = splitlatlon[0]
   let lon = splitlatlon[1]
   println("Executing HoldPattern("+legs+","+length+","+lat+","+lon+","+loops+")")
-  let  xmlfp = ff.HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
+  let  xmlfp = HoldPattern(Number(legs),Number(length),Number(lat),Number(lon),Number(loops))
   //print(xmlfp)
   let fn = icao+" Hold "+legs+" "+length+".fpl"
   let filename = FpPath(icao+"/"+fn);
-  myfs.mkdir(filename)
+  mkdir(filename)
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
-    process.stdout.write(strings.optionprompt);
+    process.stdout.write(optionprompt);
   });
  
 }
@@ -367,19 +379,19 @@ function HoldRadius(latlon,icao,legs,radius,loops)
   let legangle = Math.PI*2/Number(legs);
   let len = 2*Math.sin(legangle/2)*radius;
   println("Executing HoldPattern("+legs+","+len+","+lat+","+lon+","+loops+")")
-  let  xmlfp = ff.HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
+  let  xmlfp = HoldPattern(Number(legs),len,Number(lat),Number(lon),Number(loops));
   //print(xmlfp)
   let fn = icao+" HoldRadius "+legs+" "+radius+".fpl"
   let filename = FpPath(icao+"/"+fn);
-  myfs.mkdir(filename)
+  mkdir(filename)
   fs.writeFile(filename, xmlfp , function (err) 
   {
     if (err) throw err;
     console.log(filename+ ' Replaced!');
-    process.stdout.write(strings.optionprompt);
+    process.stdout.write(optionprompt);
   });
 }
 
-//print(strings.help)
+//print(help)
 //print('')
-process.stdout.write(strings.optionprompt)
+process.stdout.write(optionprompt)
