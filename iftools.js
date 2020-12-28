@@ -7,11 +7,11 @@ function setup()
 
 function execute()
 {
-  let lat = document.getElementById("lat");
-  let lon = document.getElementById("lon");
-  let legs = document.getElementById("legs");
-  let radius = document.getElementById("radius");
-  let loops = document.getElementById("loops");
+  let lat = document.getElementById("lat").value;
+  let lon = document.getElementById("lon").value;
+  let legs = document.getElementById("legs").value;
+  let radius = document.getElementById("radius").value;
+  let loops = document.getElementById("loops").value;
   let status = document.getElementById("status"); 
   
   let legangle = Math.PI*2/Number(legs);
