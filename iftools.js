@@ -39,16 +39,19 @@ function execute()
 
 function save() 
 {
+  let status=document.getElementById("status");
   if (xmlData.length>50)
   {
-    let lat = document.getElementById("lat").value;
-    let lon = document.getElementById("lon").value;
-    let filename = "Hold Radius.fpl"
-    download(filename,xmlData)
+    let fn = document.getElementById("filename").value;
+    if (fn.indexOf(".")>=0)
+      fn=fn.split(".")[0];
+    fn+=".fpl"
+    download(fn,xmlData)
+    status.value=fn+" downloaded"
   }
   else
   {
-    document.getElementById("lat").value="Nothing to save";
+    status.value="Nothing to save";
   }
 }
 
