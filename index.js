@@ -12,12 +12,9 @@ var askhttps = require('./httpsQuery')
 var mx = require('./flightplan')
 const readline = require('readline')
 const strings = require('./strings')
-const colors = require('colors/safe') 
 const fs = require("fs")
 const myfs = require("./myfs")
 const ff = require("./FlightFunctions")
-
-colors.enable()
 
 var printHold = ""
 const print = (msg) => {
