@@ -1,4 +1,4 @@
-var mx = require('../../MyLib/flightplan')
+var mx = require('./flightplan')
 
 var printHold = ""
 const print = (msg) => {
