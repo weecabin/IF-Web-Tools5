@@ -111,4 +111,3 @@ class Node
     return el;
   }
 }
- module.exports.Node = Node;

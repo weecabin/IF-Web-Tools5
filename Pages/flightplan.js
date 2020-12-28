@@ -6,15 +6,6 @@ Infinite Flight XML compatible plan
 Currently only supports USER WAYPOINTS
 */
 
-var printHold = ""
-const print = (msg) => {
-  printHold+=msg;
-}
-const println = (msg) => {
-  console.log(printHold+msg);
-  printHold="";
-}
-
 class FlightPlan
 {
   constructor(name)
@@ -57,6 +48,3 @@ class FlightPlan
     return this.Fp.ToXML();
   }
 }
-
-module.exports.Node = Node;
-module.exports.FlightPlan = FlightPlan;

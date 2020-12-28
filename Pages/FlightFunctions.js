@@ -1,12 +1,4 @@
 
-const print = (msg) => {
-  printHold+=msg;
-}
-const println = (msg) => {
-  console.log(printHold+msg);
-  printHold="";
-}
-
 // pads a number out to count characters with padChar
 function pad(numToPad,padChar,count)
 { 
@@ -365,19 +357,4 @@ function Circling(latlon1,latlon2,heading)
     fp.AddUserFix(id,lat,lon);
   }
   return fp.ToXml();
-}
-
-
-module.exports =
-{
-  DistHeading: DistHeading,
-  NewPoint: NewPoint,
-  FixHeading: FixHeading,
-  ToIF: ToIF,
-  ToDegMin: ToDegMin,
-  AngleBetween: AngleBetween,
-  TurnAngle: TurnAngle,
-  pad: pad,
-  HoldPattern: HoldPattern,
-  Circling: Circling
 }
