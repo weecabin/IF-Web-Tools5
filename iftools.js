@@ -44,10 +44,10 @@ function copy()
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
   /* Copy the text inside the text field */
-  document.execCommand("copy");
+  //document.execCommand("copy");
 
   /* Alert the copied text */
-  document.getElementById("status").value="flightplan copied to clipboard"
+  //document.getElementById("status").value="flightplan copied to clipboard"
 }
 
 function concat(arrayofstrings,separator="")
