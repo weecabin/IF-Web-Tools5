@@ -5,6 +5,8 @@ function setup()
   
 }
 
+var xmlData="";
+
 function execute()
 {
   let lat = document.getElementById("lat").value;
@@ -25,7 +27,8 @@ function execute()
   {
     //let fltplan = new FlightPlan("name");
     //txt.value=fltplan.ToXml();
-    txt.value=HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
+    xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
+    txt.value=xmlData;
   }
   catch(err) 
   {
@@ -34,20 +37,36 @@ function execute()
  
 }
 
-function copy() 
+function save() 
 {
-  /* Get the text field */
-  var copyText = document.getElementById("txt");
-  //alert(copyText.innerHTML)
-  /* Select the text field */
-  copyText.select(); 
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  if (xmlData.length>50)
+  {
+    let lat = document.getElementById("lat").value;
+    let lon = document.getElementById("lon").value;
+    let filename = "Hold "+lat+"/"+lon+".fpl";
+    download(filename,xmlData)
+  }
+  else
+  {
+    document.getElementById("lat").value="Nothing to save";
+  }
+}
 
-  /* Copy the text inside the text field */
-  //document.execCommand("copy");
+function download(filename, text) 
+{
 
-  /* Alert the copied text */
-  //document.getElementById("status").value="flightplan copied to clipboard"
+  var element = document.createElement('a');
+
+  element.setAttribute('href', 'data:fpl/plain;charset=utf-8,' + encodeURIComponent(text));
+
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+
+  document.body.appendChild(element);
+  element.click();
+
+  document.body.removeChild(element);
+
 }
 
 function concat(arrayofstrings,separator="")
