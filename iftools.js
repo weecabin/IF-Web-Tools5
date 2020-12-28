@@ -18,7 +18,7 @@ function execute()
   let leglen = 2*Math.sin(legangle/2)*radius;
   
   //HoldPattern(legs,leglen,lat,lon,loops=10)
-  status.value="Working: "+"HoldPattern("+concat([legs,leglen,lat,lon,loops],",")+")";
+  status.value="Working: "+"HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")";
   
   let txt= document.getElementById("txt");
   try 

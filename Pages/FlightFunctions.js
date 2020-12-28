@@ -209,7 +209,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
 
   var initialdistance = (leglen/2)/Math.sin((2*Math.PI*(180-initialheading))/360);
 
-  var fp = new FlightPlan(legs+"leg hold pattern");
+  var fp = new FlightPlan(legs+" leg hold pattern");
   for (loop=0;loop<loops;loop++)
   {
     //console.log(loop)
@@ -226,12 +226,12 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
       //console.log(angle)
       let fix = NewPoint(lat,lon,angle,initialdistance);
       //console.log(fix[0]+","+fix[1])
-      fp.AddUserFix("fix"+pad((leg+1),"0",fixlen),fix[0],fix[1]);
+      fp.AddUserFix("fix"+pad((leg+1),"0",fixlen),fix[0].toFixed(4),fix[1].toFixed(4));
       angle = FixHeading(angle + deltaAngle);
     }
     // back to the first fix to close it off
     if (loop==loops-1)
-      fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0], firstfix[1]);
+      fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(4), firstfix[1].toFixed(4));
   }
   return fp.ToXml();
 }
