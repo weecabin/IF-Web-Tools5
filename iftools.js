@@ -12,7 +12,7 @@ function execute()
   try 
   {
     let fltplan = new FlightPlan("name");
-    document.getElementById("txt").value=fltplan.ToXML();
+    document.getElementById("txt").value=fltplan.ToXml();
   }
   catch(err) 
   {
