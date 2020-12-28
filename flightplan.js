@@ -1,4 +1,4 @@
-const myxml = require("./myxml")
+//const myxml = require("./myxml")
 
 /*
 Supports the creation of a flightplan, and the generation of an
@@ -6,7 +6,7 @@ Infinite Flight XML compatible plan
 Currently only supports USER WAYPOINTS
 */
 
-const Node = myxml.Node;
+//const Node = myxml.Node;
 
 var printHold = ""
 const print = (msg) => {
@@ -60,5 +60,5 @@ class FlightPlan
   }
 }
 
-module.exports.Node = Node;
-module.exports.FlightPlan = FlightPlan;
+//module.exports.Node = Node;
+//module.exports.FlightPlan = FlightPlan;
