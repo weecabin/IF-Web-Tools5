@@ -4,7 +4,7 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools v008
+Infinite Flight Tools v009
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
@@ -13,10 +13,11 @@ Infinite Flight Tools v008
 <form onsubmit="execute()">
 <table>
 <tr><th>Name</th><th>Value</th></tr> 
-<tr><td>ICAO: </td><td><input id="icao" type="text" value="KSAN"></td></tr>
-<tr><td>Legs: </td><td><input id="icao" type="text" value="10"></td></tr>
-<tr><td>Radius: </td><td><input id="icao" type="text" value="50"></td></tr>
-<tr><td> Loops: </td><td><input id="icao" type="text" value="10"></td></tr>
+<tr><td>Latitude: </td><td><input id="lat" type="text" value="32"></td></tr>
+<tr><td>Longitude: </td><td><input id="lon" type="text" value="-117"></td></tr>
+<tr><td>Legs: </td><td><input id="legs" type="text" value="10"></td></tr>
+<tr><td>Radius: </td><td><input id="radius" type="text" value="50"></td></tr>
+<tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
 </table>
 <input type="button" value="Execute" onclick="execute()"><br>
 <input id="status" type="text" value="...">
