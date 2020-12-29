@@ -6,6 +6,12 @@ function setup()
   document.getElementById("status").value="form load complete"
 }
 
+function test()
+{
+  document.getElementById("test").value="in test()"
+}
+
+
 var xmlData="";
 
 function execute()
