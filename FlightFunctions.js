@@ -6,6 +6,7 @@ const print = (msg) => {
   printHold+=msg;
 }
 const println = (msg) => {
+  if (msg==undefined)msg="";
   console.log(printHold+msg);
   printHold="";
 }
@@ -198,10 +199,8 @@ function DistHeading(latfrom,lonfrom,latto,lonto)
    var angleRadians = Math.atan(dyx);
    var angleDegrees = angleRadians*180/Math.PI;
    var heading = FixHeading(90-angleDegrees); 
-   if (dx<0 && dy<0)
-      heading = 180+angleDegrees;
-   else if (dx<0 && dy>=0)
-      heading = 270-angleDegrees;
+   if (dx<0)
+     heading = 270-angleDegrees;
    
    //println("lonMult="+lonMult+" dx="+dx+" dy="+dy);
    //println("dy="+dy+" dx="+dx+" angleRad="+ angleRadians+" angleDeg="+angleDegrees+" heading="+heading);
@@ -250,6 +249,15 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
 /*
 computes an arc between two fixes given an entry heading.
 latlon is enterred as a two dim array for latlon1 and another for latlon2
+
+CIRCLE(45,90,46,91,90)
+
+CIRCLE(45,-90,46,-91,90)
+
+CIRCLE(-45,90,-46,91,90)
+
+CIRCLE(-45,-90,-46,-91,90)
+
 */
 function Circling(latlon1,latlon2,heading)
 {
@@ -287,9 +295,9 @@ function Circling(latlon1,latlon2,heading)
 
   // verify final fix with distance and heading from initial fix
   check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
-  //print("final from initial given heading and distance..");
-  //ToIF(check[0],check[1]);
-  //print();
+  println("final from initial given heading and distance..");
+  ToIF(check[0],check[1]);
+  println();
 
   // find the arc radius
   alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;

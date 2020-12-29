@@ -187,9 +187,7 @@ function DistHeading(latfrom,lonfrom,latto,lonto)
    var angleRadians = Math.atan(dyx);
    var angleDegrees = angleRadians*180/Math.PI;
    var heading = FixHeading(90-angleDegrees); 
-   if (dx<0 && dy<0)
-      heading = 180+angleDegrees;
-   else if (dx<0 && dy>=0)
+   if (dx<0)
       heading = 270-angleDegrees;
    
    //println("lonMult="+lonMult+" dx="+dx+" dy="+dy);
