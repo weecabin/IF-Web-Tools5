@@ -11,7 +11,7 @@ function test()
 {
   try
   { 
-    myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools2/MyAirports.json);
+    //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools2/MyAirports.json);
     document.getElementById("testid").value="in test()";
   }
   catch(err)
