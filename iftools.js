@@ -3,12 +3,12 @@ var myAirports;
 function setup()
 {
   //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools/MyAirports.json);
-  document.getElementById("status").value="form load complete"
+  document.getElementById("status").value="form load complete";
 }
 
 function test()
 {
-  document.getElementById("test").value="in test()"
+  document.getElementById("testid").value="in test()";
 }
 
 
