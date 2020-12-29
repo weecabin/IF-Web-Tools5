@@ -1,8 +1,9 @@
-
+var myAirports;
 
 function setup()
 {
-  
+  myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools/MyAirports.json);
+  document.getElementById("status").value=myAirports[0].icao;
 }
 
 var xmlData="";
