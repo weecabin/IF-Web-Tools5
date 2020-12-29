@@ -4,11 +4,19 @@ function setup()
 {
   //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools/MyAirports.json);
   document.getElementById("status").value="form load complete";
+  document.getElementById("testid").value="in setup()"
 }
 
 function test()
 {
-  document.getElementById("testid").value="in test()";
+  try
+  {
+    document.getElementById("testid").value="in test()";
+  }
+  catch(err)
+  {
+    document.getElementById("status").value=err.message;
+  }
 }
 
 
