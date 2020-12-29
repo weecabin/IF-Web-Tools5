@@ -2,7 +2,7 @@ var myAirports;
 
 function setup()
 {
-  //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools/MyAirports.json);
+  
   document.getElementById("status").value="form load complete";
   document.getElementById("testid").value="in setup()"
 }
@@ -10,7 +10,8 @@ function setup()
 function test()
 {
   try
-  {
+  { 
+    myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools2/MyAirports.json);
     document.getElementById("testid").value="in test()";
   }
   catch(err)
