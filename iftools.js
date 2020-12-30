@@ -42,7 +42,6 @@ function test()
        4: request finished and response is ready
        */
         let txt = document.getElementById("txt");
-        alert(this.readyState)
         switch (this.readyState)
         {
           case 0:
