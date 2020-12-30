@@ -37,11 +37,20 @@ function test()
   if (myAirports!=undefined)
   {
     let icao = document.getElementById("testid").value;
-    let ll = GetLatLong(icao);
-    document.getElementById("testid").value=icao+" latlon="+ll;
-    llsplit = ll.split(",");
-    document.getElementById("lat").value=llsplit[0];
-    document.getElementById("lon").value=llsplit[1];
+    if (icao.length==4)
+    {
+      let ll = GetLatLong(icao);
+      if (ll.length>0)
+      {
+        llsplit = ll.split(",");
+        if (verifyLatLon(llsplit[0],llsplit[2]))
+        {
+          document.getElementById("testid").value=icao+" latlon="+ll;
+          document.getElementById("lat").value=llsplit[0];
+          document.getElementById("lon").value=llsplit[1];
+        }
+      }
+    }
   }
  
 }
@@ -135,4 +144,15 @@ function GetLatLong(icao)
     return "";
   var ll = ap[0].latitude+","+ap[0].longitude;
   return ll;
+}
+
+function verifyLatLon(latitude,longitude)
+{
+  if(latitude==undefined || longitude==undefined)
+    return false;
+  if (Math.abs(latitude)>90)
+    return false;
+  if (Math.abs(longitude)>180)
+    return false;
+  return true;
 }
