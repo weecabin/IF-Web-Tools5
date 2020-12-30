@@ -10,17 +10,23 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools2 v036
+Infinite Flight Tools2 v038
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
   <input id="circ" type="radio" name="func" value="circ">Circle
 </form>
+
+<form>
+<input type="button" value="LatLon Lookup" onclick="LookupLatLon()">
+<input id="testid" type="text" size="80" value="...">
+</form>
+
 <form onsubmit="execute()">
 <table>
 <tr><th>Name</th><th>Value</th></tr> 
-<tr><td>Latitude: </td><td><input id="lat" type="text" value="32"></td></tr>
-<tr><td>Longitude: </td><td><input id="lon" type="text" value="-117"></td></tr>
+<tr><td>Latitude: </td><td><input id="lat" type="text" value="32" onchange="LatLonChange()"></td></tr>
+<tr><td>Longitude: </td><td><input id="lon" type="text" value="-117" onchange="LatLonChange()"></td></tr>
 <tr><td>Legs: </td><td><input id="legs" type="text" value="10"></td></tr>
 <tr><td>Radius: </td><td><input id="radius" type="text" value="50"></td></tr>
 <tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
@@ -30,11 +36,6 @@ Infinite Flight Tools2 v036
 </form>
 
 <textarea id="txt" rows="10" cols="80"></textarea>
-
-<form>
-<input type="button" value="LatLon Lookup" onclick="test()">
-<input id="testid" type="text" size="80" value="...">
-</form>
 
 <form>
 <input type="button" value="Download" onclick="save()">

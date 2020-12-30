@@ -30,13 +30,13 @@ function setup()
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
 }
-
-function test()
+let icao="";
+function LookupLatLon()
 {
   document.getElementById("txt").innerHTML="";
   if (myAirports!=undefined)
   {
-    let icao = document.getElementById("testid").value.toUpperCase();
+    icao = document.getElementById("testid").value.toUpperCase();
     if (icao.length==4)
     {
       let ll = GetLatLong(icao);
@@ -48,7 +48,7 @@ function test()
           document.getElementById("testid").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
-          document.getElementById("filename").value="Hold_"+icao+".fpl"
+         BuildFilename();
         }
       }
       else
@@ -59,6 +59,7 @@ function test()
     else
     {
       document.getElementById("testid").value=icao+" is an invalid ICAO";
+      icao="";
     }
   }
  
@@ -87,20 +88,35 @@ function execute()
   {
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
     txt.value=xmlData;
-    let fn=document.getElementById("filename").value;
-    //txt.value=fn+"\n";
-    let fnsplit=fn.split("."); 
-    //txt.value+=fnsplit[0]+" "+fnsplit[1]+"\n"
-    let newfn = fnsplit[0]+"_"+legs+"_"+radius+"_"+loops+"."+fnsplit[1];
-    //txt.value+=newfn;
-    //window.alert(newfn);
-    document.getElementById("filename").value=newfn;
+    BuildFilename();
   }
   catch(err) 
   {
     document.getElementById("txt").innerHTML = err.message;
   }
- 
+}
+
+function LatLonChange()
+{
+  
+}
+
+function HoldParamChange()
+{
+  
+}
+
+function BuildFilename()
+{
+  let legs = document.getElementById("legs").value;
+  let radius = document.getElementById("radius").value;
+  let loops = document.getElementById("loops").value;
+  let fn="";
+  if (icao.length==4)
+    fn=concat(["Hold-",icao,legs,radius,loops],"_")+".fpl";
+  else 
+    fn=concat(["Hold",legs,radius,loops],"_")+".fpl";
+  document.getElementById("filename").value=fn;
 }
 
 function save() 
