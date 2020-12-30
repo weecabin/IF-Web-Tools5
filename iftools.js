@@ -49,7 +49,6 @@ function LookupLatLon()
           document.getElementById("icaolookup").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
-         BuildFilename();
         }
       }
       else
@@ -101,12 +100,10 @@ function execute()
 function LatLonChange()
 {
   icao="";
-  BuildFilename();
 }
 
 function HoldParamChange()
 {
-  BuildFilename();
 }
 
 function BuildFilename()
