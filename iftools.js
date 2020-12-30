@@ -91,8 +91,8 @@ function execute()
     txt.value=fn+"\n";
     let fnsplit=fn.split("."); 
     txt.value+=fnsplit[0]+" "+fnsplit[1]+"\n"
-    let newfn = fnsplit[0]+"_"+legs+"_"+len+"."+fnsplit[1];
-    txt.value+=newfn;
+    let newfn = fnsplit[0]+"_"+legs+"_"+radius+"."+fnsplit[1];
+    txt.value+=newfn;&
     window.alert(newfn);
     document.getElementById("filename").value=newfn;
   }
