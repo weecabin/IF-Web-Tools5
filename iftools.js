@@ -43,13 +43,13 @@ function test()
         let txt = document.getElementById("txt");
         switch (this.readyState)
         {
-          case 0;
+          case 0:
             txt.innerHTML+= "request not initialized\n";
-          case 1;
+          case 1:
             txt.innerHTML+= "server connection established\n";
-          case 2;
+          case 2:
             txt.innerHTML+= "request received\n";
-          case 3;
+          case 3:
             txt.innerHTML+= "processing request\n";
         }
       }
