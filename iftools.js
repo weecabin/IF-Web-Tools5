@@ -2,7 +2,6 @@ var myAirports;
 
 function setup()
 {
-  
   document.getElementById("status").value="form load complete";
   document.getElementById("testid").value="in setup()"
   var xhttp = new XMLHttpRequest();
@@ -10,9 +9,10 @@ function setup()
     {
       if (this.readyState == 4 && this.status == 200) 
       {
-        let jsontext = this.responseText;
-        document.getElementById("txt").innerHTML += jsontext;
+        let jsontext = this.responseText;;
         myAirports=JSON.parse(jsontext);
+        if (myAirports.length>0)
+          document.getElementById("status").value = "Airport database loaded"
       }
       else
       {
