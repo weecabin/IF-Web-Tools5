@@ -39,6 +39,9 @@ function test()
     let icao = document.getElementById("testid").value;
     let ll = GetLatLong(icao);
     document.getElementById("testid").value=icao+" latlon="+ll;
+    llsplit = ll.split(",");
+    document.getElementById("lat").value=llsplit[0];
+    document.getElementById("lon").value=llsplit[1];
   }
  
 }
