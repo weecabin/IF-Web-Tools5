@@ -19,7 +19,14 @@ function test()
         let jsontext = this.responseText;
         document.getElementById("txt").innerHTML += jsontext;
         myAirports=JSON.parse(jsontext);
-        document.getElementById("testid").value=myAirports[0].icao+"="+myAirports[0].latitude+","+myAirports[0].longitude;
+        let icao = document.getElementById("testid").value;
+        if (icao.length==4)
+        {
+          let ll = GetLatLong(icao);
+          document.getElementById("testid").value=icao+"="+ll;
+        }
+        else
+          document.getElementById("testid").value=myAirports[0].icao+"="+myAirports[0].latitude+","+myAirports[0].longitude;
       }
       else
       {
@@ -116,4 +123,14 @@ function concat(arrayofstrings,separator="")
       ret+=separator;
   }
   return ret;
+}
+
+// returns lat,lon for the sPecified sirport ICAO
+function GetLatLong(icao)
+{
+  var ap = myAirports.filter(tst=>tst.icao==icao)
+  if (ap.length==0)
+    return "";
+  var ll = ap[0].latitude+","+ap[0].longitude;
+  return ll;
 }
