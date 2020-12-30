@@ -3,7 +3,6 @@ var myAirports;
 function setup()
 {
   document.getElementById("status").value="form load complete";
-  document.getElementById("icaolookup").value="in setup()"
   var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
@@ -12,7 +11,7 @@ function setup()
         let jsontext = this.responseText;;
         myAirports=JSON.parse(jsontext);
         if (myAirports.length>0)
-          document.getElementById("status").value = "Airport database loaded"
+          document.getElementById("icaolookup").value = "Airport database loaded"
       }
       else
       {
