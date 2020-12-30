@@ -19,7 +19,7 @@ function test()
         let jsontext = this.responseText;
         document.getElementById("txt").innerHTML += jsontext;
         myAirports=JSON.parse(jsontext);
-        document.getElementById("testid").value=myAirports[0].icao+"="+myAirports[0].latitude+","myAirports[0].longitude;
+        document.getElementById("testid").value=myAirports[0].icao+"="+myAirports[0].latitude+","+myAirports[0].longitude;
       }
       else
       {
