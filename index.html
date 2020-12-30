@@ -10,7 +10,7 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools2 v045
+Infinite Flight Tools2 v046
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
@@ -18,10 +18,10 @@ Infinite Flight Tools2 v045
 </form>
 
 <form>
+<input id="icaolookup" type="text" size="60" value="..."><br>
 <input type="button" value="LatLon Lookup" onclick="LookupLatLon()">
-<input id="icaolookup" type="text" size="60" value="...">
 <input type="button" value="Clear" onclick="Clearicao()">
-
+<br>
 </form>
 
 <form onsubmit="execute()">
@@ -33,8 +33,8 @@ Infinite Flight Tools2 v045
 <tr><td>Radius: </td><td><input id="radius" type="text" value="50"></td></tr>
 <tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
 </table>
-<input type="button" value="Execute" onclick="execute()"><br>
-<input id="status" type="text" size="80" value="...">
+<input type="button" value="Create Flightplan" onclick="execute()"><br>
+
 </form>
 
 <textarea id="txt" rows="10" cols="80"></textarea>
@@ -43,6 +43,7 @@ Infinite Flight Tools2 v045
 <input type="button" value="Download" onclick="save()">
 <input id="filename" type="text" size="60" value="Hold.fpl">
 </form>
-
+<br> <br> <br>
+<input id="status" size="80" value="...">
 </body>
 </html>
