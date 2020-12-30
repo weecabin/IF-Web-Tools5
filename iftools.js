@@ -106,6 +106,12 @@ function HoldParamChange()
 {
 }
 
+function Clearicao()
+{
+   document.getElementById("icaolookup").value="";
+   icao="";
+}
+
 function BuildFilename()
 {
   let legs = document.getElementById("legs").value;
