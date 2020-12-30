@@ -16,11 +16,14 @@ function test()
     {
       if (this.readyState == 4 && this.status == 200) 
       {
-        document.getElementById("txt").innerHTML = this.responseText;
+        let jsontext = this.responseText;
+        document.getElementById("txt").innerHTML = jsontext;
+        myAirports=JSON.parse(jsontext);
+        document.getElementById("testid").value=myAirports[0];
       }
       else
       {
-        document.getElementById("txt").innerHTML="something wrong";
+        document.getElementById("txt").innerHTML="something wrong: "+this.readyState;
       }
     };
     xhttp.open("GET", "MyAirports.json", true);
