@@ -42,8 +42,8 @@ function test()
       let ll = GetLatLong(icao);
       if (ll.length>0)
       {
-        llsplit = ll.split(",");
-        if (verifyLatLon(llsplit[0],llsplit[2]))
+        let llsplit = ll.split(",");
+        if (verifyLatLon(llsplit[0],llsplit[1]))
         {
           document.getElementById("testid").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
