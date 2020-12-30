@@ -92,7 +92,7 @@ function execute()
     let fnsplit=fn.split("."); 
     txt.value+=fnsplit[0]+" "+fnsplit[1]+"\n"
     let newfn = fnsplit[0]+"_"+legs+"_"+radius+"."+fnsplit[1];
-    txt.value+=newfn;&
+    txt.value+=newfn;
     window.alert(newfn);
     document.getElementById("filename").value=newfn;
   }
