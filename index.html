@@ -10,7 +10,7 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools2 v048
+Infinite Flight Tools2 v049
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
@@ -18,9 +18,11 @@ Infinite Flight Tools2 v048
 </form>
 
 <form>
-ICAO: <input id="icaolookup" type="text" size="60" value="enter ICAO here and press Lookup ICAO"><br>
-<input type="button" value="LatLon Lookup" onclick="LookupLatLon()">
-<input type="button" value="Clear" onclick="Clearicao()">
+<table> 
+<tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="60" value="enter ICAO here and press Lookup ICAO"></td></tr>
+<tr><td></td><td><input type="button" value="LatLon Lookup" onclick="LookupLatLon()"></td></tr>
+<tr><td></td><td><input type="button" value="Clear" onclick="Clearicao()"></td></tr>
+</table>
 <br>
 </form>
 
@@ -32,8 +34,8 @@ ICAO: <input id="icaolookup" type="text" size="60" value="enter ICAO here and pr
 <tr><td>Legs: </td><td><input id="legs" type="text" value="10"></td></tr>
 <tr><td>Radius: </td><td><input id="radius" type="text" value="50"></td></tr>
 <tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
+<tr><td></td><td><input type="button" value="Create Flightplan" onclick="execute()"></td></tr>
 </table>
-<input type="button" value="Create Flightplan" onclick="execute()"><br>
 
 </form>
 
