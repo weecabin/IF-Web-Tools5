@@ -18,6 +18,10 @@ function test()
       {
         document.getElementById("txt").innerHTML = this.responseText;
       }
+      else
+      {
+        document.getElementById("txt").innerHTML="something wrong";
+      }
     };
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
