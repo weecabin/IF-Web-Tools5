@@ -13,6 +13,7 @@ function test()
 {
   try
   { 
+  /*
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
@@ -23,7 +24,7 @@ function test()
     };
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
-    //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools2/MyAirports.json);
+    */
     document.getElementById("testid").value="in test()";
   }
   catch(err)
