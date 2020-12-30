@@ -9,8 +9,20 @@ function setup()
 
 function test()
 {
+  function test()
+{
   try
   { 
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+      if (this.readyState == 4 && this.status == 200) 
+      {
+        document.getElementById("txt").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "MyAirports.json", true);
+    xhttp.send();
     //myAirports=JSON.parse(https://weecabin.github.io/IF-Web-Tools2/MyAirports.json);
     document.getElementById("testid").value="in test()";
   }
