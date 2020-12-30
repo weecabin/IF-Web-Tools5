@@ -42,17 +42,8 @@ function test()
        4: request finished and response is ready
        */
         let txt = document.getElementById("txt");
-        switch (this.readyState)
-        {
-          case 0:
-            txt.innerHTML+= "request not initialized\n";
-          case 1:
-            txt.innerHTML+= "server connection established\n";
-          case 2:
-            txt.innerHTML+= "request received\n";
-          case 3:
-            txt.innerHTML+= "processing request\n";
-        }
+        txt.innerHTML+=this.readyState;
+       
       }
     };
     xhttp.open("GET", "MyAirports.json", true);
