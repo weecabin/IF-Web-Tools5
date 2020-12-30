@@ -3,7 +3,7 @@ var myAirports;
 function setup()
 {
   document.getElementById("status").value="form load complete";
-  document.getElementById("testid").value="in setup()"
+  document.getElementById("icaolookup").value="in setup()"
   var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
@@ -30,6 +30,7 @@ function setup()
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
 }
+
 let icao="";
 function LookupLatLon()
 {
