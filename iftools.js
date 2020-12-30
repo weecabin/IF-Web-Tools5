@@ -5,14 +5,7 @@ function setup()
   
   document.getElementById("status").value="form load complete";
   document.getElementById("testid").value="in setup()"
-}
-
-function test()
-{
-  document.getElementById("txt").innerHTML="";
-  try
-  { 
-    var xhttp = new XMLHttpRequest();
+  var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
       if (this.readyState == 4 && this.status == 200) 
@@ -20,12 +13,6 @@ function test()
         let jsontext = this.responseText;
         document.getElementById("txt").innerHTML += jsontext;
         myAirports=JSON.parse(jsontext);
-        let icao = document.getElementById("testid").value;
-        if (icao.length==4)
-        {
-          let ll = GetLatLong(icao);
-          document.getElementById("testid").value=icao+"="+ll;
-        }
       }
       else
       {
@@ -36,20 +23,24 @@ function test()
        3: processing request 
        4: request finished and response is ready
        */
-        let txt = document.getElementById("txt");
-        txt.innerHTML+=this.readyState;
-       
+        //let txt = document.getElementById("txt");
+        //txt.innerHTML+=this.readyState;
       }
     };
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
-    
-    document.getElementById("testid").value="in test()";
-  }
-  catch(err)
+}
+
+function test()
+{
+  document.getElementById("txt").innerHTML="";
+  if (myAirports!=undefined)
   {
-    document.getElementById("status").value=err.message;
+    let icao = document.getElementById("testid").value;
+    let ll = GetLatLong(icao);
+    document.getElementById("testid").value=icao+" latlon="+ll;
   }
+ 
 }
 
 
