@@ -48,6 +48,7 @@ function test()
           document.getElementById("testid").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
+          document.getElementById("filename").value="Hold_"+icao+".fpl"
         }
       }
       else
@@ -88,6 +89,9 @@ function execute()
     //txt.value=fltplan.ToXml();
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
     txt.value=xmlData;
+    let fn=document.getElementById("filename").value;
+    let fnsplit=fn.split(".");
+    document.getElementById("filename").value=fnsplit[0]+"_"+legs+"_"+len+"_"+fnsplit[1];
   }
   catch(err) 
   {
