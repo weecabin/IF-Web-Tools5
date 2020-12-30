@@ -36,7 +36,7 @@ function LookupLatLon()
   document.getElementById("txt").innerHTML="";
   if (myAirports!=undefined)
   {
-    icao = document.getElementById("testid").value.toUpperCase();
+    icao = document.getElementById("icaolookup").value.toUpperCase();
     if (icao.length==4)
     {
       let ll = GetLatLong(icao);
@@ -45,7 +45,7 @@ function LookupLatLon()
         let llsplit = ll.split(",");
         if (verifyLatLon(llsplit[0],llsplit[1]))
         {
-          document.getElementById("testid").value=icao+" latlon="+ll;
+          document.getElementById("icaolookup").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
          BuildFilename();
@@ -53,12 +53,13 @@ function LookupLatLon()
       }
       else
       {
-        document.getElementById("testid").value=icao+" is not in the databspase"
+        document.getElementById("icaolookup").value=icao+" is not in the databspase"
+        icao="";
       }
     }
     else
     {
-      document.getElementById("testid").value=icao+" is an invalid ICAO";
+      document.getElementById("icaolookup").value=icao+" is an invalid ICAO";
       icao="";
     }
   }
@@ -98,12 +99,13 @@ function execute()
 
 function LatLonChange()
 {
-  
+  icao="";
+  BuildFilename();
 }
 
 function HoldParamChange()
 {
-  
+  BuildFilename();
 }
 
 function BuildFilename()
@@ -113,7 +115,7 @@ function BuildFilename()
   let loops = document.getElementById("loops").value;
   let fn="";
   if (icao.length==4)
-    fn=concat(["Hold-",icao,legs,radius,loops],"_")+".fpl";
+    fn=concat(["Hold",icao,legs,radius,loops],"_")+".fpl";
   else 
     fn=concat(["Hold",legs,radius,loops],"_")+".fpl";
   document.getElementById("filename").value=fn;
