@@ -214,7 +214,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
     // print out the first point
     var fixlen=(legs-1+"").toString().length;
     var firstfix = NewPoint(lat,lon,initialheading,initialdistance);
-    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(4), firstfix[1].toFixed(4));
+    fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(6), firstfix[1].toFixed(6));
 
     // print out the remaining points
     var deltaAngle = 360/legs;
@@ -224,12 +224,12 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
       //console.log(angle)
       let fix = NewPoint(lat,lon,angle,initialdistance);
       //console.log(fix[0]+","+fix[1])
-      fp.AddUserFix("fix"+pad((leg+1),"0",fixlen),fix[0].toFixed(4),fix[1].toFixed(4));
+      fp.AddUserFix("fix"+pad((leg+1),"0",fixlen),fix[0].toFixed(6),fix[1].toFixed(6));
       angle = FixHeading(angle + deltaAngle);
     }
     // back to the first fix to close it off
     if (loop==loops-1)
-      fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(4), firstfix[1].toFixed(4));
+      fp.AddUserFix("fix"+pad(0,"0",fixlen), firstfix[0].toFixed(6), firstfix[1].toFixed(6));
   }
   return fp.ToXml();
 }
@@ -348,8 +348,8 @@ function Circling(latlon1,latlon2,heading)
   //print("Decimal fixes...");
   for (index=0;index<decPoints.length;index++)
   {
-    var lat = Number(decPoints[index][0]).toFixed(4);
-    var lon = Number(decPoints[index][1]).toFixed(4);
+    var lat = Number(decPoints[index][0]).toFixed(6);
+    var lon = Number(decPoints[index][1]).toFixed(6);
     //print(lat+"/"+lon+" ");
     var id = (lat*1000).toFixed(0) +"/"+ (lon*1000).toFixed(0);
     fp.AddUserFix(id,lat,lon);
