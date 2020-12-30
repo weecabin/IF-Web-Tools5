@@ -26,11 +26,6 @@ function test()
           let ll = GetLatLong(icao);
           document.getElementById("testid").value=icao+"="+ll;
         }
-        else
-        {
-          document.getElementById("testid").value=myAirports[0].icao+"="+myAirports[0].latitude+","+myAirports[0].longitude;
-        }
-       
       }
       else
       {
