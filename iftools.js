@@ -52,15 +52,19 @@ function LookupLatLon()
       }
       else
       {
-        document.getElementById("icaolookup").value=icao+" is not in the databspase"
+        document.getElementById("icaolookup").value=icao+" is not in the database"
         icao="";
       }
     }
     else
     {
-      document.getElementById("icaolookup").value=icao+" is an invalid ICAO";
+      document.getElementById("icaolookup").value="Invalid ICAO";
       icao="";
     }
+  }
+  else
+  {
+    document.getElementById("icaolookup").value="No database loaded"
   }
  
 }
