@@ -10,7 +10,7 @@
 </head>
 <body onload="setup()">
 <h1>
-Infinite Flight Tools2 v049
+Infinite Flight Tools2 v050
 </h1>
 <form onsubmit="functionselect()">
   <input id="hold" type="radio" name="func" value="hold">Hold<br>
@@ -20,10 +20,9 @@ Infinite Flight Tools2 v049
 <form>
 <table> 
 <tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="60" value="enter ICAO here and press Lookup ICAO"></td></tr>
-<tr><td></td><td><input type="button" value="LatLon Lookup" onclick="LookupLatLon()"></td></tr>
-<tr><td></td><td><input type="button" value="Clear" onclick="Clearicao()"></td></tr>
+<tr><td></td><td><input type="button" value="LatLon Lookup" onclick="LookupLatLon()">
+<input type="button" value="Clear" onclick="Clearicao()"></td></tr>
 </table>
-<br>
 </form>
 
 <form onsubmit="execute()">
@@ -45,7 +44,7 @@ Infinite Flight Tools2 v049
 <input type="button" value="Download" onclick="save()">
 <input id="filename" type="text" size="60" value="Hold.fpl">
 </form>
-<br> <br> <br>
+<br> <br>
 <input id="status" size="80" value="...">
 </body>
 </html>
