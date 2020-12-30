@@ -36,7 +36,7 @@ function test()
   document.getElementById("txt").innerHTML="";
   if (myAirports!=undefined)
   {
-    let icao = document.getElementById("testid").value;
+    let icao = document.getElementById("testid").value.toUpperCase();
     if (icao.length==4)
     {
       let ll = GetLatLong(icao);
@@ -50,6 +50,14 @@ function test()
           document.getElementById("lon").value=llsplit[1];
         }
       }
+      else
+      {
+        document.getElementById("testid").value=icao+" is not in the databspase"
+      }
+    }
+    else
+    {
+      document.getElementById("testid").value=icao+" is an invalid ICAO";
     }
   }
  
