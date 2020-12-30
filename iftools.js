@@ -9,6 +9,7 @@ function setup()
 
 function test()
 {
+  document.getElementById("txt").innerHTML="";
   try
   { 
     var xhttp = new XMLHttpRequest();
