@@ -85,13 +85,14 @@ function execute()
   let txt= document.getElementById("txt");
   try 
   {
-    //let fltplan = new FlightPlan("name");
-    //txt.value=fltplan.ToXml();
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
-    txt.value=xmlData;
+    //txt.value=xmlData;
     let fn=document.getElementById("filename").value;
+    txt.value=fn+"\n";
     let fnsplit=fn.split("."); 
+    txt.value+=fnsplit[0]+" "+fnsplit[1]+"\n"
     let newfn = fnsplit[0]+"_"+legs+"_"+len+"."+fnsplit[1];
+    txt.value+=newfn;
     window.alert(newfn);
     document.getElementById("filename").value=newfn;
   }
