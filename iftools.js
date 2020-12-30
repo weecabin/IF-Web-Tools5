@@ -9,8 +9,6 @@ function setup()
 
 function test()
 {
-  function test()
-{
   try
   { 
   /*
