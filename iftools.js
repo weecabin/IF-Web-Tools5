@@ -90,8 +90,10 @@ function execute()
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
     txt.value=xmlData;
     let fn=document.getElementById("filename").value;
-    let fnsplit=fn.split(".");
-    document.getElementById("filename").value=fnsplit[0]+"_"+legs+"_"+len+"_"+fnsplit[1];
+    let fnsplit=fn.split("."); 
+    let newfn = fnsplit[0]+"_"+legs+"_"+len+"."+fnsplit[1];
+    window.alert(newfn);
+    document.getElementById("filename").value=newfn;
   }
   catch(err) 
   {
