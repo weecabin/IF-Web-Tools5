@@ -148,7 +148,7 @@ function BuildFilename()
   document.getElementById("filename").value=fn;
 }
 
-function DownloadHold() 
+function DownloadXML() 
 {
   let status=document.getElementById("status");
   if (xmlData.length>50)
