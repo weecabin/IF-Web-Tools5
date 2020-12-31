@@ -75,7 +75,7 @@ function MakeCircle()
 }
 
 var xmlData="";
-function MakeHold()
+function CreateHold()
 {
   let lat = document.getElementById("lat").value;
   let lon = document.getElementById("lon").value;
@@ -131,7 +131,7 @@ function BuildFilename()
   document.getElementById("filename").value=fn;
 }
 
-function save() 
+function DownloadHold() 
 {
   let status=document.getElementById("status");
   if (xmlData.length>50)
