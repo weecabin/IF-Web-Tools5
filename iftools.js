@@ -69,9 +69,12 @@ function LookupLatLon()
  
 }
 
+function MakeCircle()
+{
+  
+}
 
 var xmlData="";
-
 function execute()
 {
   let lat = document.getElementById("lat").value;
