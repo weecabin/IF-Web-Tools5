@@ -1,0 +1,50 @@
+<html>
+<head>
+<script src="Pages/myxml.js"></script>
+
+<script src="Pages/flightplan.js"></script>
+
+<script src="Pages/FlightFunctions.js"></script>
+
+<script src="iftools.js"></script>
+</head>
+<body onload="setup()">
+<h1>
+Infinite Flight Tools2 v052
+</h1>
+<form onsubmit="functionselect()">
+  <input id="hold" type="radio" name="func" value="hold">Hold<br>
+  <input id="circ" type="radio" name="func" value="circ">Circle
+</form>
+
+<form>
+<table> 
+<tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="60" value="enter ICAO here and press Lookup"></td></tr>
+<tr><td></td><td><input type="button" value="Lookup" onclick="LookupLatLon()">
+<input type="button" value="Clear" onclick="Clearicao()"></td></tr>
+</table>
+</form>
+
+<form onsubmit="execute()">
+<table>
+<tr><th style="width:30px">Name</th><th style="width:40px">Value</th></tr> 
+<tr><td>Latitude: </td><td><input id="lat" type="text" value="32" onchange="LatLonChange()"></td></tr>
+<tr><td>Longitude: </td><td><input id="lon" type="text" value="-117" onchange="LatLonChange()"></td></tr>
+<tr><td>Legs: </td><td><input id="legs" type="text" value="10"></td></tr>
+<tr><td>Radius: </td><td><input id="radius" type="text" value="50"></td></tr>
+<tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
+<tr><td></td><td><input type="button" value="Create Flightplan" onclick="execute()"></td></tr>
+</table>
+
+</form>
+
+<textarea id="txt" rows="10" cols="80"></textarea>
+
+<form>
+<input type="button" value="Download" onclick="save()">
+<input id="filename" type="text" size="60" value="Hold.fpl">
+</form>
+<br> <br>
+<input id="status" size="80" value="...">
+</body>
+</html>
