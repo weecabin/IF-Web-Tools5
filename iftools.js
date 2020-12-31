@@ -132,6 +132,7 @@ function Clearicao()
 {
    document.getElementById("icaolookup").value="";
    icao="";
+   document.getElementById("icaolookup").focus();
 }
 
 function BuildFilename()
