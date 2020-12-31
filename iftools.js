@@ -75,7 +75,7 @@ function MakeCircle()
 }
 
 var xmlData="";
-function execute()
+function MakeHold()
 {
   let lat = document.getElementById("lat").value;
   let lon = document.getElementById("lon").value;
