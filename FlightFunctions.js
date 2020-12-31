@@ -365,7 +365,7 @@ function Circling(latlon1,latlon2,heading)
   }
   //println();
 
-  var fp = new FlightPlan("KSAN Circle");
+  var fp = new FlightPlan("Circle");
   //print("Decimal fixes...");
   for (index=0;index<decPoints.length;index++)
   {

@@ -71,7 +71,22 @@ function LookupLatLon()
 
 function MakeCircle()
 {
-  
+  let inlat = document.getElementById("inlat").value;
+  let inlon = document.getElementById("inlon").value;
+  let outlat = document.getElementById("outlat").value;
+  let outlon = document.getElementById("outlon").value;
+  let heading = document.getElementById("heading").value;
+  try
+  {
+    xmlData = Circling([inlat, inlon],[outlat, outlon],heading);
+    let txt= document.getElementById("txt");
+    txt.value=xmlData;
+  }
+  catch(err)
+  {
+    txt.value = err.message;
+  }
+ 
 }
 
 var xmlData="";
@@ -99,7 +114,7 @@ function CreateHold()
   }
   catch(err) 
   {
-    document.getElementById("txt").innerHTML = err.message;
+    txt.value = err.message;
   }
 }
 
