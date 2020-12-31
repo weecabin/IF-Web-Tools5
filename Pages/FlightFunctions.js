@@ -238,7 +238,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
 computes an arc between two fixes given an entry heading.
 latlon is enterred as a two dim array for latlon1 and another for latlon2
 */
-function Circling(latlon1,latlon2,heading)
+function Circling(latlon1,latlon2,heading,points)
 {
   console.log("in Circling")
   var lat0=Number(latlon1[0]);
@@ -246,8 +246,6 @@ function Circling(latlon1,latlon2,heading)
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
 
-  var points=10;
-  
   /*
   print("heading "+heading);
   print("Initial ");
@@ -344,7 +342,7 @@ function Circling(latlon1,latlon2,heading)
   }
   //println();
 
-  var fp = new FlightPlan("KSAN Circle");
+  var fp = new FlightPlan("Circle");
   //print("Decimal fixes...");
   for (index=0;index<decPoints.length;index++)
   {

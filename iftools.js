@@ -76,9 +76,10 @@ function MakeCircle()
   let outlat = document.getElementById("outlat").value;
   let outlon = document.getElementById("outlon").value;
   let heading = document.getElementById("heading").value;
+  let points = document.getElementById("points").value;
   try
   {
-    xmlData = Circling([inlat, inlon],[outlat, outlon],heading);
+    xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     let txt= document.getElementById("txt");
     txt.value=xmlData;
   }

@@ -259,15 +259,13 @@ CIRCLE(-45,90,-46,91,90)
 CIRCLE(-45,-90,-46,-91,90)
 
 */
-function Circling(latlon1,latlon2,heading)
+function Circling(latlon1,latlon2,heading,points)
 {
   console.log("in Circling")
   var lat0=Number(latlon1[0]);
   var lon0=Number(latlon1[1]);
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
-
-  var points=10;
   
   /*
   print("heading "+heading);
