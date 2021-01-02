@@ -99,12 +99,12 @@ function SetupCircle()
   txt.value+=JSON.stringify(ap) +"\n"; 
   if (ap.length==1)
   {
-    let rwy1=ap[0].rwys.filter(x=>rwy==runway);
+    let rwy1=ap[0].rwys.filter(x=>x.rwy==runway);
     txt.value=JSON.stringify(rwy1)
     let otherend = runway-18;
     if (otherend<=0)
       otherend+=360;
-    let rwy2=ap[0].rwys.filter(x=>rwy==otherend);
+    let rwy2=ap[0].rwys.filter(x=>x.rwy==otherend);
     // setup runway threshold lat/lon
     let lat1=Number(rwy1[0].lat);
     let lon1=Number(rwy1[0].lon);
