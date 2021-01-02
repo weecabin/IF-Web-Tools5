@@ -51,8 +51,8 @@ function AngleBetween(heading1,heading2)
   var delta=h1>h2?h1-h2:h2-h1;
   if (delta>180)
     delta=360-delta;
-  //println("heading1="+heading1+" heading2="+heading2);
-  //println("fxedheading1="+h1+" fixedheading2="+h2+" delta="+delta);
+  println("heading1="+heading1+" heading2="+heading2);
+  println("fxedheading1="+h1+" fixedheading2="+h2+" delta="+delta);
   return delta;
 }
 
@@ -277,6 +277,7 @@ function Circling(latlon1,latlon2,heading,points)
   println(check[0]+","+check[1]);
 
   // find the arc radius
+  println("heading - headingToFinal "+heading+"-"+headingToFinal+"="+ Math.abs(heading - headingToFinal))
   alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;
   println("alpha="+alpha)
   var arcR = Math.abs(dh[0]/(2*Math.cos(alpha*Math.PI/180)));
