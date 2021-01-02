@@ -141,6 +141,7 @@ function SetupCircle()
 
 function MakeCircle()
 {
+  document.getElementById("txt").value="";
   let inlat = document.getElementById("inlat").value;
   let inlon = document.getElementById("inlon").value;
   let outlat = document.getElementById("outlat").value;
