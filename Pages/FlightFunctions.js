@@ -278,7 +278,7 @@ function Circling(latlon1,latlon2,heading,points)
 
   // find the arc radius
   alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;
-  //println("alpha="+alpha)
+  println("alpha="+alpha)
   var arcR = Math.abs(dh[0]/(2*Math.cos(alpha*Math.PI/180)));
   println("Arc Radius="+arcR)
 
