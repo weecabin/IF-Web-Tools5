@@ -31,6 +31,7 @@ function setup()
       xhttp.open("GET", "MyAirports.json", true);
       xhttp.send();
       runways=JSON.parse(fs.readFileSync("RunwayDB.json"));
+      document.getElementById("txt").value=runways.length;
     }
     catch(err)
     {
