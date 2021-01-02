@@ -262,19 +262,18 @@ function Circling(latlon1,latlon2,heading,points)
   println("LonMultiplier="+lonscale);
   var dx = (lon1-lon0)*lonscale;
   var dy = lat1-lat0;
-  println(dx + "," + dy);
+  println("dx,dy = "+dx + "," + dy);
 
   // find the distance and heading to the final fix
   dh = DistHeading(lat0,lon0,lat1,lon1);
   //print("dist="+dh[0] + " heading=" + dh[1]);
   var headingToFinal=dh[1];
   var distToFinal=dh[0];
-  println("headingToFinal="+ headingToFinal);
+  println("heading from initial to final = "+ headingToFinal);
 
   // verify final fix with distance and heading from initial fix
   check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
-  println("final from initial given heading and distance..");
-  println(check[0]+","+check[1]);
+  println("final from initial given heading and distance.."+check[0]+","+check[1]);
 
   // find the arc radius
   println("heading - headingToFinal "+heading+"-"+headingToFinal+"="+ Math.abs(heading - headingToFinal))
