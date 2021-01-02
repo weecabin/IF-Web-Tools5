@@ -14,10 +14,20 @@
 <h1>
 Infinite Flight Circling Approach
 </h1>
-
-<form onsubmit="execute()">
+<form>
 <table>
-<tr><th style="width:30px" style="text-align:right">Name</th><th style="width:40px">Value</th></tr> 
+<tr><th style="width:30px">Name</th><th style="width:40px">Value</th></tr> 
+<tr><td>ICAO: </td><td><input id="icao" type="text" value="KSAN"></td></tr>
+<tr><td>Runway: </td><td><input id="runway" type="text" value="27"></td></tr>
+<tr><td>Distance: </td><td><input id="distance" type="text" value="10"></td></tr>
+<tr><td>Radius: </td><td><input id="radius" type="text" value="30"></td></tr>
+<tr><td></td><td><input type="button" value="Use" onclick="SetupCircle()"></td></tr>
+</table>
+</form>
+
+<form>
+<table>
+<tr><th style="width:30px">Name</th><th style="width:40px">Value</th></tr> 
 <tr><td>Entry Latitude: </td><td><input id="inlat" type="text" value="32.5745"></td></tr>
 <tr><td>Entry Longitude: </td><td><input id="inlon" type="text" value="-117.0031"></td></tr>
 <tr><td>Exit Latitude: </td><td><input id="outlat" type="text" value="32.6808"></td></tr>

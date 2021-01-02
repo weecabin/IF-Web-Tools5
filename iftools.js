@@ -70,6 +70,39 @@ function LookupLatLon()
  
 }
 
+function SetupCircle()
+{
+  let icao = document.getElementById("icao").value;
+  let runway = document.getElementById("runway").value;
+  let dist = document.getElementById("distance").value;
+  let radius = document.getElementById("radius").value;
+  let ap=runways.filter(x=>x.icao==icao);
+  if (ap.length==1)
+  {
+    let rwy1=ap[0].rwys.filter(x=>rwy==runway);
+    let otherend = runway-18;
+    if (otherend<=0)
+      otherend+=360;
+    let rwy2=ap[0].rwys.filter(x=>rwy==otherend);
+    // setup runway threshold lat/lon
+    let lat1=Number(rwy1[0].lat);
+    let lon1=Number(rwy1[0].lon);
+    let lat2=Number(rwy2[0].lat);
+    let lon2=Number(rwy2[0].lon);
+    let disthead=DistHeading(lat1,lon1,lat2,lon2);
+    let headingtoend= Number(FixHeading(disthead[1]-180));
+    let circlEnd = NewPoint(lat1,lon1,Number(dist), headingtoend);
+    let headingtobegin=Number(FixHeading(headingtoend-90))
+    let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),radius*2,Number(headingtobegin))
+     
+    document.getElementById("inlat").value=circleBegin[0];
+    document.getElementById("inlon").value=circleBegin[1];
+    document.getElementById("outlat").value=circlEnd[0];
+    document.getElementById("outlon").value=circlEnd[1];
+    document.getElementById("heading").value=headingtoend;
+  }
+}
+
 function MakeCircle()
 {
   let inlat = document.getElementById("inlat").value;
