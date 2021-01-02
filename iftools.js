@@ -105,10 +105,15 @@ function SetupCircle()
     let lon1=Number(rwy1[0].lon);
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
+    // runway dist and heading
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
+    // heading to the end of the circle
     let headingtoend= Number(FixHeading(disthead[1]-180)).toFixed(1);
+    // lat lon of end of circle
     let circlEnd = NewPoint(lat1,lon1,headingtoend,dist);
+    // heading to beginning of circle
     let headingtobegin=Number(FixHeading(headingtoend+90)).toFixed(1)
+    println("heading to beginning of circle "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
      
     document.getElementById("inlat").value=circleBegin[0].toFixed(6);
