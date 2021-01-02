@@ -117,7 +117,11 @@ function SetupCircle()
     // lat lon of end of circle
     let circlEnd = NewPoint(lat1,lon1,headingtoend,dist);
     // heading to beginning of circle
-    let headingtobegin=Number(FixHeading(Number(headingtoend)+90)).toFixed(1)
+    let left=true;
+    if (!document.getElementById("lefttraffic").checked)
+      left=false;
+     
+    let headingtobegin=Number(FixHeading(Number(headingtoend)+left?90:-90)).toFixed(1)
     println("heading to beginning of circle "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
      
