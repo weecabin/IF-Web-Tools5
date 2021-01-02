@@ -72,6 +72,8 @@ function LookupLatLon()
 
 function SetupCircle()
 {
+  let txt= document.getElementById("txt");
+  txt.value=""
   let icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
@@ -80,6 +82,7 @@ function SetupCircle()
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>rwy==runway);
+    txt.value=JSON.stringify(rwy1)
     let otherend = runway-18;
     if (otherend<=0)
       otherend+=360;
