@@ -68,19 +68,20 @@ rl.on('line', (line) =>
   {
     case "RUNWAY":
     let rwy=splitcmd[2];
-    let otherend=rwy-18;
-    if (otherend<=0)
-      otherend=360-otherend;
+    let otherend=OppositeRunway(rwy)
+    console.log("opposite="+otherend)
     let rwyap=runways.filter(el=>el.icao==icao)
     if (rwyap.length==1)
     {
-      //console.log(JSON.stringify(rwyap[0],null,1));
+      console.log(JSON.stringify(rwyap[0],null,1));
       //console.log(otherend)
       let rw1 = rwyap[0].rwys.filter(el=>el.rwy==rwy)
+      console.log(rw1)
       let rw2 = rwyap[0].rwys.filter(el=>el.rwy==otherend)
-      //console.log(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
+      console.log(rw2)
+      console.log(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
       let disthead = ff.DistHeading(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
-      //console.log(disthead)
+      console.log(disthead)
       console.log(icao+" Runway "+rwy+" length="+disthead[0].toFixed(3)+" true heading="+disthead[1].toFixed(2))
     }
     break;
@@ -224,6 +225,36 @@ rl.on('line', (line) =>
     }
   }
 })
+
+function OppositeRunway(rwy)
+{
+  let num="";
+  num=rwy;
+  let suffix="";
+  if (isNaN(rwy))
+  {
+    switch (rwy[rwy.length-1])
+    {
+      case "L":
+      suffix="R";
+      break;
+      
+      case "C":
+      suffix="C";
+      break;
+      
+      case "R":
+      suffix="L";
+      break;
+    }
+    num=rwy.substring(0,rwy.length-1)
+  }
+  num = num - 18;
+  if (num <= 0)num +=36;
+  if (num.toString().length==1)
+    num="0"+num.toString();
+  return num+suffix;
+}
 
 // returns the offset into mainstr for the n'th searchstr'
 function Occurence(count,mainstr,searchstr)
@@ -415,4 +446,7 @@ function HoldRadius(latlon,icao,legs,radius,loops)
 
 //print(help)
 //print('')
+let rwys = ["25L","25","24C","6R"]
+for (r of rwys)
+console.log(r+" - "+OppositeRunway(r))
 process.stdout.write(optionprompt)

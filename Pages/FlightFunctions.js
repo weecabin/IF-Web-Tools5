@@ -1,4 +1,34 @@
 
+function OppositeRunway(rwy)
+{
+  let num="";
+  num=rwy;
+  let suffix="";
+  if (isNaN(rwy))
+  {
+    switch (rwy[rwy.length-1])
+    {
+      case "L":
+      suffix="R";
+      break;
+      
+      case "C":
+      suffix="C";
+      break;
+      
+      case "R":
+      suffix="L";
+      break;
+    }
+    num=rwy.substring(0,rwy.length-1)
+  }
+  num = num - 18;
+  if (num <= 0)num +=36;
+  if (num.toString().length==1)
+    num="0"+num.toString();
+  return num+suffix;
+}
+
 // pads a number out to count characters with padChar
 function pad(numToPad,padChar,count)
 { 

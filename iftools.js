@@ -101,9 +101,7 @@ function SetupCircle()
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>x.rwy==runway);
-    let otherend = runway-18;
-    if (otherend<=0)
-      otherend+=36;
+    let otherend = OppositeRunway(runway);
     let rwy2=ap[0].rwys.filter(x=>x.rwy==otherend);
     // setup runway threshold lat/lon
     let lat1=Number(rwy1[0].lat);
