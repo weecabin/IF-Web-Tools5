@@ -269,7 +269,7 @@ function Circling(latlon1,latlon2,heading,points)
   //print("dist="+dh[0] + " heading=" + dh[1]);
   var headingToFinal=dh[1];
   var distToFinal=dh[0];
-  //print("headingToFinal="+ headingToFinal);
+  print("headingToFinal="+ headingToFinal);
 
   // verify final fix with distance and heading from initial fix
   check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
