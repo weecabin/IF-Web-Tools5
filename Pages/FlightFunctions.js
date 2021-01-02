@@ -245,6 +245,7 @@ function Circling(latlon1,latlon2,heading,points)
   var lon0=Number(latlon1[1]);
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
+  document.getElementById("txt").value="Circling "+lat0+","+lon0;
 
   /*
   print("heading "+heading);
