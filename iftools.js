@@ -116,12 +116,12 @@ function SetupCircle()
     let lon2=Number(rwy2[0].lon);
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
     cdebug("runway dist/heading "+disthead)
-    let headingtoend= Number(FixHeading(disthead[1]-180));
+    let headingtoend= Number(FixHeading(disthead[1]-180)).toFixed(1);
     cdebug("heading to end "+headingtoend)
     let circlEnd = NewPoint(lat1,lon1,headingtoend,dist);
     cdebug(lat1+" "+lon1+" "+dist+" "+headingtoend)
     cdebug("circlEnd "+circlEnd)
-    let headingtobegin=Number(FixHeading(headingtoend-90))
+    let headingtobegin=Number(FixHeading(headingtoend+90)).toFixed(1)
     cdebug("headingtobegin "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
     cdebug("circleBegin "+circleBegin)
