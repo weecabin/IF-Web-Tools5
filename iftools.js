@@ -136,7 +136,7 @@ function MakeCircle()
   try
   {
     let txt= document.getElementById("txt");
-    txt.value=inlat+" "+inlon+" "+outlat+" "+outlon;
+    txt.value=inlat+" "+inlon+" "+outlat+" "+outlon+" "+heading+" "points;
     xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
    
     txt.value+=xmlData;
