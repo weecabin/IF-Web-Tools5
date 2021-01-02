@@ -85,22 +85,26 @@ function LookupLatLon()
  
 }
 
+function cdebug(str)
+{
+  document.getElementById("txt").value+=str+"\n";
+}
 function SetupCircle()
 {
   try{
-  let txt= document.getElementById("txt");
-  txt.value="runways length: "+ myRunways.length+"\n"; 
+  document.getElementById("txt").value="";
+  cdebug("runways length: "+ myRunways.length); 
   icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
-  txt.value+=icao+"\n"; 
+  cdebug(icao); 
   let ap = myRunways.filter(x=>x.icao==icao);
-  txt.value+=JSON.stringify(ap) +"\n"; 
+  cdebug(JSON.stringify(ap));
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>x.rwy==runway);
-    txt.value=JSON.stringify(rwy1)
+    cdebug(JSON.stringify(rwy1));
     let otherend = runway-18;
     if (otherend<=0)
       otherend+=360;
@@ -111,9 +115,12 @@ function SetupCircle()
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
+    cdebug("runway heading "+disthead)
     let headingtoend= Number(FixHeading(disthead[1]-180));
+    cdebug("heading to end "+headingtoend)
     let circlEnd = NewPoint(lat1,lon1,Number(dist), headingtoend);
     let headingtobegin=Number(FixHeading(headingtoend-90))
+    cdebug("headingtobegin "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),radius*2,Number(headingtobegin))
      
     document.getElementById("inlat").value=circleBegin[0].toFixed(6);
