@@ -46,6 +46,11 @@ function setup()
     }
 }
 
+function ClearFlightplan()
+{
+  document.getElementById("txt").value="";
+}
+
 let icao="";
 function LookupLatLon()
 {
@@ -132,7 +137,6 @@ function SetupCircle()
 
 function MakeCircle()
 {
-  document.getElementById("txt").value="";
   let inlat = document.getElementById("inlat").value;
   let inlon = document.getElementById("inlon").value;
   let outlat = document.getElementById("outlat").value;
