@@ -240,12 +240,12 @@ latlon is enterred as a two dim array for latlon1 and another for latlon2
 */
 function Circling(latlon1,latlon2,heading,points)
 {
-  document.getElementById("txt").value+="Circling "+latlon1;
+  println("Circling params "+latlon1+","+latlon2+","+heading+","+points);
   var lat0=Number(latlon1[0]);
   var lon0=Number(latlon1[1]);
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
-  document.getElementById("txt").value+="Circling "+lat0+","+lon0;
+  println("Circling varParams "+lat0+","+lon0+","+","+lat1+","+lon1+","+heading+","+points;
 
   /*
   print("heading "+heading);
@@ -259,10 +259,10 @@ function Circling(latlon1,latlon2,heading,points)
   */
   
   var lonscale = LonMultiplier((lat0+lat1)/2);
-  //println("LonMultiplier="+lonscale);
+  println("LonMultiplier="+lonscale);
   var dx = (lon1-lon0)*lonscale;
   var dy = lat1-lat0;
-  //println(dx + "," + dy);
+  println(dx + "," + dy);
 
   // find the distance and heading to the final fix
   dh = DistHeading(lat0,lon0,lat1,lon1);
@@ -274,14 +274,13 @@ function Circling(latlon1,latlon2,heading,points)
   // verify final fix with distance and heading from initial fix
   check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
   println("final from initial given heading and distance..");
-  ToIF(check[0],check[1]);
-  println();
+  println(check[0]+","+check[1]);
 
   // find the arc radius
   alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;
   //println("alpha="+alpha)
   var arcR = Math.abs(dh[0]/(2*Math.cos(alpha*Math.PI/180)));
-  //println("Arc Radius="+arcR)
+  println("Arc Radius="+arcR)
 
   // find lat lon of arc center
   // first determine the direction
