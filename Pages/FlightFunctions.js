@@ -285,7 +285,7 @@ function Circling(latlon1,latlon2,heading,points)
   // find lat lon of arc center
   // first determine the direction
   var dir1=heading-90;
-  var dir2=heading+90;
+  var dir2=Number(heading)+90;
   println("heading choices to center if arc "+dir1+" "+dir2)
   var headingToCenter=dir2;
   var turnLeft=false;
