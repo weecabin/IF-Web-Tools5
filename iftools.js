@@ -136,7 +136,7 @@ function MakeCircle()
   try
   {
     println("MakeCircle: "+inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
-    xmlData = Circling([]inlat, inlon],[outlat, outlon],heading,points);
+    xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     println(xmlData);
   }
   catch(err)
