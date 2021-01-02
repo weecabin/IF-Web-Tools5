@@ -85,27 +85,17 @@ function LookupLatLon()
  
 }
 
-function cdebug(str)
-{
-  document.getElementById("txt").value+=str+"\n";
-}
-
 function SetupCircle()
 {
   try{
-  document.getElementById("txt").value="";
-  cdebug("runways length: "+ myRunways.length); 
   icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
-  cdebug(icao); 
   let ap = myRunways.filter(x=>x.icao==icao);
-  cdebug(JSON.stringify(ap));
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>x.rwy==runway);
-    cdebug(JSON.stringify(rwy1));
     let otherend = runway-18;
     if (otherend<=0)
       otherend+=360;
@@ -116,16 +106,10 @@ function SetupCircle()
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
-    cdebug("runway dist/heading "+disthead)
     let headingtoend= Number(FixHeading(disthead[1]-180)).toFixed(1);
-    cdebug("heading to end "+headingtoend)
     let circlEnd = NewPoint(lat1,lon1,headingtoend,dist);
-    cdebug(lat1+" "+lon1+" "+dist+" "+headingtoend)
-    cdebug("circlEnd "+circlEnd)
     let headingtobegin=Number(FixHeading(headingtoend+90)).toFixed(1)
-    cdebug("headingtobegin "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
-    cdebug("circleBegin "+circleBegin)
      
     document.getElementById("inlat").value=circleBegin[0].toFixed(6);
     document.getElementById("inlon").value=circleBegin[1].toFixed(6);
@@ -149,11 +133,12 @@ function MakeCircle()
   let outlon = document.getElementById("outlon").value;
   let heading = document.getElementById("heading").value;
   let points = document.getElementById("points").value;
-  cdebug("inlat "+inlat)
   try
   {
-    xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     let txt= document.getElementById("txt");
+    txt.value=inlat+" "+inlon+" "+outlat+" "+outlon;
+    xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
+   
     txt.value+=xmlData;
   }
   catch(err)
