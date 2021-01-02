@@ -72,6 +72,7 @@ function LookupLatLon()
 
 function SetupCircle()
 {
+  try{
   let txt= document.getElementById("txt");
   txt.value=""
   let icao = document.getElementById("icao").value;
@@ -103,6 +104,11 @@ function SetupCircle()
     document.getElementById("outlat").value=circlEnd[0];
     document.getElementById("outlon").value=circlEnd[1];
     document.getElementById("heading").value=headingtoend;
+  }
+  }
+  catch(err)
+  {
+    txt.value+=err.message;
   }
 }
 
