@@ -168,7 +168,7 @@ function CreateHold()
   try 
   {
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
-    txt.value=xmlData;
+    txt.value+=xmlData;
     BuildFilename();
   }
   catch(err) 

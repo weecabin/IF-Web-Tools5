@@ -11,7 +11,8 @@ const print = (msg) => {
   printHold+=msg;
 }
 const println = (msg) => {
-  console.log(printHold+msg);
+  if (msg==undefined)msg="";
+  document.getElementById("txt").value+=printHold+msg+"\n";
   printHold="";
 }
 

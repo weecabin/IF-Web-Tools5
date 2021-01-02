@@ -273,9 +273,9 @@ function Circling(latlon1,latlon2,heading,points)
 
   // verify final fix with distance and heading from initial fix
   check = NewPoint(lat0,lon0,headingToFinal,distToFinal);
-  //print("final from initial given heading and distance..");
-  //ToIF(check[0],check[1]);
-  //print();
+  println("final from initial given heading and distance..");
+  ToIF(check[0],check[1]);
+  println();
 
   // find the arc radius
   alpha = FixHeading(90 - Math.abs(heading - headingToFinal))%360;
