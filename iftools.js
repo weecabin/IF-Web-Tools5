@@ -89,13 +89,13 @@ function SetupCircle()
 {
   try{
   let txt= document.getElementById("txt");
-  txt.value="runways length: "+runways.length+"\n"; 
+  txt.value="runways length: "+ myRunways.length+"\n"; 
   icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
   txt.value+=icao+"\n"; 
-  let ap=runways.filter(x=>x.icao==icao);
+  let ap = myRunways.filter(x=>x.icao==icao);
   txt.value+=JSON.stringify(ap) +"\n"; 
   if (ap.length==1)
   {
