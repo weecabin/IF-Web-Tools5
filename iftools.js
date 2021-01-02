@@ -118,7 +118,8 @@ function SetupCircle()
   }
   catch(err)
   {
-    txt.value+=err.message;
+    txt.value+=err.message+"\n";
+    txt.value+=err+"\n";
   }
 }
 
