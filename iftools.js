@@ -114,6 +114,7 @@ function SetupCircle()
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
     // heading to the end of the circle
     let headingtoend= Number(FixHeading(disthead[1]-180)).toFixed(1);
+    println("heading from threshold to end of circle "+headingtoend)
     // lat lon of end of circle
     let circlEnd = NewPoint(lat1,lon1,headingtoend,dist);
     // heading to beginning of circle
