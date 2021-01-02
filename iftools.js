@@ -111,10 +111,10 @@ function SetupCircle()
     let headingtobegin=Number(FixHeading(headingtoend+90)).toFixed(1)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
      
-    document.getElementById("inlat").value=circleBegin[0];
-    document.getElementById("inlon").value=circleBegin[1];
-    document.getElementById("outlat").value=circlEnd[0];
-    document.getElementById("outlon").value=circlEnd[1];
+    document.getElementById("inlat").value=circleBegin[0].toFixed(6);
+    document.getElementById("inlon").value=circleBegin[1].toFixed(6);
+    document.getElementById("outlat").value=circlEnd[0].toFixed(6);
+    document.getElementById("outlon").value=circlEnd[1].toFixed(6);
     document.getElementById("heading").value=Math.round(headingtoend);
   }
   }
@@ -135,11 +135,9 @@ function MakeCircle()
   let points = document.getElementById("points").value;
   try
   {
-    let txt= document.getElementById("txt");
-    txt.value=inlat+" "+inlon+" "+outlat+" "+outlon+" "+heading+" "+points;
+    println("MakeCircle: "inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
     xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
-   
-    txt.value+=xmlData;
+    println(xmlData);
   }
   catch(err)
   {
