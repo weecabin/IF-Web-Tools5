@@ -3,7 +3,7 @@ var runways;
 function setup()
 {
   document.getElementById("status").value="form load complete.";
-  var xhttp = new XMLHttpRequest();
+  var xhttp1 = new XMLHttpRequest();
     xhttp.onreadystatechange = function() 
     {
       if (this.readyState == 4 && this.status == 200) 
@@ -13,25 +13,30 @@ function setup()
         if (myAirports.length>0)
           document.getElementById("status").value += " Airport database loaded"
       }
-      else
+    };
+    try
+    {
+      xhttp1.open("GET", "MyAirports.json", true);
+      xhttp1.send();
+    }
+    catch(err)
+    {
+      document.getElementById("txt").value=err.message;
+    }
+    
+    var xhttp2 = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+      if (this.readyState == 4 && this.status == 200) 
       {
-       /*
-       0: request not initialized 
-       1: server connection established
-       2: request received 
-       3: processing request 
-       4: request finished and response is ready
-       */
-        //let txt = document.getElementById("txt");
-        //txt.innerHTML+=this.readyState;
+        let jsontext = this.responseText;;
+        runways=JSON.parse(jsontext);
       }
     };
     try
     {
-      xhttp.open("GET", "MyAirports.json", true);
-      xhttp.send();
-      runways=JSON.parse(fs.readFileSync("RunwayDB.json"));
-      document.getElementById("txt").value=runways.length;
+      xhttp2.open("GET", "RunwayDB.json", true);
+      xhttp2.send();
     }
     catch(err)
     {
