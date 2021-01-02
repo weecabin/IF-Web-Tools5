@@ -89,6 +89,7 @@ function cdebug(str)
 {
   document.getElementById("txt").value+=str+"\n";
 }
+
 function SetupCircle()
 {
   try{
@@ -148,6 +149,7 @@ function MakeCircle()
   let outlon = document.getElementById("outlon").value;
   let heading = document.getElementById("heading").value;
   let points = document.getElementById("points").value;
+  cdebug("inlat "+inlat)
   try
   {
     xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
