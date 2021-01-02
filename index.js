@@ -41,6 +41,8 @@ const apfilename="./MyAirports.json"
 const jsonString = fs.readFileSync(apfilename)
 var myAirports = JSON.parse(jsonString) 
 
+var runways = JSON.parse(fs.readFileSync("RunwayDB.json"));
+
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -64,6 +66,25 @@ rl.on('line', (line) =>
   //console.log(url)
   switch (cmd)
   {
+    case "RUNWAY":
+    let rwy=splitcmd[2];
+    let otherend=rwy-18;
+    if (otherend<=0)
+      otherend=360-otherend;
+    let rwyap=runways.filter(el=>el.icao==icao)
+    if (rwyap.length==1)
+    {
+      //console.log(JSON.stringify(rwyap[0],null,1));
+      //console.log(otherend)
+      let rw1 = rwyap[0].rwys.filter(el=>el.rwy==rwy)
+      let rw2 = rwyap[0].rwys.filter(el=>el.rwy==otherend)
+      //console.log(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
+      let disthead = ff.DistHeading(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
+      //console.log(disthead)
+      console.log(icao+" Runway "+rwy+" length="+disthead[0].toFixed(3)+" true heading="+disthead[1].toFixed(2))
+    }
+    break;
+    
     case "LATLON":
     println("Executing LATLON")
     var latlon = GetLatLong(icao)

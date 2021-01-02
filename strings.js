@@ -11,6 +11,7 @@ HOLD2(ICAO,legs,radius,loops)\n\
 HOLD3(lat,lon,legs,length,loops)\n\
 CIRCLE(lat1,lon1,lat2,lon2,entryHeading)\n\
 LATLON(AirportICAO)\n\
+RUNWAY(AirportICAO,runway)\n\
 UPDATE(AirportICAO)\n\
 > "
 const Flightplans = "../../Flightplans"

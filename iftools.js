@@ -1,5 +1,5 @@
 var myAirports;
-
+var runways;
 function setup()
 {
   document.getElementById("status").value="form load complete.";
@@ -28,6 +28,7 @@ function setup()
     };
     xhttp.open("GET", "MyAirports.json", true);
     xhttp.send();
+    runways=JSON.parse(fs.readFileSync("RunwayDB.json"));
 }
 
 let icao="";
