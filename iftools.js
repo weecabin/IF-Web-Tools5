@@ -8,7 +8,7 @@ function setup()
     {
       if (this.readyState == 4 && this.status == 200) 
       {
-        let jsontext = this.responseText;;
+        let jsontext = this.responseText;
         myAirports=JSON.parse(jsontext);
         if (myAirports.length>0)
           document.getElementById("status").value += " Airport database loaded"
@@ -29,8 +29,10 @@ function setup()
     {
       if (this.readyState == 4 && this.status == 200) 
       {
-        let jsontext = this.responseText;;
+        document.getElementById("txt").value="in xhttp2";
+        let jsontext = this.responseText;
         runways=JSON.parse(jsontext);
+        document.getElementById("txt").value=runways.length;
       }
     };
     try
