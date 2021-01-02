@@ -79,7 +79,9 @@ function SetupCircle()
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
+  txt.value+=icao;
   let ap=runways.filter(x=>x.icao==icao);
+  txt.value+=JSON.stringify(ap);
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>rwy==runway);
