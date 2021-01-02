@@ -1,3 +1,9 @@
+function RemovePad(str,pad)
+{
+  if (pad==undefined)pad="0";
+  let ret = str.replace(pad,"")
+  return ret;
+}
 
 function OppositeRunway(rwy)
 {
