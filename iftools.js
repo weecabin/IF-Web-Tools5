@@ -32,7 +32,7 @@ function setup()
         document.getElementById("txt").value="in xhttp2";
         let jsontext = this.responseText;
         runways=JSON.parse(jsontext);
-        document.getElementById("txt").value=runways.length;
+        //document.getElementById("txt").value=runways.length;
       }
     };
     try
@@ -90,7 +90,7 @@ function SetupCircle()
   try{
   txt.value="runways length: "+runways.length+"\n"; 
   let txt= document.getElementById("txt");
-  let icao = document.getElementById("icao").value;
+  icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
