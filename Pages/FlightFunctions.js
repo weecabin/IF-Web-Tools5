@@ -292,11 +292,11 @@ function Circling(latlon1,latlon2,heading,points)
   {
     headingToCenter=dir1;
     turnLeft=true;
-    //println("turning left");
+    println("turning left");
   }
   var arcCenterDec = NewPoint(lat0,lon0,headingToCenter,arcR);
   var initialArcHeading = FixHeading(headingToCenter-180);
-  //print("headingToCenter="+headingToCenter+" initialArcHeading="+ initialArcHeading);
+  println("headingToCenter="+headingToCenter+" initialArcHeading="+ initialArcHeading);
 
   // find swept angle and setup increment
   var headingfixangle=AngleBetween(heading,headingToFinal);
