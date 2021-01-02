@@ -245,7 +245,7 @@ function Circling(latlon1,latlon2,heading,points)
   var lon0=Number(latlon1[1]);
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
-  println("Circling varParams "+lat0+","+lon0+","+","+lat1+","+lon1+","+heading+","+points;
+  println("Circling varParams "+lat0+","+lon0+","+","+lat1+","+lon1+","+heading+","+points);
 
   /*
   print("heading "+heading);
