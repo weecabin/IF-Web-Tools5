@@ -4,7 +4,7 @@ function setup()
 {
   document.getElementById("status").value="form load complete.";
   var xhttp1 = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() 
+    xhttp1.onreadystatechange = function() 
     {
       if (this.readyState == 4 && this.status == 200) 
       {
@@ -25,7 +25,7 @@ function setup()
     }
     
     var xhttp2 = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() 
+    xhttp2.onreadystatechange = function() 
     {
       if (this.readyState == 4 && this.status == 200) 
       {
