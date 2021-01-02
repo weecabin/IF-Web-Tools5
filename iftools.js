@@ -26,9 +26,16 @@ function setup()
         //txt.innerHTML+=this.readyState;
       }
     };
-    xhttp.open("GET", "MyAirports.json", true);
-    xhttp.send();
-    runways=JSON.parse(fs.readFileSync("RunwayDB.json"));
+    try
+    {
+      xhttp.open("GET", "MyAirports.json", true);
+      xhttp.send();
+      runways=JSON.parse(fs.readFileSync("RunwayDB.json"));
+    }
+    catch(err)
+    {
+      document.getElementById("txt").value=err.message;
+    }
 }
 
 let icao="";
