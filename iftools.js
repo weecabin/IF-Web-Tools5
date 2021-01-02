@@ -1,5 +1,5 @@
 var myAirports;
-var runways;
+var myRunways;
 function setup()
 {
   document.getElementById("status").value="form load complete.";
@@ -29,10 +29,10 @@ function setup()
     {
       if (this.readyState == 4 && this.status == 200) 
       {
-        document.getElementById("txt").value="in xhttp2";
+        document.getElementById("txt").value="in xhttp2 ";
         let jsontext = this.responseText;
-        runways=JSON.parse(jsontext);
-        //document.getElementById("txt").value=runways.length;
+        myRunways =JSON.parse(jsontext);
+        document.getElementById("txt").value+= "myRunways.length="+myRunways.length;
       }
     };
     try
@@ -88,8 +88,8 @@ function LookupLatLon()
 function SetupCircle()
 {
   try{
-  txt.value="runways length: "+runways.length+"\n"; 
   let txt= document.getElementById("txt");
+  txt.value="runways length: "+runways.length+"\n"; 
   icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
