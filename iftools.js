@@ -116,11 +116,11 @@ function SetupCircle()
     let headingtobegin=Number(FixHeading(headingtoend-90))
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),radius*2,Number(headingtobegin))
      
-    document.getElementById("inlat").value=circleBegin[0];
-    document.getElementById("inlon").value=circleBegin[1];
-    document.getElementById("outlat").value=circlEnd[0];
-    document.getElementById("outlon").value=circlEnd[1];
-    document.getElementById("heading").value=headingtoend;
+    document.getElementById("inlat").value=circleBegin[0].toFixed(6);
+    document.getElementById("inlon").value=circleBegin[1].toFixed(6);
+    document.getElementById("outlat").value=circlEnd[0].toFixed(6);
+    document.getElementById("outlon").value=circlEnd[1].toFixed(6);
+    document.getElementById("heading").value=Math.round(headingtoend);
   }
   }
   catch(err)
