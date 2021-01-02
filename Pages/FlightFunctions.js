@@ -240,7 +240,7 @@ latlon is enterred as a two dim array for latlon1 and another for latlon2
 */
 function Circling(latlon1,latlon2,heading,points)
 {
-  console.log("in Circling")
+  document.getElementById("txt").value="Circling "+latlon1;
   var lat0=Number(latlon1[0]);
   var lon0=Number(latlon1[1]);
   var lat1=Number(latlon2[0]);
