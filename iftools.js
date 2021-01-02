@@ -154,7 +154,7 @@ function MakeCircle()
   {
     xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     let txt= document.getElementById("txt");
-    txt.value=xmlData;
+    txt.value+=xmlData;
   }
   catch(err)
   {
