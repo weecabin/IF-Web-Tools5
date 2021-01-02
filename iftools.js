@@ -100,10 +100,10 @@ function SetupCircle()
   let ap = myRunways.filter(x=>x.icao==icao);
   if (ap.length==1)
   {
-    let rwy1=ap[0].rwys.filter(x=>x.rwy==runway);
+    let rwy1=ap[0].rwys.filter(x=>RemovePad(x.rwy)==RemovePad(runway));
     let otherend = OppositeRunway(runway);
     println(otherend)
-    let rwy2=ap[0].rwys.filter(x=>x.rwy==otherend);
+    let rwy2=ap[0].rwys.filter(x=>RemovePad(x.rwy)==RemovePad(otherend));
     // setup runway threshold lat/lon
     let lat1=Number(rwy1[0].lat);
     let lon1=Number(rwy1[0].lon);

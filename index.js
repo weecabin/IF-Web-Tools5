@@ -73,11 +73,11 @@ rl.on('line', (line) =>
     let rwyap=runways.filter(el=>el.icao==icao)
     if (rwyap.length==1)
     {
-      console.log(JSON.stringify(rwyap[0],null,1));
+      console.log(JSON.stringify(rwyap,null,1));
       //console.log(otherend)
-      let rw1 = rwyap[0].rwys.filter(el=>el.rwy==rwy)
+      let rw1 = rwyap[0].rwys.filter(el=>RemovePad(el.rwy)==RemovePad(rwy))
       console.log(rw1)
-      let rw2 = rwyap[0].rwys.filter(el=>el.rwy==otherend)
+      let rw2 = rwyap[0].rwys.filter(el=>RemovePad(el.rwy)==RemovePad(otherend))
       console.log(rw2)
       console.log(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
       let disthead = ff.DistHeading(Number(rw1[0].lat), Number(rw1[0].lon), Number(rw2[0].lat), Number(rw2[0].lon))
@@ -226,6 +226,13 @@ rl.on('line', (line) =>
   }
 })
 
+function RemovePad(str,pad)
+{
+  if (pad==undefined)pad="0";
+  let ret = str.replace(pad,"")
+  return ret;
+}
+
 function OppositeRunway(rwy)
 {
   let num="";
@@ -251,8 +258,8 @@ function OppositeRunway(rwy)
   }
   num = num - 18;
   if (num <= 0)num +=36;
-  if (num.toString().length==1)
-    num="0"+num.toString();
+  //if (num.toString().length==1)
+  //  num="0"+num.toString();
   return num+suffix;
 }
 
@@ -446,7 +453,9 @@ function HoldRadius(latlon,icao,legs,radius,loops)
 
 //print(help)
 //print('')
-let rwys = ["25L","25","24C","6R"]
+let rwys = ["25L","25","24C","6R","06R","06","6"]
 for (r of rwys)
-console.log(r+" - "+OppositeRunway(r))
+  console.log(r+" - "+OppositeRunway(r))
+for (r of rwys) 
+  console.log("remove pad "+r+" - "+RemovePad(r))
 process.stdout.write(optionprompt)
