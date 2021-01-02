@@ -73,15 +73,15 @@ function LookupLatLon()
 function SetupCircle()
 {
   try{
+  txt.value="runways length: "+runways.length+"\n"; 
   let txt= document.getElementById("txt");
-  txt.value=""
   let icao = document.getElementById("icao").value;
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
-  txt.value+=icao;
+  txt.value+=icao+"\n"; 
   let ap=runways.filter(x=>x.icao==icao);
-  txt.value+=JSON.stringify(ap);
+  txt.value+=JSON.stringify(ap) +"\n"; 
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>rwy==runway);
