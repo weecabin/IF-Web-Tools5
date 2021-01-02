@@ -119,9 +119,11 @@ function SetupCircle()
     let headingtoend= Number(FixHeading(disthead[1]-180));
     cdebug("heading to end "+headingtoend)
     let circlEnd = NewPoint(lat1,lon1,Number(dist), headingtoend);
+    cdebug("circlEnd "+circlEnd)
     let headingtobegin=Number(FixHeading(headingtoend-90))
     cdebug("headingtobegin "+headingtobegin)
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),radius*2,Number(headingtobegin))
+    cdebug("circleBegin "+circleBegin)
      
     document.getElementById("inlat").value=circleBegin[0].toFixed(6);
     document.getElementById("inlon").value=circleBegin[1].toFixed(6);
