@@ -32,7 +32,7 @@ function setup()
         document.getElementById("txt").value="in xhttp2 ";
         let jsontext = this.responseText;
         myRunways =JSON.parse(jsontext);
-        document.getElementById("txt").value+= "myRunways.length="+myRunways.length;
+        println("myRunways.length="+myRunways.length);
       }
     };
     try
@@ -141,7 +141,6 @@ function SetupCircle()
 
 function MakeCircle()
 {
-  document.getElementById("txt").value="";
   let inlat = document.getElementById("inlat").value;
   let inlon = document.getElementById("inlon").value;
   let outlat = document.getElementById("outlat").value;
@@ -152,7 +151,7 @@ function MakeCircle()
   {
     println("MakeCircle: "+inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
     xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
-    println(xmlData);
+    document.getElementById("txt").value=xmlData;
   }
   catch(err)
   {
