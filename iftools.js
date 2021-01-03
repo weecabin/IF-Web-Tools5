@@ -51,12 +51,14 @@ function ValueChanged(object)
   switch (object.id)
   {
     case "icao":
-    ap=runways.filter(x=>x.ivao==object.value);
+    ap=myRunways.filter(x=>x.icao==object.value);
     if (ap.length==1)
     {
-      document.getElementById("runwayinfo").value=JSON.stringify(ap[0]);
+      apstr= JSON.stringify(ap[0]);
+      document.getElementById("runwayinfo").value=apstr;
+      document.getElementById("txt").value=apstr;
     }
-    break
+    break;
   }
 }
 function ClearFlightplan()
