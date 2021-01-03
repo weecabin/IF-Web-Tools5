@@ -50,7 +50,7 @@ function setup()
 function UserLatLon()
 {
   runwaylatlon="";
-  document.getElementById("txt").value+="in UserLatLon"
+  println("in UserLatLon");
 }
 
 function RunwaySelected(runway)
