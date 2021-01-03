@@ -48,7 +48,7 @@ function setup()
 
 function ValueChanged(object)
 {
-  document.getElementById("txt").value=object+object.id
+  document.getElementById("txt").value=document.getElementById(object.id).value;
 }
 function ClearFlightplan()
 {
