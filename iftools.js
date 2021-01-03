@@ -49,6 +49,7 @@ function setup()
 
 function RunwaySelected(runway)
 {
+document.getElementById("txt").value="in RunwaySelected "+runway;
   document.getElementById("runway").value=runway;
 }
 
@@ -63,7 +64,7 @@ function ValueChanged(object)
       let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
       {
-        data+="<tr><td>"+"<form><input type=\"button\" value=\""+runway.rwy+"\" onclick=\"RunwaySelected("+runway.rwy+")\"></td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr></form>"
+        data+="<tr><td>"+"<form><input type=\"button\" value=\""+runway.rwy+"\" onclick=\"RunwaySelected(\""+runway.rwy+"\")\"></td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr></form>"
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
