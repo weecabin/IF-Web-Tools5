@@ -54,7 +54,7 @@ function ValueChanged(object)
     ap=myRunways.filter(x=>x.icao==object.value);
     if (ap.length==1)
     {
-      let data="<table><tr><th>Runway</th><th>Latitude</th><th>Longitude</th></tr>";
+      let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:10px\">Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
       {
         data+="<tr><td>"+runway.rwy+"</td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr>"
