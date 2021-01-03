@@ -45,11 +45,11 @@ function setup()
       document.getElementById("txt").value=err.message;
     }
     ValueChanged(document.getElementById("icao"))
+    RunwaySelected("KSAN")
 }
 
 function RunwaySelected(runway)
 {
-  document.getElementById("txt").value="in RunwaySelected "+runway;
   document.getElementById("runway").value=runway;
 }
 
