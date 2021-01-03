@@ -47,6 +47,11 @@ function setup()
     ValueChanged(document.getElementById("icao"))
 }
 
+function RunwaySelected(runway)
+{
+  dicument.getElementById("runway").value=runway;
+}
+
 function ValueChanged(object)
 {
   switch (object.id)
@@ -58,7 +63,7 @@ function ValueChanged(object)
       let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
       {
-        data+="<tr><td>"+runway.rwy+"</td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr>"
+        data+="<tr><td>"+"<input type=\"button\" onclick=\"RunwaySelected("+runway.rwy+")\">"</td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr>"
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
