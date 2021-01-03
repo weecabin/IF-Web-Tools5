@@ -48,7 +48,16 @@ function setup()
 
 function ValueChanged(object)
 {
-  document.getElementById("txt").value=document.getElementById(object.id).value;
+  switch (object.id)
+  {
+    case "icao":
+    ap=runways.filter(x=>x.ivao==object.value);
+    if (ap.length==1)
+    {
+      document.getElementById("runwayinfo").value=JSON.stringify(ap[0]);
+    }
+    break
+  }
 }
 function ClearFlightplan()
 {
@@ -289,4 +298,4 @@ function verifyLatLon(latitude,longitude)
   if (Math.abs(longitude)>180)
     return false;
   return true;
-}
+} 
