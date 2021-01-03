@@ -390,7 +390,8 @@ function Circling(latlon1,latlon2,heading,points,finallatlon)
   }
   if(finallatlon!=undefined)
   {
-    fp.AddUserFix(finallatlon[0],finallatlon[1]);
+    var id = (finallatlon[0]*1000).toFixed(0) +"/"+ (finallatlon[1]*1000).toFixed(0);
+    fp.AddUserFix(id,finallatlon[0],finallatlon[1]);
   }
   return fp.ToXml();
 }
