@@ -138,6 +138,7 @@ function SetupCircle()
   if (ap.length==1)
   {
     let rwy1=ap[0].rwys.filter(x=>RemovePad(x.rwy)==RemovePad(runway));
+    if(rwy1==undefined)throw "Invalid Runway";
     let otherend = OppositeRunway(runway);
     println(otherend)
     let rwy2=ap[0].rwys.filter(x=>RemovePad(x.rwy)==RemovePad(otherend));
@@ -175,8 +176,7 @@ function SetupCircle()
   catch(err)
   {
     runwaylatlon="";
-    txt.value+=err.message+"\n";
-    txt.value+=err+"\n";
+    document.getElementById("status").value=err.message;
   }
 }
 
@@ -199,7 +199,7 @@ function MakeCircle()
   }
   catch(err)
   {
-    txt.value = err.message;
+    document.getElementById("status").value=err.message;
   }
  
 }
@@ -229,7 +229,7 @@ function CreateHold()
   }
   catch(err) 
   {
-    txt.value = err.message;
+    document.getElementById("status").value=err.message;
   }
 }
 
