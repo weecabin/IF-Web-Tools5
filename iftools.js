@@ -118,6 +118,7 @@ function LookupLatLon()
  
 }
 
+var runwaylatlon="";
 function SetupCircle()
 {
   try{
@@ -137,6 +138,7 @@ function SetupCircle()
     let lon1=Number(rwy1[0].lon);
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
+    runwaylatlon=[lat1,lon1];
     // runway dist and heading
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
     // heading to the end of the circle
@@ -158,10 +160,12 @@ function SetupCircle()
     document.getElementById("outlat").value=circlEnd[0].toFixed(6);
     document.getElementById("outlon").value=circlEnd[1].toFixed(6);
     document.getElementById("heading").value=Math.round(headingtoend);
+    circlesetup=true;
   }
   }
   catch(err)
   {
+    runwaylatlon="";
     txt.value+=err.message+"\n";
     txt.value+=err+"\n";
   }
@@ -178,7 +182,10 @@ function MakeCircle()
   try
   {
     println("MakeCircle: "+inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
-    xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
+    if (circlesetup)
+      xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
+    else
+      xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     document.getElementById("txt").value=xmlData;
   }
   catch(err)
@@ -207,7 +214,10 @@ function CreateHold()
   let txt= document.getElementById("txt");
   try 
   {
-    xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
+    if(runwaylatlon.length>0)
+      xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops),runwaylatlon);
+    else
+      xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
     txt.value+=xmlData;
     BuildFilename();
   }

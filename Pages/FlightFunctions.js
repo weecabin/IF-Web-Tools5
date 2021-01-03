@@ -274,7 +274,7 @@ function HoldPattern(legs,leglen,lat,lon,loops=10)
 computes an arc between two fixes given an entry heading.
 latlon is enterred as a two dim array for latlon1 and another for latlon2
 */
-function Circling(latlon1,latlon2,heading,points)
+function Circling(latlon1,latlon2,heading,points,finallatlon)
 {
   println("Circling params "+latlon1+","+latlon2+","+heading+","+points);
   var lat0=Number(latlon1[0]);
@@ -282,7 +282,6 @@ function Circling(latlon1,latlon2,heading,points)
   var lat1=Number(latlon2[0]);
   var lon1=Number(latlon2[1]);
   println("Circling varParams "+lat0+","+lon0+","+lat1+","+lon1+","+heading+","+points);
-
   /*
   print("heading "+heading);
   print("Initial ");
@@ -388,6 +387,10 @@ function Circling(latlon1,latlon2,heading,points)
     //print(lat+"/"+lon+" ");
     var id = (lat*1000).toFixed(0) +"/"+ (lon*1000).toFixed(0);
     fp.AddUserFix(id,lat,lon);
+  }
+  if(finallatlon!=undefined)
+  {
+    fp.AddUserFix(finallatlon[0],finallatlon[1]);
   }
   return fp.ToXml();
 }
