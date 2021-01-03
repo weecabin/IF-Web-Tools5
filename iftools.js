@@ -130,6 +130,7 @@ function SetupCircle()
 {
   try{
   icao = document.getElementById("icao").value;
+  if(icao.length!=4)throw "Invalid ICAO";
   let runway = document.getElementById("runway").value;
   let dist = document.getElementById("distance").value;
   let radius = document.getElementById("radius").value;
@@ -169,6 +170,7 @@ function SetupCircle()
     document.getElementById("heading").value=Math.round(headingtoend);
     circlesetup=true;
   }
+  else throw "Airport not found"
   }
   catch(err)
   {
