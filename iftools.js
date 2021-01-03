@@ -47,10 +47,10 @@ function setup()
     ValueChanged(document.getElementById("icao"))
 }
 
-function RunwaySelected(runway)
+function RunwaySelected(input)
 {
-document.getElementById("txt").value="in RunwaySelected "+runway;
-  document.getElementById("runway").value=runway;
+  document.getElementById("txt").value="in RunwaySelected "+runway.value;
+  document.getElementById("runway").value=runway.value;
 }
 
 function ValueChanged(object)
@@ -65,7 +65,7 @@ function ValueChanged(object)
       for(runway of ap[0].rwys)
       {
         data+="<tr><td>"+"<form><input type=\"button\" value=\""+runway.rwy+"\" \
-        onclick=\"RunwaySelected()\"></td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr></form>"
+        onclick=\"RunwaySelected(this)\"></td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr></form>"
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
