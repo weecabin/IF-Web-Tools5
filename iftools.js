@@ -182,8 +182,8 @@ function MakeCircle()
   try
   {
     println("MakeCircle: "+inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
-    if (circlesetup)
-      xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
+    if (runwaylatlon.length>0)
+      xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points,runwaylatlon);
     else
       xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     document.getElementById("txt").value=xmlData;
@@ -214,10 +214,7 @@ function CreateHold()
   let txt= document.getElementById("txt");
   try 
   {
-    if(runwaylatlon.length>0)
-      xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops),runwaylatlon);
-    else
-      xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
+    xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
     txt.value+=xmlData;
     BuildFilename();
   }
