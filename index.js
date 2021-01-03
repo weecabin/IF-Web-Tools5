@@ -37,7 +37,7 @@ const println = (msg) => {
   printHold="";
 }
 
-const apfilename="./MyAirports.json"
+const apfilename="./MyAirportsWithAlt.json"
 const jsonString = fs.readFileSync(apfilename)
 var myAirports = JSON.parse(jsonString) 
 
@@ -373,7 +373,7 @@ function GetLatLong(icao)
   var ap = myAirports.filter(tst=>tst.icao==icao)
   if (ap.length==0)
     return "";
-  var ll = ap[0].latitude+","+ap[0].longitude;
+  var ll = ap[0].lat+","+ap[0].lon;
   return ll;
 }
 
