@@ -49,7 +49,7 @@ function setup()
 
 function RunwaySelected(runway)
 {
-  dicument.getElementById("runway").value=runway;
+  document.getElementById("runway").value=runway;
 }
 
 function ValueChanged(object)
