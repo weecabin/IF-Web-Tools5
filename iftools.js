@@ -34,6 +34,7 @@ function setup()
         myRunways =JSON.parse(jsontext);
         println("myRunways.length="+myRunways.length);
         ValueChanged(document.getElementById("icao"));
+        document.getElementById("runway").value="27";
       }
     };
     try
