@@ -78,6 +78,10 @@ function ValueChanged(object)
       //apstr= JSON.stringify(ap[0]);
       //document.getElementById("txt").value=apstr;
     }
+    else
+    {
+      document.getElementById("runwayinfo").innerHTML=ap[0].icao+" not in database";
+    }
     break;
   }
 }
