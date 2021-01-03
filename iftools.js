@@ -60,7 +60,7 @@ function RunwaySelected(runway)
 
 function ValueChanged(object)
 {
-  document.getElementById("status").value="ValueChanged("+object.value+")";
+  println("ValueChanged("+object.value+")");
   switch (object.id)
   {
     case "icao":
@@ -81,7 +81,8 @@ function ValueChanged(object)
     }
     else
     {
-      document.getElementById("runwayinfo").innerHTML=oblect.value+" error";
+      document.getElementById("runwayinfo").innerHTML="";
+      printl(object.value+" error");
     }
     break;
   }
