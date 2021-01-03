@@ -65,9 +65,11 @@ function ValueChanged(object)
   {
     case "icao":
     ap=myRunways.filter(x=>x.icao==object.value);
+    println(JSON.stringify(ap))
     if (ap!=undefined && ap.length==1)
     {
-      let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">Latitude</th><th>Longitude</th></tr>";
+      let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">\
+      Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
       {
         data+="<tr><td>"+"<input type=\"button\" value=\""+runway.rwy+"\" \
