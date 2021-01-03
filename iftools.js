@@ -60,11 +60,12 @@ function RunwaySelected(runway)
 
 function ValueChanged(object)
 {
+  document.getElementById("status").value="ValueChanged("+object.value+")";
   switch (object.id)
   {
     case "icao":
     ap=myRunways.filter(x=>x.icao==object.value);
-    if (ap.length==1)
+    if (ap!=undefined && ap.length==1)
     {
       let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
@@ -80,7 +81,7 @@ function ValueChanged(object)
     }
     else
     {
-      document.getElementById("runwayinfo").innerHTML=ap[0].icao+" not in database";
+      document.getElementById("runwayinfo").innerHTML=oblect.value+" error";
     }
     break;
   }
