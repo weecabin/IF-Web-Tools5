@@ -44,6 +44,7 @@ function setup()
     {
       document.getElementById("txt").value=err.message;
     }
+    ValueChanged(document.getElementById("icao"))
 }
 
 function ValueChanged(object)
@@ -54,15 +55,15 @@ function ValueChanged(object)
     ap=myRunways.filter(x=>x.icao==object.value);
     if (ap.length==1)
     {
-      let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:10px\">Latitude</th><th>Longitude</th></tr>";
+      let data="<table><tr><th style=\" padding-right:10px\">Runway</th><th style=\" padding-right:30px\">Latitude</th><th>Longitude</th></tr>";
       for(runway of ap[0].rwys)
       {
         data+="<tr><td>"+runway.rwy+"</td><td>"+runway.lat+"</td><td>"+runway.lon+"</td></tr>"
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
-      apstr= JSON.stringify(ap[0]);
-      document.getElementById("txt").value=apstr;
+      //apstr= JSON.stringify(ap[0]);
+      //document.getElementById("txt").value=apstr;
     }
     break;
   }
