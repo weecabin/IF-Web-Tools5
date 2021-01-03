@@ -55,7 +55,7 @@ function ValueChanged(object)
     if (ap.length==1)
     {
       apstr= JSON.stringify(ap[0]);
-      document.getElementById("runwayinfo").value=apstr;
+      document.getElementById("runwayinfo").innerHTML=apstr;
       document.getElementById("txt").value=apstr;
     }
     break;
