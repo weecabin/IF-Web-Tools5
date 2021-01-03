@@ -46,6 +46,10 @@ function setup()
     }
 }
 
+function ValueChanged(object)
+{
+  window.alert(object.id)
+}
 function ClearFlightplan()
 {
   document.getElementById("txt").value="";
