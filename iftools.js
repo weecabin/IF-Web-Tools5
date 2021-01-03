@@ -47,6 +47,12 @@ function setup()
     }
 }
 
+function UserLatLon()
+{
+  runwaylatlon="";
+  document.getElementById("txt").value+="in UserLatLon"
+}
+
 function RunwaySelected(runway)
 {
   document.getElementById("runway").value=runway;
