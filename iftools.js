@@ -12,6 +12,7 @@ function setup()
         myAirports=JSON.parse(jsontext);
         if (myAirports.length>0)
           println(" Airport database loaded");
+        ValueChanged(document.getElementById("icao"));
       }
     };
     try
@@ -33,6 +34,7 @@ function setup()
         let jsontext = this.responseText;
         myRunways =JSON.parse(jsontext);
         println("myRunways.length="+myRunways.length);
+        RunwaySelected("KSAN");
       }
     };
     try
@@ -44,8 +46,6 @@ function setup()
     {
       document.getElementById("txt").value=err.message;
     }
-    ValueChanged(document.getElementById("icao"))
-    RunwaySelected("KSAN")
 }
 
 function RunwaySelected(runway)
