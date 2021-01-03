@@ -74,6 +74,7 @@ function ValueChanged(object)
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
+      document.getElementById("runway").value="";
       //apstr= JSON.stringify(ap[0]);
       //document.getElementById("txt").value=apstr;
     }
