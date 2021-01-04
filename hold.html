@@ -15,7 +15,8 @@ Infinite Flight Hold Pattern Generator
 </h1>
 <form>
 <table> 
-<tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="60" value="enter ICAO here and press Lookup"></td></tr>
+<tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="60" onchange="HoldValueChanged(this)"
+value="enter ICAO here and press Lookup"></td></tr>
 <tr><td></td><td><input type="button" value="Lookup" onclick="LookupLatLon()">
 <input type="button" value="Clear" onclick="Clearicao()"></td></tr>
 </table>

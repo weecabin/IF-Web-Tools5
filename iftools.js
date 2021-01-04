@@ -59,7 +59,12 @@ function RunwaySelected(runway)
   document.getElementById("runway").value=runway;
 }
 
-function ValueChanged(object)
+function HoldValueChanged(object)
+{
+  
+}
+
+function CircleValueChanged(object)
 {
   println("ValueChanged("+object.value+")");
   switch (object.id)
