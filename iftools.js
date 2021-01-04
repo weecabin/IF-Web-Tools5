@@ -64,6 +64,7 @@ function RunwaySelected(runway)
 function HoldValueChanged(object)
 {
   println("HoldValueChanged("+object.value+")");
+  return false;
 }
 
 function CircleValueChanged(object)
