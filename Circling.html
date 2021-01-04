@@ -52,17 +52,18 @@ Circling Parameters
 <tr><td>Points: </td><td><input id="points" type="text" value="10" onchange="CircleChanged()"></td></tr>
 <tr><td></td><td>
 <input type="button" value="Create Flightplan" onclick="MakeCircle()">
-<input type="button" value="Clear Flightplan" onclick="ClearFlightplan()">
+
 </td></tr>
 </table>
 </form>
 </div>
-<h3>IF XML flightplan...</h3><br>
+<h3>IF XML flightplan...</h3>
 <textarea id="txt" rows="10" cols="80"></textarea>
 
 <form>
 <input type="button" value="Download" onclick="DownloadXML()">
-<input id="filename" type="text" size="60" value="Circle.fpl">
+<input type="button" value="Clear Flightplan" onclick="ClearFlightplan()">
+Filename:<input id="filename" type="text" size="40" value="Circle.fpl">
 </form>
 
 <br> <br>
