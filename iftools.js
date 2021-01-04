@@ -187,7 +187,7 @@ function SetupCircle()
     
     let fn = "Hold-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
     println(fn)
-    document.getElementById("filename")=fn;
+    document.getElementById("filename").value=fn; 
     circlesetup=true;
   }
   else throw "Airport not found"
