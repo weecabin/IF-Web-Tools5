@@ -77,7 +77,7 @@ function CircleValueChanged(object)
       object.value=object.value.toUpperCase();
     else
       {
-        object.getElementById("status").value="Invalid ICAO";
+        document.getElementById("status").value="Invalid ICAO";
         return;
       }
     ap=myRunways.filter(x=>x.icao==object.value);
