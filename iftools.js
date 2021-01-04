@@ -221,6 +221,8 @@ function MakeCircle()
 var xmlData="";
 function CreateHold()
 {
+  let txt= document.getElementById("txt");
+  txt.value="";
   let lat = document.getElementById("lat").value;
   let lon = document.getElementById("lon").value;
   let legs = document.getElementById("legs").value;
@@ -234,11 +236,10 @@ function CreateHold()
   //HoldPattern(legs,leglen,lat,lon,loops=10)
   status.value="Working: "+"HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")";
   
-  let txt= document.getElementById("txt");
   try 
   {
     xmlData= HoldPattern(Number(legs), Number(leglen), Number(lat), Number(lon), Number(loops));
-    txt.value+=xmlData;
+    txt.value=xmlData;
     BuildFilename();
   }
   catch(err) 
