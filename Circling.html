@@ -9,6 +9,13 @@
 
 <script src="iftools.js"></script>
 
+<style>
+div {
+  margin: 20px;
+  border: 1px solid #4CAF50;
+}
+</style>
+
 </head>
 <body onload="setup()">
 <h1>
@@ -58,7 +65,7 @@ Circling Parameters
 </form>
 </div>
 
-<div style="margin-left:60px;">
+<div>
 <h3>IF XML flightplan...</h3>
 <textarea id="txt" rows="10" cols="80"></textarea>
 <form>
@@ -66,8 +73,7 @@ Circling Parameters
 <input type="button" value="Clear Flightplan" onclick="ClearFlightplan()">
 Filename:<input id="filename" type="text" size="30" value="Circle.fpl">
 </form>
-</div>
-<br> <br>
+</div><br> <br>
 
 <input id="status" size="80" value="...">
 
