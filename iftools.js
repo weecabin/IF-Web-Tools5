@@ -51,6 +51,7 @@ function setup()
 function UserLatLon()
 {
   runwaylatlon="";
+  document.getElementById("filename")="Hold.fpl";
   println("in UserLatLon");
 }
 
@@ -183,6 +184,8 @@ function SetupCircle()
     document.getElementById("outlat").value=circlEnd[0].toFixed(6);
     document.getElementById("outlon").value=circlEnd[1].toFixed(6);
     document.getElementById("heading").value=Math.round(headingtoend);
+    
+    let fn = "Hold-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
     circlesetup=true;
   }
   else throw "Airport not found"
