@@ -200,6 +200,7 @@ function SetupCircle()
     document.getElementById("status").value=err.message;
   }
   ClearFlightplan();
+  MakeCircle();
 }
 
 function MakeCircle()
