@@ -186,6 +186,7 @@ function SetupCircle()
     document.getElementById("heading").value=Math.round(headingtoend);
     
     let fn = "Hold-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
+    println(fn)
     document.getElementById("filename")=fn;
     circlesetup=true;
   }
