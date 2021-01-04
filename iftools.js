@@ -93,7 +93,7 @@ function CircleValueChanged(object)
       }
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
-      document.getElementById("runway").value="";
+      document.getElementById("runway").value=ap[0].rwys[0].rwy;
       //apstr= JSON.stringify(ap[0]);
       //document.getElementById("txt").value=apstr;
     }
