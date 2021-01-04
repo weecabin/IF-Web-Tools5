@@ -33,8 +33,8 @@ function setup()
         let jsontext = this.responseText;
         myRunways =JSON.parse(jsontext);
         println("myRunways.length="+myRunways.length);
-        ValueChanged(document.getElementById("icao"));
-        document.getElementById("runway").value="27";
+        //ValueChanged(document.getElementById("icao"));
+        //document.getElementById("runway").value="27";
       }
     };
     try
