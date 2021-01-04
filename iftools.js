@@ -74,10 +74,11 @@ function CircleValueChanged(object)
   {
     case "icao":
     if (object.value.length==4)
-      object.value=object.value.toUppercase();
+      object.value=object.value.toUpperCase();
     else
       {
         object.getElementById("status").value="Invalid ICAO";
+        return;
       }
     ap=myRunways.filter(x=>x.icao==object.value);
     println(JSON.stringify(ap))
