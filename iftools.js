@@ -48,12 +48,12 @@ function setup()
     }
 }
 
-function UserLatLon()
+function CircleChanged()
 {
   runwaylatlon="";
   document.getElementById("filename").value="Hold.fpl";
   ClearFlightplan();
-  println("in UserLatLon");
+  println("in CircleChanged");
 }
 
 function RunwaySelected(runway)
