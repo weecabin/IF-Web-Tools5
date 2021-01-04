@@ -61,12 +61,12 @@ function RunwaySelected(runway)
 
 function HoldValueChanged(object)
 {
-  
+  println("HoldValueChanged("+object.value+")");
 }
 
 function CircleValueChanged(object)
 {
-  println("ValueChanged("+object.value+")");
+  println("CircleValueChanged("+object.value+")");
   switch (object.id)
   {
     case "icao":
