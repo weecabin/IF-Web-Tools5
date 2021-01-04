@@ -51,7 +51,7 @@ function setup()
 function UserLatLon()
 {
   runwaylatlon="";
-  document.getElementById("filename")="Hold.fpl";
+  document.getElementById("filename").value="Hold.fpl";
   println("in UserLatLon");
 }
 
