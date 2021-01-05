@@ -1,0 +1,23 @@
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.menu {
+  height: 60px;
+  background-color: #B2D6FF;    /* Medium blue */
+}
+
+.parameters {
+  float: left;                  /* Add this */
+  background-color: #F09A9D;
+}
+
+.result {
+  float: left;                  /* Add this */
+  background-color: #F5CF8E;
+}
+
+.divider {
+  clear: both;
+} 

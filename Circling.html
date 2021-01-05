@@ -1,29 +1,20 @@
 <html>
 <head>
-
+<link rel='stylesheet' href='styles.css' />
 <script src="Pages/myxml.js"></script>
-
 <script src="Pages/flightplan.js"></script>
-
 <script src="Pages/FlightFunctions.js"></script>
-
 <script src="iftools.js"></script>
-
-<style>
-div {
-  padding-left: 20px;
-}
-</style>
-
 </head>
+
 <body onload="setup()">
+<div class="menu">
 <h1>
 Infinite Flight Circling Approach
 </h1>
+</div>
 
-<div style="width: 100%; overflow: hidden;">
-
-<div style="display: inline-block; float: left;">
+<div class="parameters">
 <form>
 <table>
 <tr><th style="width:30px">Name</th><th style="width:40px">Value</th></tr> 
@@ -39,10 +30,8 @@ Infinite Flight Circling Approach
 </form>
 </div>
 
-<div style= "display: inline-block; float: left;"> 
+<div class="result">
 <p id="runwayinfo">runway information...</p>
-</div>
-
 </div>
 
 <div style="width: 100%; overflow: hidden;">
