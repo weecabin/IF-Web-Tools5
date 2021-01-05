@@ -29,3 +29,8 @@
   clear: both;
   background-color: #D5CF8E;
 } 
+
+.left30 {
+  float:left;
+  width:30%;
+}
