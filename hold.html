@@ -11,14 +11,15 @@
 
 <script src="iftools.js"></script>
 </head>
-
 <body onload="setup()">
+
+<div class="menu">
 <h1>
 Infinite Flight Hold Pattern Generator
 </h1>
+</div>
 
-<div style="display: inline-block; float: left;">
-
+<div class="parameters">
 <form>
 <table> 
 <tr><td>ICAO: </td><td><input id="icaolookup" type="text" size="20" onchange="HoldValueChanged(this)"
@@ -38,18 +39,21 @@ value=""></td></tr>
 <tr><td>Loops: </td><td><input id="loops" type="text" value="10"></td></tr>
 <tr><td></td><td><input type="button" value="Create Flightplan" onclick="CreateHold()"></td></tr>
 </table>
-
 </form>
-
 </div>
 
+<div class="result">
 <textarea id="txt" rows="10" cols="80"></textarea>
 
 <form>
 <input type="button" value="Download" onclick="DownloadXML()">
 <input id="filename" type="text" size="60" value="Hold.fpl">
 </form>
-<br> <br>
+</div>
+
+<div class="footer">
 <input id="status" size="80" value="...">
+</div>
+
 </body>
 </html>
