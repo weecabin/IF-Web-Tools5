@@ -18,6 +18,11 @@
   background-color: #F5CF8E;
 }
 
+.status {
+  clear: both;
+  width: 100%;
+}
+
 .divider {
   clear: both;
 } 
