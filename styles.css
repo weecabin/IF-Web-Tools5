@@ -15,6 +15,7 @@
 .result {
   float: left;                  /* Add this */
   background-color: #F5CF8E;
+  padding-left:20px;
 }
 
 .status {
