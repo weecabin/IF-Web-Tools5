@@ -1,9 +1,7 @@
 var myAirports;
 var myRunways;
-var fpNameRoot;
-function setup(fproot)
+function setup()
 {
-  fpNameRoot=fproot;
   document.getElementById("status").value="form load complete.";
   var xhttp1 = new XMLHttpRequest();
     xhttp1.onreadystatechange = function() 
@@ -48,13 +46,13 @@ function setup(fproot)
     {
       document.getElementById("txt").value=err.message;
     }
-    document.getElementById("filename").value=fpNameRoot+".fpl";
+    document.getElementById("filename").value="Hold.fpl";
 }
 
 function CircleChanged()
 {
   runwaylatlon="";
-  document.getElementById("filename").value= fpNameRoot+".fpl";
+  document.getElementById("filename").value= "Circle.fpl";
   ClearFlightplan();
   println("in CircleChanged");
 }
@@ -291,9 +289,9 @@ function BuildFilename()
   let loops = document.getElementById("loops").value;
   let fn="";
   if (icao.length==4)
-    fn=concat([fpNameRoot,icao,legs,radius,loops],"_")+".fpl";
+    fn=concat(["Hold",icao,legs,radius,loops],"_")+".fpl";
   else 
-    fn=concat([fpNameRoot,legs,radius,loops],"_")+".fpl";
+    fn=concat(["Hold",legs,radius,loops],"_")+".fpl";
   document.getElementById("filename").value=fn;
 }
 
