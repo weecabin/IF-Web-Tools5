@@ -46,7 +46,10 @@ function setup()
     {
       document.getElementById("txt").value=err.message;
     }
-    document.getElementById("filename").value="Hold.fpl";
+    if (document.getElementById("title").innerHTML.indexOf("Hold")>0)
+      document.getElementById("filename").value="Hold.fpl";
+    else
+      document.getElementById("filename").value="Circle.fpl";
 }
 
 function CircleChanged()
