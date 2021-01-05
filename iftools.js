@@ -291,7 +291,7 @@ function BuildFilename()
   let loops = document.getElementById("loops").value;
   let fn="";
   if (icao.length==4)
-    fn=concat([fpNameRoot+".fpl";,icao,legs,radius,loops],"_")+".fpl";
+    fn=concat([fpNameRoot,icao,legs,radius,loops],"_")+".fpl";
   else 
     fn=concat([fpNameRoot,legs,radius,loops],"_")+".fpl";
   document.getElementById("filename").value=fn;
