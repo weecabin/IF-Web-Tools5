@@ -30,8 +30,12 @@
   background-color: #D5CF8E;
 } 
 
-.left {
+.link {
   float:left;
   padding-left:30px;
+}
+
+.description{
+  float:left;
   width:40%;
 }
