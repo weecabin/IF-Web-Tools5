@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 .menu {
-  height: 60px;
   background-color: #B2D6FF;    /* Medium blue */
 }
 
@@ -21,8 +20,11 @@
 .status {
   clear: both;
   width: 100%;
+  background-color: #B5CF8E;
 }
 
 .divider {
+  height: 2px;
   clear: both;
+  background-color: #D5CF8E;
 } 
