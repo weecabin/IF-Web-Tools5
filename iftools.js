@@ -90,16 +90,15 @@ function HoldValueChanged(object)
     case "lat":
     case "lon":
     icao="";
-    BuildFilename();
+    CreateHold();
     break;
     
     case "legs":
     case "radius":
     case "loops":
-    BuildFilename();
+    CreateHold();
     break;
   }
-  CreateHold();
 }
 
 function CircleValueChanged(object)
