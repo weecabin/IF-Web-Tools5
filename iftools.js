@@ -289,6 +289,8 @@ function CreateHold()
 function LatLonChange()
 {
   icao="";
+  document.getElementById("filename").value="Hold.fpl";
+  document.getElementById("txt").value="";
 }
 
 function HoldParamChange()
@@ -382,4 +384,4 @@ function verifyLatLon(latitude,longitude)
   if (Math.abs(longitude)>180)
     return false;
   return true;
-} 
+} I mean it's very similar why do you taste test
