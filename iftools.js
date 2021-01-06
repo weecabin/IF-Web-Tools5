@@ -145,7 +145,7 @@ function LookupLatLon()
         let llsplit = ll.split(",");
         if (verifyLatLon(llsplit[0],llsplit[1]))
         {
-          document.getElementById("icaolookup").value=icao+" latlon="+ll;
+          //document.getElementById("icaolookup").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
         }
