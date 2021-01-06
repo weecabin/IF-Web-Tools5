@@ -166,7 +166,7 @@ function LookupLatLon()
   {
     document.getElementById("icaolookup").value="No database loaded"
   }
- 
+ window.alert("exiting LookupLatLon");
 }
 
 var runwaylatlon="";
