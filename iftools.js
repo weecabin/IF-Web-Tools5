@@ -57,12 +57,14 @@ function CircleChanged()
   runwaylatlon="";
   document.getElementById("filename").value= "Circle.fpl";
   ClearFlightplan();
+  AddStatus("Cleared Flightplan");
   println("in CircleChanged");
 }
 
 function RunwaySelected(runway)
 {
   document.getElementById("runway").value=runway;
+  AddStatus("Runway: "+runway)
 }
 
 function HoldValueChanged(object)
@@ -127,8 +129,7 @@ function CircleValueChanged(object)
       data+="</table>"
       document.getElementById("runwayinfo").innerHTML=data;
       document.getElementById("runway").value=ap[0].rwys[0].rwy;
-      //apstr= JSON.stringify(ap[0]);
-      //document.getElementById("txt").value=apstr;
+      AddStatus("ICAO: "+object.value+" Runway: "+ ap[0].rwys[0].rwy);
     }
     else
     {
@@ -264,7 +265,8 @@ function SetupCircle()
    
     circlesetup=true;
   }
-  else throw "Airport not found"
+  AddStatus("Airport not found");
+  else throw "Airport not found";
   }
   catch(err)
   {
@@ -296,6 +298,7 @@ function MakeCircle()
     else
       xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points);
     document.getElementById("txt").value=xmlData;
+    AddStatus("New flightplan created");
   }
   catch(err)
   {
@@ -324,7 +327,7 @@ function CreateHold()
   let leglen = 2*Math.sin(legangle/2)*radius;
   
   //HoldPattern(legs,leglen,lat,lon,loops=10)
-  AddStatus("Working: "+"HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")");
+  AddStatus("Calling HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")");
   
   try 
   {
@@ -343,6 +346,7 @@ function Clearicao()
    document.getElementById("icao").value="";
    icao="";
    document.getElementById("icao").focus();
+   AddStatus("ICAO cleared")
 }
 
 function BuildFilename()
@@ -356,6 +360,7 @@ function BuildFilename()
   else 
     fn=concat(["Hold",legs,radius,loops],"_")+".fpl";
   document.getElementById("filename").value=fn;
+  AddStatus("Filename set to "+fn)
 }
 
 function DownloadXML() 
@@ -412,6 +417,7 @@ function GetLatLong(icao)
   if (ap.length==0)
     return "";
   var ll = ap[0].lat+","+ap[0].lon;
+  AddStatus(icao+" latlon: "+ll);
   return ll;
 }
 
