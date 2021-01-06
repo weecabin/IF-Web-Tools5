@@ -142,7 +142,7 @@ function CircleValueChanged(object)
     case "outlat":
     case "outlon":
     case "heading":
-    CircleChanged():
+    CircleChanged();
     break;
     
     case "points":
