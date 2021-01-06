@@ -67,6 +67,7 @@ function RunwaySelected(runway)
 
 function HoldValueChanged(object)
 {
+  window.alert("in HoldValueChanged");
   println("HoldValueChanged("+object.value+")");
     switch (object.id)
   {
@@ -79,10 +80,10 @@ function HoldValueChanged(object)
     else
     {
       document.getElementById("status").value="Invalid ICAO";
-      return;
     }
     break;
   }
+  window.alert("exiting HoldValueChanged");
 }
 
 function CircleValueChanged(object)
