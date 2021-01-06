@@ -84,6 +84,19 @@ function HoldValueChanged(object)
       document.getElementById("status").value="Invalid ICAO";
     }
     break;
+    
+    case "latitude":
+    case "longitude":
+    document.getElementById("filename").value="Hold.fpl";
+    document.getElementById("txt").value="";
+    break;
+    
+    case "legs":
+    case "radius":
+    case "loops":
+    document.getElementById("filename").value="Hold.fpl";
+    document.getElementById("txt").value="";
+    break;
   }
   //window.alert("exiting HoldValueChanged");
 }
@@ -284,13 +297,6 @@ function CreateHold()
   {
     document.getElementById("status").value=err.message;
   }
-}
-
-function LatLonChange()
-{
-  icao="";
-  document.getElementById("filename").value="Hold.fpl";
-  document.getElementById("txt").value="";
 }
 
 function HoldParamChange()
