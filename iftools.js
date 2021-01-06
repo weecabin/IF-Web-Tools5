@@ -81,7 +81,7 @@ function HoldValueChanged(object)
     }
     else
     {
-      document.getElementById("status").value="Invalid ICAO";
+      AddStatus("Invalid ICAO");
     }
     break;
     
@@ -110,7 +110,7 @@ function CircleValueChanged(object)
       object.value=object.value.toUpperCase();
     else
       {
-        document.getElementById("status").value="Invalid ICAO";
+       AddStatus("Invalid ICAO");
         return;
       }
     ap=myRunways.filter(x=>x.icao==object.value);
@@ -168,19 +168,19 @@ function LookupLatLon()
       }
       else
       {
-        document.getElementById("status").value=icao+" is not in the database"
+        AddStatus(icao+" is not in the database");
         icao="";
       }
     }
     else
     {
-      document.getElementById("status").value="Invalid ICAO";
+      AddStatus("Invalid ICAO");
       icao="";
     }
   }
   else
   {
-    document.getElementById("status").value="No database loaded"
+    AddStatus("No database loaded");
   }
  //window.alert("exiting LookupLatLon");
 }
@@ -249,7 +249,7 @@ function SetupCircle()
   catch(err)
   {
     runwaylatlon="";
-    document.getElementById("status").value=err.message;
+    AddStatus(err.message);
   }
   ClearFlightplan();
   MakeCircle();
@@ -279,7 +279,7 @@ function MakeCircle()
   }
   catch(err)
   {
-    document.getElementById("status").value=err.message;
+    AddStatus(err.message);
   }
  
 }
@@ -298,14 +298,13 @@ function CreateHold()
   let legs = document.getElementById("legs").value;
   let radius = document.getElementById("radius").value;
   let loops = document.getElementById("loops").value;
-  let status = document.getElementById("status"); 
   // the Holdpattern function takes leg length instead of radius, so we need to
   // calculate leg length given leg count and radius
   let legangle = Math.PI*2/Number(legs);
   let leglen = 2*Math.sin(legangle/2)*radius;
   
   //HoldPattern(legs,leglen,lat,lon,loops=10)
-  status.value="Working: "+"HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")";
+  AddStatus("Working: "+"HoldPattern("+concat([legs,leglen.toFixed(2),lat,lon,loops],",")+")");
   
   try 
   {
@@ -315,7 +314,7 @@ function CreateHold()
   }
   catch(err) 
   {
-    document.getElementById("status").value=err.message;
+    AddStatus(err.message);
   }
 }
 
@@ -341,7 +340,6 @@ function BuildFilename()
 
 function DownloadXML() 
 {
-  let status=document.getElementById("status");
   if (xmlData.length>50)
   {
     let fn = document.getElementById("filename").value;
@@ -349,11 +347,11 @@ function DownloadXML()
       fn=fn.split(".")[0];
     fn+=".fpl"
     download(fn,xmlData)
-    status.value=fn+" downloaded"
+    AddStatus(fn+" downloaded");
   }
   else
   {
-    status.value="Nothing to save";
+    AddStatus("Nothing to save");
   }
 }
 
