@@ -85,8 +85,8 @@ function HoldValueChanged(object)
     }
     break;
     
-    case "latitude":
-    case "longitude":
+    case "lat":
+    case "lon":
     document.getElementById("filename").value="Hold.fpl";
     document.getElementById("txt").value="";
     break;
