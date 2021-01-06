@@ -87,15 +87,14 @@ function HoldValueChanged(object)
     
     case "lat":
     case "lon":
-    document.getElementById("filename").value="Hold.fpl";
-    document.getElementById("txt").value="";
+    icao="";
+    BuildFilename();
     break;
     
     case "legs":
     case "radius":
     case "loops":
-    document.getElementById("filename").value="Hold.fpl";
-    document.getElementById("txt").value="";
+    BuildFilename();
     break;
   }
   //window.alert("exiting HoldValueChanged");
@@ -297,10 +296,6 @@ function CreateHold()
   {
     document.getElementById("status").value=err.message;
   }
-}
-
-function HoldParamChange()
-{
 }
 
 function Clearicao()
