@@ -404,3 +404,8 @@ function verifyLatLon(latitude,longitude)
     return false;
   return true;
 }
+
+function AddStatus(str)
+{
+  document.getElementById("status").value+=str+"\n"
+}
