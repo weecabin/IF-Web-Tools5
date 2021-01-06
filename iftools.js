@@ -105,6 +105,7 @@ function HoldValueChanged(object)
 function CircleValueChanged(object)
 {
   println("CircleValueChanged("+object.value+")");
+  AddStatus("CircleValueChanged("+object.value+")");
   switch (object.id)
   {
     case "icao":
