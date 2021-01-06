@@ -265,7 +265,6 @@ function SetupCircle()
    
     circlesetup=true;
   }
-  AddStatus("Airport not found");
   else throw "Airport not found";
   }
   catch(err)
