@@ -110,7 +110,7 @@ function CircleValueChanged(object)
       object.value=object.value.toUpperCase();
     else
       {
-       AddStatus("Invalid ICAO");
+        AddStatus("Invalid ICAO");
         return;
       }
     ap=myRunways.filter(x=>x.icao==object.value);
@@ -135,6 +135,18 @@ function CircleValueChanged(object)
       document.getElementById("runwayinfo").innerHTML=object.value+" error";
       printl(object.value+" error");
     }
+    break;
+    
+    case "inlat":
+    case "inlon":
+    case "outlat":
+    case "outlon":
+    case "heading":
+    CircleChanged():
+    break;
+    
+    case "points":
+    CircleDownloadFilename();
     break;
   }
 }
@@ -183,6 +195,16 @@ function LookupLatLon()
     AddStatus("No database loaded");
   }
  //window.alert("exiting LookupLatLon");
+}
+
+function CircleDownloadFilename()
+{
+  let runway = document.getElementById("runway").value;
+  let dist = document.getElementById("distance").value;
+  let radius = document.getElementById("radius").value;
+  let fn = "Circle-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
+  document.getElementById("filename").value=fn; 
+  AddStatus("Download Filename: "+fn);
 }
 
 var runwaylatlon="";
@@ -238,9 +260,7 @@ function SetupCircle()
     document.getElementById("heading").value=Math.round(headingtoend);
     
     // change filename to reflect airport configuration
-    let fn = "Circle-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
-    println(fn)
-    document.getElementById("filename").value=fn; 
+    CircleDownloadFilename();
    
     circlesetup=true;
   }
@@ -408,5 +428,5 @@ function verifyLatLon(latitude,longitude)
 
 function AddStatus(str)
 {
-  document.getElementById("status").value+=str+"\n"
+  document.getElementById("status").value+="\n"+str
 }

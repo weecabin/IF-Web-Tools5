@@ -42,12 +42,12 @@ Circling Parameters
 <form>
 <table>
 <tr><th style="width:30px">Name</th><th style="width:40px">Value</th></tr> 
-<tr><td>Entry Latitude: </td><td><input id="inlat" type="text" value="32.519041" onchange="CircleChanged()"></td></tr>
-<tr><td>Entry Longitude: </td><td><input id="inlon" type="text" value="-117.020520" onchange="CircleChanged()"></td></tr>
-<tr><td>Exit Latitude: </td><td><input id="outlat" type="text" value="32.679171" onchange="CircleChanged()"></td></tr>
-<tr><td>Exit Longitude: </td><td><input id="outlon" type="text" value="-116.965609" onchange="CircleChanged()"></td></tr>
-<tr><td>Entry Heading: </td><td><input id="heading" size="15" type="text" value="106" onchange="CircleChanged()">true</td></tr>
-<tr><td>Points: </td><td><input id="points" size="15" type="text" value="10" onchange="CircleChanged()"></td></tr>
+<tr><td>Entry Latitude: </td><td><input id="inlat" type="text" value="32.519041" onchange="CircleValueChanged(this)"></td></tr>
+<tr><td>Entry Longitude: </td><td><input id="inlon" type="text" value="-117.020520" onchange="CircleValueChanged(this)"></td></tr>
+<tr><td>Exit Latitude: </td><td><input id="outlat" type="text" value="32.679171" onchange="CircleValueChanged(this)"></td></tr>
+<tr><td>Exit Longitude: </td><td><input id="outlon" type="text" value="-116.965609" onchange="CircleValueChanged(this)"></td></tr>
+<tr><td>Entry Heading: </td><td><input id="heading" size="15" type="text" value="106" onchange="CircleValueChanged(this)">true</td></tr>
+<tr><td>Points: </td><td><input id="points" size="15" type="text" value="10" onchange="CircleValueChanged(this)"></td></tr>
 <tr><td></td><td>
 <input type="button" value="Create Flightplan" onclick="MakeCircle()">
 
