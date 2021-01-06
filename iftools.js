@@ -364,9 +364,15 @@ function BuildFilename()
 
 function DownloadXML() 
 {
+  let fn = document.getElementById("filename").value;
+  if (fn.toUpperCase().indexOf(".FPL")<3)
+  {
+    AddStatus("Invalid filename")
+    return;
+  }
   if (xmlData.length>50)
   {
-    let fn = document.getElementById("filename").value;
+   
     if (fn.indexOf(".")>=0)
       fn=fn.split(".")[0];
     fn+=".fpl"
