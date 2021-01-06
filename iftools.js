@@ -71,8 +71,8 @@ function HoldValueChanged(object)
   println("HoldValueChanged("+object.value+")");
   switch (object.id)
   {
-    case "icaolookup":
-    //window.alert("in case icaolookup");
+    case "icao":
+    //window.alert("in case icao");
     if (object.value.length==4)
     {
       object.value=object.value.toUpperCase();
@@ -149,7 +149,7 @@ function LookupLatLon()
   document.getElementById("txt").innerHTML="";
   if (myAirports!=undefined)
   {
-    icao = document.getElementById("icaolookup").value.toUpperCase();
+    icao = document.getElementById("icao").value.toUpperCase();
     if (icao.length==4)
     {
       let ll = GetLatLong(icao);
@@ -158,7 +158,7 @@ function LookupLatLon()
         let llsplit = ll.split(",");
         if (verifyLatLon(llsplit[0],llsplit[1]))
         {
-          //document.getElementById("icaolookup").value=icao+" latlon="+ll;
+          //document.getElementById("icao").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
         }
@@ -183,9 +183,14 @@ function LookupLatLon()
 }
 
 var runwaylatlon="";
+/*
+SetupCircle
+Is called to configure the Circling approach parameters based on the airport configuration.
+*/
 function SetupCircle()
 {
   try{
+  // get the airport config details
   icao = document.getElementById("icao").value;
   if(icao.length!=4)throw "Invalid ICAO";
   let runway = document.getElementById("runway").value;
@@ -194,6 +199,7 @@ function SetupCircle()
   let ap = myRunways.filter(x=>x.icao==icao);
   if (ap.length==1)
   {
+    // get lat and lon for each end of the runway
     let rwy1=ap[0].rwys.filter(x=>RemovePad(x.rwy)==RemovePad(runway));
     if(rwy1==undefined)throw "Invalid Runway";
     let otherend = OppositeRunway(runway);
@@ -219,14 +225,16 @@ function SetupCircle()
      
     let headingtobegin=Number(FixHeading(Number(headingtoend)+(left?90:-90))).toFixed(1)
     println("heading to beginning of circle "+headingtobegin)
+    // lat lon of the beginning of the circle
     let circleBegin = NewPoint(Number(circlEnd[0]),Number(circlEnd[1]),Number(headingtobegin) ,radius*2)
-     
+    // load the computed values into the Circling Parameters
     document.getElementById("inlat").value=circleBegin[0].toFixed(6);
     document.getElementById("inlon").value=circleBegin[1].toFixed(6);
     document.getElementById("outlat").value=circlEnd[0].toFixed(6);
     document.getElementById("outlon").value=circlEnd[1].toFixed(6);
     document.getElementById("heading").value=Math.round(headingtoend);
     
+    // change filename to reflect airport configuration
     let fn = "Circle-"+icao+"-"+runway+"-"+dist+"-"+radius+".fpl";
     println(fn)
     document.getElementById("filename").value=fn; 
@@ -244,6 +252,10 @@ function SetupCircle()
   MakeCircle();
 }
 
+/*
+MakeCircle
+builds the circle based in the Circling Parameters 
+*/
 function MakeCircle()
 {
   let inlat = document.getElementById("inlat").value;
@@ -255,6 +267,7 @@ function MakeCircle()
   try
   {
     println("MakeCircle: "+inlat+","+inlon+","+outlat+","+outlon+","+heading+","+points);
+    // if runwaylatlon is defined, we want to terminate the flightplan at the runway threshold
     if (runwaylatlon.length>0)
       xmlData = Circling([inlat, inlon],[outlat, outlon],heading,points,runwaylatlon);
     else
@@ -269,6 +282,10 @@ function MakeCircle()
 }
 
 var xmlData="";
+/*
+CreateHold
+creates a hold pattern centerred at the specified lat lon, with the defined radius and number of legs
+*/
 function CreateHold()
 {
   let txt= document.getElementById("txt");
@@ -279,7 +296,8 @@ function CreateHold()
   let radius = document.getElementById("radius").value;
   let loops = document.getElementById("loops").value;
   let status = document.getElementById("status"); 
-  
+  // the Holdpattern function takes leg length instead of radius, so we need to
+  // calculate leg length given leg count and radius
   let legangle = Math.PI*2/Number(legs);
   let leglen = 2*Math.sin(legangle/2)*radius;
   
@@ -300,9 +318,9 @@ function CreateHold()
 
 function Clearicao()
 {
-   document.getElementById("icaolookup").value="";
+   document.getElementById("icao").value="";
    icao="";
-   document.getElementById("icaolookup").focus();
+   document.getElementById("icao").focus();
 }
 
 function BuildFilename()
