@@ -67,12 +67,12 @@ function RunwaySelected(runway)
 
 function HoldValueChanged(object)
 {
-  window.alert("in HoldValueChanged("+object.value+")");
+  //window.alert("in HoldValueChanged("+object.value+")");
   println("HoldValueChanged("+object.value+")");
   switch (object.id)
   {
     case "icaolookup":
-    window.alert("in case icaolookup");
+    //window.alert("in case icaolookup");
     if (object.value.length==4)
     {
       object.value=object.value.toUpperCase();
@@ -84,7 +84,7 @@ function HoldValueChanged(object)
     }
     break;
   }
-  window.alert("exiting HoldValueChanged");
+  //window.alert("exiting HoldValueChanged");
 }
 
 function CircleValueChanged(object)
@@ -166,7 +166,7 @@ function LookupLatLon()
   {
     document.getElementById("status").value="No database loaded"
   }
- window.alert("exiting LookupLatLon");
+ //window.alert("exiting LookupLatLon");
 }
 
 var runwaylatlon="";
