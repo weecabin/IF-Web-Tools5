@@ -97,7 +97,7 @@ function HoldValueChanged(object)
     BuildFilename();
     break;
   }
-  //window.alert("exiting HoldValueChanged");
+  CreateHold();
 }
 
 function CircleValueChanged(object)
