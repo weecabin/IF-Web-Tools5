@@ -68,6 +68,20 @@ function RunwaySelected(runway)
 function HoldValueChanged(object)
 {
   println("HoldValueChanged("+object.value+")");
+    switch (object.id)
+  {
+    case "icao":
+    if (object.value.length==4)
+    {
+      object.value=object.value.toUpperCase();
+      LookupLatLon();
+    }
+    else
+      {
+        document.getElementById("status").value="Invalid ICAO";
+        return;
+      }
+  }
   return false;
 }
 
