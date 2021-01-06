@@ -81,8 +81,8 @@ function HoldValueChanged(object)
         document.getElementById("status").value="Invalid ICAO";
         return;
       }
+      break;
   }
-  return false;
 }
 
 function CircleValueChanged(object)
