@@ -384,4 +384,4 @@ function verifyLatLon(latitude,longitude)
   if (Math.abs(longitude)>180)
     return false;
   return true;
-} how come you know what
+}
