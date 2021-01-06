@@ -161,6 +161,9 @@ function LookupLatLon()
           //document.getElementById("icao").value=icao+" latlon="+ll;
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
+          let llstr= llsplit[0]+","+ llsplit[1];
+          AddStatus(llstr);
+          return llstr;
         }
       }
       else
