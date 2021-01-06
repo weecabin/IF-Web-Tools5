@@ -70,18 +70,18 @@ function HoldValueChanged(object)
   println("HoldValueChanged("+object.value+")");
     switch (object.id)
   {
-    case "icao":
+    case "icaolookup":
     if (object.value.length==4)
     {
       object.value=object.value.toUpperCase();
       LookupLatLon();
     }
     else
-      {
-        document.getElementById("status").value="Invalid ICAO";
-        return;
-      }
-      break;
+    {
+      document.getElementById("status").value="Invalid ICAO";
+      return;
+    }
+    break;
   }
 }
 
