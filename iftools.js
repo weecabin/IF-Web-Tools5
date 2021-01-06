@@ -67,11 +67,12 @@ function RunwaySelected(runway)
 
 function HoldValueChanged(object)
 {
-  window.alert("in HoldValueChanged");
+  window.alert("in HoldValueChanged("+object.value+")");
   println("HoldValueChanged("+object.value+")");
-    switch (object.id)
+  switch (object.id)
   {
     case "icaolookup":
+    window.alert("in case icaolookup");
     if (object.value.length==4)
     {
       object.value=object.value.toUpperCase();
