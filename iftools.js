@@ -77,6 +77,7 @@ function HoldValueChanged(object)
     {
       object.value=object.value.toUpperCase();
       LookupLatLon();
+      CreateHold();
     }
     else
     {

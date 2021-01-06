@@ -10,7 +10,7 @@ var printHold = ""
 const print = (msg) => {
   printHold+=msg;
 }
-const println = (msg) => {//return;
+const println = (msg) => {return;
   if (msg==undefined)msg="";
   document.getElementById("txt").value+=printHold+msg+"\n";
   printHold="";
