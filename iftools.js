@@ -69,7 +69,7 @@ function RunwaySelected(runway)
 
 function HoldValueChanged(object)
 {
-  //window.alert("in HoldValueChanged("+object.value+")");
+  AddStatus("HoldValueChanged("+object.id+") = "+object.value);
   println("HoldValueChanged("+object.value+")");
   switch (object.id)
   {
@@ -105,7 +105,7 @@ function HoldValueChanged(object)
 function CircleValueChanged(object)
 {
   println("CircleValueChanged("+object.value+")");
-  AddStatus("CircleValueChanged("+object.value+")");
+  AddStatus("CircleValueChanged("+object.id+") = "+object.value);
   switch (object.id)
   {
     case "icao":
@@ -176,7 +176,6 @@ function LookupLatLon()
           document.getElementById("lat").value=llsplit[0];
           document.getElementById("lon").value=llsplit[1];
           let llstr= llsplit[0]+","+ llsplit[1];
-          AddStatus(llstr);
           return llstr;
         }
       }
