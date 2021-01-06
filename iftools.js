@@ -384,4 +384,4 @@ function verifyLatLon(latitude,longitude)
   if (Math.abs(longitude)>180)
     return false;
   return true;
-} I mean it's very similar why do you taste test
+} how come you know what
