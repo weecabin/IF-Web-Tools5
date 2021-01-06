@@ -148,6 +148,7 @@ function CircleValueChanged(object)
     
     case "points":
     CircleDownloadFilename();
+    MakeCircle();
     break;
   }
 }
