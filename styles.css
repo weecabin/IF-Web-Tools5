@@ -22,6 +22,7 @@
 .status {
   clear: both;
   width: 100%;
+  text-align: center;
   /* background-color: #B5CF8E;  */
 }
 
