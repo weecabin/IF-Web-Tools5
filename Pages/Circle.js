@@ -48,6 +48,7 @@ function CircleValueChanged(object)
     case "distance":
     case "radius":
     case "lefttraffic":
+    case "righttraffic":
     SetupCircle();
     break;
     
@@ -76,6 +77,7 @@ function CircleChanged()
 function RunwaySelected(runway)
 {
   document.getElementById("runway").value=runway;
+  SetupCircle();
   AddStatus("Runway: "+runway)
 }
 

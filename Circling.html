@@ -26,7 +26,7 @@ Infinite Flight Circling Approach
 <tr><td>Radius: </td><td><input id="radius" type="text" value="5" onchange="CircleValueChanged(this)"></td></tr>
 <tr><td>Traffic: </td><td>
 <input type="radio" id="lefttraffic" name="traffic" value="Left" checked onchange="CircleValueChanged(this)"> Left
-<input type="radio" id="righttraffic" name="traffic" value="right"> Right</td></tr>
+<input type="radio" id="righttraffic" name="traffic" value="right" onchange="CircleValueChanged(this)"> Right</td></tr>
 <tr><td></td><td>Click<input type="button" value="Use" onclick="SetupCircle()">to load runway<br>into Circling Parameters</td></tr>
 </table>
 </form>
