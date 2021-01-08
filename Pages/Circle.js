@@ -44,6 +44,13 @@ function CircleValueChanged(object)
     CircleChanged();
     break;
     
+    case "runway": 
+    case "distance":
+    case "radius":
+    case "lefttraffic":
+    SetupCircle();
+    break;
+    
     case "points":
     CircleDownloadFilename();
     MakeCircle();
