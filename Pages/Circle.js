@@ -27,6 +27,7 @@ function CircleValueChanged(object)
       document.getElementById("runwayinfo").innerHTML=data;
       document.getElementById("runway").value=ap[0].rwys[0].rwy;
       AddStatus("ICAO: "+object.value+" Runway: "+ ap[0].rwys[0].rwy);
+      SetupCircle();
     }
     else
     {
