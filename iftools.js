@@ -237,7 +237,7 @@ function SetupCircle()
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
     let elev=Number(myAirports.filter(x=>x.icao==icao).alt);
-    AddStatus("Runway Elevation="elev)
+    AddStatus("Runway Elevation="+elev)
     runwaylatlon=[lat1,lon1,elev];
     // runway dist and heading
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
