@@ -236,7 +236,8 @@ function SetupCircle()
     let lon1=Number(rwy1[0].lon);
     let lat2=Number(rwy2[0].lat);
     let lon2=Number(rwy2[0].lon);
-    runwaylatlon=[lat1,lon1];
+    let elev=Number(myAirports.filter(i=>i==icao).alt);
+    runwaylatlon=[lat1,lon1,elev];
     // runway dist and heading
     let disthead=DistHeading(lat1,lon1,lat2,lon2);
     // heading to the end of the circle

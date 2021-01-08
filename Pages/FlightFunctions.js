@@ -377,7 +377,6 @@ function Circling(latlon1,latlon2,heading,points,finallatlon)
     }
   }
   //println();
-''
   var fp = new FlightPlan("Circle");
   //print("Decimal fixes...");
   for (index=0;index<decPoints.length;index++)
@@ -391,7 +390,7 @@ function Circling(latlon1,latlon2,heading,points,finallatlon)
   if(finallatlon!=undefined)
   {
     var id = (finallatlon[0]*1000).toFixed(0) +"/"+ (finallatlon[1]*1000).toFixed(0);
-    fp.AddUserFix(id,finallatlon[0],finallatlon[1]);
+    fp.AddUserFix(id,finallatlon[0],finallatlon[1],finallatlon[2]);
   }
   return fp.ToXml();
 }
