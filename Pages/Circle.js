@@ -63,6 +63,7 @@ function CircleValueChanged(object)
 function ClearFlightplan()
 {
   document.getElementById("txt").value="";
+  document.getElementById("filename").value= "";
 }
 
 function CircleChanged()
