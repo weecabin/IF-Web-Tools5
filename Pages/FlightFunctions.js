@@ -210,7 +210,7 @@ function NewPoint(latitude,longitude,heading,leglength)
   return [newLat,newLon];
 }
 
-function DistHeading(latfrom, lonfrom, latto, lonto) {
+function AdamDistHeading(latfrom, lonfrom, latto, lonto) {
 
       const R = 6371e3; // metres
       const φ1 = latfrom * Math.PI/180; // φ, λ in radians
@@ -238,7 +238,7 @@ function DistHeading(latfrom, lonfrom, latto, lonto) {
 
     }
 
-function oldDistHeading(latfrom,lonfrom,latto,lonto)
+function DistHeading(latfrom,lonfrom,latto,lonto)
 {
    var lonMult = LonMultiplier((latfrom+latto)/2);
    var dy = (latto-latfrom)*60;
