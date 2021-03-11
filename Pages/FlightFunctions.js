@@ -210,7 +210,35 @@ function NewPoint(latitude,longitude,heading,leglength)
   return [newLat,newLon];
 }
 
-function DistHeading(latfrom,lonfrom,latto,lonto)
+function DistHeading(latfrom, lonfrom, latto, lonto) {
+
+      const R = 6371e3; // metres
+      const φ1 = latfrom * Math.PI/180; // φ, λ in radians
+      const φ2 = latto * Math.PI/180;
+      const Δφ = (latto-latfrom) * Math.PI/180;
+      const Δλ = (lonto-lonfrom) * Math.PI/180;
+      const λ1 = lonfrom * Math.PI/180;
+      const λ2 = lonto * Math.PI/180;
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+          Math.cos(φ1) * Math.cos(φ2) *
+          Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      const d = R * c; // in metres
+      var dist = d / 1852 // in NM
+
+      const y = Math.sin(λ2-λ1) * Math.cos(φ2);
+      const x = Math.cos(φ1)*Math.sin(φ2) -
+          Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
+      const θ = Math.atan2(y, x);
+      var heading = (θ*180/Math.PI + 360) % 360; // in degrees
+
+      return [dist, heading];
+
+    }
+
+function oldDistHeading(latfrom,lonfrom,latto,lonto)
 {
    var lonMult = LonMultiplier((latfrom+latto)/2);
    var dy = (latto-latfrom)*60;
